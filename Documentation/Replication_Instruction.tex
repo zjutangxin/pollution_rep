@@ -1,0 +1,157 @@
+% Article Format: American Economic Review
+% Xin Tang @ Stony Brook University
+% Last Updated: August 2014
+\documentclass[twoside,11pt,leqno]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Text Layout                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Layout
+\usepackage[hmargin={1.2in,1.2in},vmargin={1.5in,1.5in}]{geometry}
+\topmargin -1cm        % read Lamport p.163
+\oddsidemargin 0.04cm   % read Lamport p.163
+\evensidemargin 0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm
+\renewcommand\baselinestretch{1.15}
+\parskip 0.25em
+\parindent 1em
+\linespread{1}
+
+% Set header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+%\fancyhead[CE]{\textit{JI QI, XIN TANG AND XICAN XI}}
+%\fancyhead[CO]{\textit{THE SIZE DISTRIBUTION OF FIRMS AND INDUSTRIAL POLLUTION}}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt}
+%\renewcommand*\footnoterule{}
+%\setcounter{page}{1}
+
+% Font
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+%\usepackage[lite]{mtpro2}
+% use Palatinho-Roman as default font family
+%\renewcommand{\rmdefault}{ppl}
+\usepackage[scaled=0.88]{helvet}
+\makeatletter   % Roman Numbers
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+\usepackage{CJK}
+
+% Section Titles
+\renewcommand\thesection{\textnormal{\textbf{\Roman{section}.}}}
+\renewcommand\thesubsection{\textnormal{\Alph{subsection}.}}
+\usepackage{titlesec}
+\titleformat*{\section}{\bf \center}
+\titleformat*{\subsection}{\it \center}
+\renewcommand{\refname}{\textnormal{REFERENCES}}
+
+% Appendix
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{APPENDIX}
+
+% Citations
+\usepackage[authoryear,comma]{natbib}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0em}
+\usepackage[%dvipdfmx,%
+            bookmarks=true,%
+            pdfstartview=FitH,%
+            breaklinks=true,%
+            colorlinks=true,%
+            %allcolors=black,%
+            citecolor=blue,
+            linkcolor=red,
+            pagebackref=true]{hyperref}
+
+% Functional Package
+\usepackage{enumerate}
+\usepackage{url}      % This package helps to typeset urls
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Mathematics                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs,upgreek}
+% Operators
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\plim}{plim}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\gvec}[1]{{\boldsymbol{#1}}}
+
+\newcommand{\code}{\texttt}
+\newcommand{\bcode}[1]{\texttt{\blue{#1}}}
+\newcommand{\rcode}[1]{\texttt{\red{#1}}}
+\newcommand{\rtext}[1]{{\red{#1}}}
+\newcommand{\btext}[1]{{\blue{#1}}}
+
+% New Environments
+\newtheorem{result}{Result}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\setlength{\unitlength}{1mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 Tables and Figures                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{threeparttable,booktabs,multirow,array} % This allows notes in tables
+\usepackage{floatrow} % For Figure Notes
+\floatsetup[table]{capposition=top}
+\usepackage[font={sc,footnotesize}]{caption}
+\DeclareCaptionLabelSeparator{aer}{---}
+\captionsetup[table]{labelsep=aer}
+\captionsetup[figure]{labelsep=period}
+\usepackage{graphicx,pstricks,epstopdf}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 Insert Code Snippet                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings,textcomp,upquote}
+\lstset{
+     language=fortran,
+     frame = single,
+%     backgroundcolor=\color[RGB]{255,228,202}, % pink
+     backgroundcolor=\color[RGB]{231,240,233}, % green
+%     backgroundcolor=\color[RGB]{239,240,248},
+     framerule=0pt,
+     showstringspaces=false,
+     basicstyle=\ttfamily\footnotesize,
+     numbers=left,
+     stepnumber=1,
+     numberstyle=\tiny,
+     keywordstyle=\color{blue}\ttfamily,
+     stringstyle=\color{red}\ttfamily,
+     commentstyle=\color[rgb]{.133,.545,.133}\ttfamily,
+     morecomment=[l][\color{magenta}]{\#},
+     fontadjust,
+     captionpos=t,
+     framextopmargin=2pt,framexbottommargin=2pt,
+     abovecaptionskip=4ex,belowcaptionskip=3pt,
+     belowskip=3pt,
+     framexleftmargin=4pt,
+     xleftmargin=4em,xrightmargin=4em,
+     texcl=false,
+     extendedchars=false,columns=flexible,mathescape=true,
+     captionpos=b,
+}
+\renewcommand{\lstlistingname}{Source Code}
+
+\title{\vspace{-1cm}\Large{\textsf{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China} \\ \textsf{Replication Instruction}}}
+\author{\normalsize\textsc{Xin Tang} \\ \normalsize\textsc{International Monetary Fund}}
+\date{\normalsize\today}
+
+\begin{document}
+\maketitle
+
+This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}.
+
+\end{document}

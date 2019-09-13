@@ -1,0 +1,10 @@
+notes/*.*
+!notes/*.tex
+!notes/*.pdf
+bin/*.*
+obj/*.*
+results/*.*
+*.out
+*.mod
+src/*.mod
+src/*.o
