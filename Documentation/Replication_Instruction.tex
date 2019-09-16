@@ -152,11 +152,13 @@
 \begin{document}
 \maketitle
 
-This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with several house-keeping notes. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the empirical results.  
+This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the empirical results. Section \rom{3} shows how the quantitative results can be replicated.
 
 \section{Housekeeping Stuff}
 
-To replicate all the results in the paper, three softwares are used. Specifically, \textsc{Stata} is used for initial data processing. All the empirical results are then produced using \code{R}. We use MATLAB to compute all the quantitative results. There is no particular scientific reason that we use one statistical software (\textsc{Stata}) for data cleaning and the other (\code{R}) for empirical analysis. It is easier to handle Chinese characters with \textsc{Stata} while \code{R} switches back and forth between different datasets swiftly. Veterans of \textsc{Stata} (or \code{R}) should be able to replicate all the empirical results with just one software using our source code as reference with ease. In addition, which in fact should go without saying, for readers without a licence to MATALB, GNU Octave could be used instead.
+\subsection{Overview}
+
+To replicate all the results in the paper, three softwares are used. Specifically, \textsc{Stata} is used for initial data processing. All the empirical results are then produced using \code{R}. MATLAB is used to compute all the quantitative results. There is no particular scientific reason that we use one statistical software (\textsc{Stata}) for data cleaning and the other (\code{R}) for empirical analysis. We do this simply because it is easier to handle Chinese characters with \textsc{Stata} while \code{R} switches back and forth between different datasets swiftly. Veterans of \textsc{Stata} (or \code{R}) should be able to replicate all the empirical results with just one software using our source code as reference with ease. In addition, which in fact should go without saying, for readers without a licence to MATALB, GNU Octave could be used instead.
 
 We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
 \begin{itemize}
@@ -179,11 +181,89 @@ In the replication files, we cannot provide micro-level data of the NGSPS, due t
     \item
     Some miscellaneous information scattered across the paper.
 \end{itemize}
+The rest of the results can all be replicated by following this guide.
+
+\subsection{File Structures}
+
+The readers will get a number of files for replicating the results. To ease digestion, we briefly introduce the structure of the folders and files. As typographical convention, we use \bcode{blue computer modern typewriter} to indicate \bcode{folders}, and \code{black computer modern typewriter} to label \code{files}. The current folder is referred to as \code{./}.
+\begin{itemize}
+    \item
+    \bcode{./Empirical/}:
+    \begin{itemize}
+        \item
+        \bcode{./Data/}
+        \item
+        \bcode{./Results/}
+        \item
+        \code{./cpsc\_raw.do}
+        \item
+        \code{./cec\_clean.do}
+        \item
+        \code{./cpsc\_convert.R}
+        \item
+        \code{./cec\_convert.R}        
+        \item
+        \code{./Empirical\_AEJ.R}        
+        \item
+        \code{./Empirical\_Appendix.R}                
+        \item
+        \code{./Accounting.R}
+    \end{itemize}
+    \item
+    \bcode{./Quantitative/}
+    \begin{itemize}
+        \item
+        \bcode{./Results/}
+        \item
+        \bcode{./Figures/}
+        \item
+        \code{./twosectors.m}
+        \item
+        \code{./fcn2.m}
+        \item
+        \code{./compute\_tables.m}
+        \item
+        \code{./plot\_figures.m}
+        \item
+        \code{./twosectors\_ces.m}        
+        \item
+        \code{./fcnces.m}        
+        \item
+        \code{./compute\_tables\_ces.m}   
+        \item
+        \code{./misc.m}     
+    \end{itemize}
+\end{itemize}
+
+\subsection{Data Cleaning}
 
 \section{Empirical Results}
 
 The instructions are organized by logic instead of the order of appearance in the paper.
 
 \section{Quantitative Results}
+
+\begin{enumerate}
+    \item
+    set \code{twosectors.m} to benchmark and run
+    \item
+    set \code{twosectors.m} to no tax and run
+    \item
+    set \code{twosectors.m} to regulation and run
+    \item
+    set \code{twosectors.m} to flat tax and run
+    \item
+    run \code{plot\_figures.m}
+    \item
+    set \code{compute\_tables.m} to benchmark and run
+    \item
+    set \code{compute\_tables.m} to no tax and run    
+    \item
+    set \code{compute\_tables.m} to regulation and run    
+    \item
+    set \code{compute\_tables.m} to flat tax and run    
+    \item
+    manually compute the numbers for the tables
+\end{enumerate}
 
 \end{document}
