@@ -1,6 +1,6 @@
-notes/*.*
-!notes/*.tex
-!notes/*.pdf
+documentation/*.*
+!documentation/*.tex
+!documentation/*.pdf
 bin/*.*
 obj/*.*
 results/*.*

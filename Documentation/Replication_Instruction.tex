@@ -152,6 +152,38 @@
 \begin{document}
 \maketitle
 
-This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}.
+This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with several house-keeping notes. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the empirical results.  
+
+\section{Housekeeping Stuff}
+
+To replicate all the results in the paper, three softwares are used. Specifically, \textsc{Stata} is used for initial data processing. All the empirical results are then produced using \code{R}. We use MATLAB to compute all the quantitative results. There is no particular scientific reason that we use one statistical software (\textsc{Stata}) for data cleaning and the other (\code{R}) for empirical analysis. It is easier to handle Chinese characters with \textsc{Stata} while \code{R} switches back and forth between different datasets swiftly. Veterans of \textsc{Stata} (or \code{R}) should be able to replicate all the empirical results with just one software using our source code as reference with ease. In addition, which in fact should go without saying, for readers without a licence to MATALB, GNU Octave could be used instead.
+
+We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
+\begin{itemize}
+    \item
+    The NGSPS is a confidential dataset housed at the Ministry of Ecology and Environment. The data can only be accessed within the Ministry of Ecology and Environment as well as institutions under its direct supervision. Individual researchers requesting access should submit the application through the official portal for Information Access (\begin{CJK}{GBK}{kai}政府信息公开\end{CJK}) by the Ministry of Ecology and Environment at the following url: \url{http://www.mee.gov.cn/weihu/201706/t20170625_416641.shtml}. The url is retrieved on September 15th, 2019 and may vary in the future. All applications are subject to official approval by the Ministry of Ecology and Environment.
+    \item
+    The CNEC is also a confidential dataset belonging to National Bureau of Statistics of China. Many universities and institutions have legal copy of the dataset. Our copy was obtained from Wuhan University. One portal to request access to the data for individual researchers is through the Micro-data Lab of the National Bureau of Statistics (\begin{CJK}{GBK}{kai}国家统计局微观数据实验室，国家统计局-清华大学数据开发中心\end{CJK}). The url, retrieved on September 15th, 2019, is \url{http://microdata.stats.gov.cn/}; and again it may vary in the future. All applications are subject to official approval by the National Bureau of Statistics.
+    \item
+    The SUSB is publicly available from the Census Bureau's dedicated website. The url, retrieved on September 15th, 2019, and subject to possible change in the future, is \url{https://www.census.gov/programs-surveys/susb.html}.
+\end{itemize}
+
+In the replication files, we cannot provide micro-level data of the NGSPS, due to the Non-Disclosure Agreement with the Ministry of Ecology and Environment. Therefore, we only post the source code that generates the results. The NGSPS is used to compute the following results:
+\begin{itemize}
+    \item
+    Tables: 1, 2, A.1, C.1, D.1 and F.1.
+    \item
+    Figures: 1, B.1 (upper panels), C.1, C.2, D.3.
+    \item
+    Regressions: 1 and the un-numbered one in Section \rom{1}.B, 2, 3, the 6 un-numbered regression in Appendix C.1 and the un-numbered regression in Appendix D.2.
+    \item
+    Some miscellaneous information scattered across the paper.
+\end{itemize}
+
+\section{Empirical Results}
+
+The instructions are organized by logic instead of the order of appearance in the paper.
+
+\section{Quantitative Results}
 
 \end{document}
