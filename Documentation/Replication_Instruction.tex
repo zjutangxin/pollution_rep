@@ -152,13 +152,13 @@
 \begin{document}
 \maketitle
 
-This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the empirical results. Section \rom{3} shows how the quantitative results can be replicated.
+This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the empirical results. Section \rom{3} shows how the quantitative results can be replicated. 
 
 \section{Housekeeping Stuff}
 
 \subsection{Overview}
 
-To replicate all the results in the paper, three softwares are used. Specifically, \textsc{Stata} is used for initial data processing. All the empirical results are then produced using \code{R}. MATLAB is used to compute all the quantitative results. There is no particular scientific reason that we use one statistical software (\textsc{Stata}) for data cleaning and the other (\code{R}) for empirical analysis. We do this simply because it is easier to handle Chinese characters with \textsc{Stata} while \code{R} switches back and forth between different datasets swiftly. Veterans of \textsc{Stata} (or \code{R}) should be able to replicate all the empirical results with just one software using our source code as reference with ease. In addition, which in fact should go without saying, for readers without a licence to MATALB, GNU Octave could be used instead.
+To replicate all the results in the paper, three softwares are used. Specifically, \textsc{Stata} is used for initial data processing. All the empirical results are then produced using \code{R}. MATLAB is used to compute all the quantitative results. There is no particular scientific reason that we use one statistical software (\textsc{Stata}) for data cleaning and the other (\code{R}) for empirical analysis.\footnote{Due to limited backward compatibility of \textsc{Stata} and that the \code{foreign} package of \code{R} supports only \code{.dta} files saved by \textsc{Stata} up to Version 12, to run the code without any modification, the reader would need \textsc{Stata} 12. Readers with more recent version of the \textsc{Stata} would need to either modify in the \code{.do} file everywhere \code{.dta} files are read and written, or use alternative \code{R} package (for instance \code{readstata13}) to convert the data in \code{cpsc\_convert.R} and \code{cec\_convert.R}. Compatibility of our code is not tested under such environments though. None of our results would be affected though.} We do this simply because it is easier to handle Chinese characters with \textsc{Stata} while \code{R} switches back and forth between different datasets swiftly. Veterans of \textsc{Stata} (or \code{R}) should be able to replicate all the empirical results with just one software using our source code as reference with ease. In addition, which in fact should go without saying, for readers without a licence to MATALB, GNU Octave could be used instead.
 
 We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
 \begin{itemize}
@@ -201,11 +201,11 @@ The readers will get a number of files for replicating the results. To ease dige
         \item
         \code{./cpsc\_convert.R}
         \item
-        \code{./cec\_convert.R}        
+        \code{./cec\_convert.R}
         \item
-        \code{./Empirical\_AEJ.R}        
+        \code{./Empirical\_AEJ.R}
         \item
-        \code{./Empirical\_Appendix.R}                
+        \code{./Empirical\_Appendix.R}
         \item
         \code{./Accounting.R}
     \end{itemize}
@@ -225,15 +225,99 @@ The readers will get a number of files for replicating the results. To ease dige
         \item
         \code{./plot\_figures.m}
         \item
-        \code{./twosectors\_ces.m}        
+        \code{./twosectors\_ces.m}
         \item
-        \code{./fcnces.m}        
+        \code{./fcnces.m}
         \item
-        \code{./compute\_tables\_ces.m}   
+        \code{./compute\_tables\_ces.m}
         \item
-        \code{./misc.m}     
+        \code{./misc.m}
     \end{itemize}
 \end{itemize}
+
+We try to group results according to their order of appearance in the paper. But this is not possible all the time. To ease the navigation, Table summarizes the results in the paper and in which file they are replicated. Acronym: \code{KEYFIRM\_R.RData (PK)}, \code{ALLFIRM\_R.RData (PA)}, \code{DLARGE\_R.RData (DL)} \code{CNEC\_avgp.RData (CA)}, \code{susb04.csv (US)}.
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{Navigating the Main Text}
+\begin{tabular}{llll}
+    \hline \hline
+    Content                         & File Name                 & File Dependency   & Location in Code \\
+    \midrule
+    \textbf{Section \rom{1}.A} \\
+    \ \ \ Table 1                   & \code{Descriptive.R}      & \code{PK, PA} \\ 
+    \textbf{Section \rom{1}.B} \\
+    \ \ \ Figure 1                  & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 1  \\
+    \ \ \ Table 2                   & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 2  \\
+    \ \ \ Regression 1              & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 1  \\
+    \ \ \ Regressions 2, 3          & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 2 \\
+    \ \ \ Regression (!\#)          & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 2 \\
+    \textbf{Section \rom{1}.C} \\
+    \ \ \ Figure 2                  & \code{Empirical\_AEJ.R}   & \code{CA, US}     & Section 3 \\
+    \ \ \ Accounting                & \code{Accounting.R}       & \code{PK, CA, US} \\
+    \textbf{Section \rom{2}.A} \\
+    \ \ \ Figure 3                  & \code{Empirical\_AEJ.R}   & \code{CA}         & Section 4 \\
+    \ \ \ Figure 4                  & Illustrative figure. \\
+    \textbf{Section \rom{3}} \\
+    \ \ \ Size Distribution         & \code{Empirical\_AEJ.R}   & \code{CA, US}     & Section 3 \\
+    \ \ \ $\varphi_1$               & \code{Empirical\_AEJ.R}   & \code{CA} & Section 4 \\
+    \ \ \ Clean share               & \code{Empirical\_AEJ.R}   & \code{PK} & Section 2 \\
+    \ \ \ $k_E/Y$ for clean firms   & \code{Empirical\_AEJ.R}   & \code{PK} & Section 2 \\
+    \ \ \ Figure 5                  & \code{twosectors.m}       & \multirow{2}{*}{\centering \code{*.mat}} \\ 
+                                    & \code{plot\_figures.m} \\
+    \textbf{Section \rom{4}.A} \\    
+    \ \ \ Table 4                   & \code{compute\_tables.m}  & \code{*.mat} \\ 
+    \ \ \ Table 5                   & \code{compute\_tables.m}  & \code{*.mat} \\ 
+    \ \ \ Figure 6                  & \code{plot\_figures.m}    & \code{*.mat} \\
+    \ \ \ Decomposition             & \code{misc.m}             & \code{*.mat} \\
+    \textbf{Section \rom{4}.B} \\
+    \ \ \ Table 6                   & \code{compute\_tables.m}  & \code{*.mat} \\ 
+    \ \ \ Decomposition             & \code{misc.m}             & \code{*.mat} \\    
+    \bottomrule
+\end{tabular}
+\label{tab:navi}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{Navigating the Appendix}
+\begin{tabular}{llll}
+    \hline \hline
+    Content                         & File Name                      & File Dependency   & Location in Code \\
+    \midrule
+    \textbf{Appendix A.1} \\
+    \ \ \ Table A.1                 & \code{Descriptive.R}           & \code{PK, PA} \\
+    \textbf{Appendix B} \\
+    \ \ \ Figure B.1                & \code{Empirical\_Appendix.R}   & \code{PK, PA, DL, CA}  & Section 1  \\
+    \textbf{Appendix C.1} \\    
+    \ \ \ Figure C.1                & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 2  \\
+    \ \ \ Table C.1              & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 2  \\
+    \ \ \ Figure C.2          & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 2  \\
+    \ \ \ Regressions (!\#)          & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 2  \\
+    \ \ \ 3-Regressions (!\#) & \code{Empirical\_AEJ.R}   & \code{PK}         & Section 2 \\
+    \textbf{Appendix D.1} \\
+    \ \ \ Figure D.1            & \code{Empirical\_Appendix.R}   & \code{CA}  & Section 4  \\
+    \ \ \ Figure D.2                & \code{misc.m}       \\
+    \textbf{Appendix D.2} \\
+    \ \ \ Table D.1                  & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 3  \\
+    \ \ \ Regression (!\#)           & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 3  \\
+    \ \ \ Fixed Cost Ratio & \code{Empirical\_Appendix.R}   & \code{PK}  & Section 3  \\
+    \textbf{Appendix E.1} \\
+    \ \ \ Figure E.1         & \code{Empirical\_Appendix.R}   & \code{CA, US}  & Section 5  \\
+    \textbf{Appendix F} \\    
+    \ \ \ Table F.1               & \code{Accounting.R}   & \code{PK, CA, US}  \\
+    \textbf{Appendix J} \\
+    \ \ \ Table J                  & \code{twosectors\_ces.m}       & \multirow{2}{*}{\centering \code{*.mat}} \\
+                                    & \code{compute\_tables\_ces.m} \\
+    \bottomrule
+\end{tabular}
+\label{tab:navi}
+\end{threeparttable}
+\end{table}
 
 \subsection{Data Cleaning}
 
@@ -257,11 +341,11 @@ The instructions are organized by logic instead of the order of appearance in th
     \item
     set \code{compute\_tables.m} to benchmark and run
     \item
-    set \code{compute\_tables.m} to no tax and run    
+    set \code{compute\_tables.m} to no tax and run
     \item
-    set \code{compute\_tables.m} to regulation and run    
+    set \code{compute\_tables.m} to regulation and run
     \item
-    set \code{compute\_tables.m} to flat tax and run    
+    set \code{compute\_tables.m} to flat tax and run
     \item
     manually compute the numbers for the tables
 \end{enumerate}

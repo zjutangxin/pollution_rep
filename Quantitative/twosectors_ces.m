@@ -54,15 +54,17 @@ ksid_0 = -3.4114 ;          % Dirty technology: intercept
 ksid_1 = -0.3636 ;          % Dirty technology: slope
 ksic_0 = -4.3747 ;          % Clean technology: intercept
 ksic_1 = -0.3288 ;          % Clean technology: slope
-% ke     = 1.50 ;             % Fixed cost of clean technology
-ke = 1.30 ; % ces = 3.0
 rss    = 1/beta-1+delta ;   % Equilibrium interest rate
-% sigmaces = 1.5;
-sigmaces = 3.0 ;
 
-% Benchmark case
-% varces = 0.31 ;   % ces = 1.5
-varces = 0.42 ;             % Share of polluting good in final production
+% CES = 1.5
+% sigmaces = 1.5;
+% ke     = 1.50 ;             % Fixed cost of clean technology
+% varces = 0.31 ;   % Share of polluting good in final production
+
+% CES = 3.0
+ke = 1.30 ;
+sigmaces = 3.0 ;
+varces = 0.42 ; % ces = 3.0 
 
 % Size Distribution
 mud   = 0.20 ;               % Share of entrepreneurs in polluting sector
@@ -108,9 +110,11 @@ zprob = [zprob*(1-zendw); zendw] ;
 % Now we transform z' to z
 zgrid = (zgrid/(phi0^(1/(1-gamma)))).^((1-gamma)/(1-gamma+phi1));
 
+% benchmark
 % tauzd = max(0,1-phi0*zgrid.^phi1);
 % tauzc = max(0,1-phi0*zgrid.^phi1);
 
+% no tax
 tauzd = zeros(zn,1);
 tauzc = zeros(zn,1);
 
@@ -211,8 +215,8 @@ end
 firmmodel = (mud*firmmodeld+(1-mud)*firmmodelc)/totfirm;
 esmodel = (mud*esmodeld+(1-mud)*esmodelc)/tote;
 
-fsdata = [0.4889 0.1948 0.1567 0.1365 0.0232];
-esdata = [0.0780 0.1021 0.1833 0.4218 0.2148];
+fsdata = [0.4698 0.2797 0.1290 0.1020 0.0195];
+esdata = [0.0864 0.1611 0.1655 0.3501 0.2369];
 
 string = ['gamma = ', num2str(gamma)];
 disp(string)

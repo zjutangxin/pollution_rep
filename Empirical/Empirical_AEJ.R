@@ -25,7 +25,7 @@
 # Clear memory
 rm(list = ls())
 
-# Load in packages
+# Load packages
 library(foreign)
 library(data.table)
 library(AER)
@@ -33,10 +33,11 @@ library(scales)
 library(grid)
 
 # =========================================================================
-#                   0. Aggregating Categorical Variables
+#                   1. Intensity and Firm Size
 # =========================================================================
 load("./Data/KEYFIRM_R.RData")
-# ------------ Aggregate ownership rights type ------------------
+# -------------------- Data Processing --------------------------
+# Aggregate ownership rights type
 # 0: missing, 1: State/collective, 3: private, 4: HMT, 5: foreign
 KEYFIRM$type_a <- 0
 # State and collective
@@ -60,8 +61,7 @@ sel <- which(KEYFIRM$type == 300 | KEYFIRM$type == 310
     | KEYFIRM$type == 320 | KEYFIRM$type == 330 | KEYFIRM$type == 340)
 KEYFIRM$type_a[sel] <- 5
 
-# ------------ Aggregate treatment technology type ------------------
-# For disposal equipment type
+# Aggregate treatment technology type
 KEYFIRM$dm1_code_a <- 0
 # Physical
 sel <- which(KEYFIRM$dm1_code >= 1000 & KEYFIRM$dm1_code < 2000)
@@ -78,31 +78,26 @@ KEYFIRM$dm1_code_a[sel] <- 4
 # Combination
 sel <- which(KEYFIRM$dm1_code >= 5000 & KEYFIRM$dm1_code < 6000)
 KEYFIRM$dm1_code_a[sel] <- 5
+# dm1_code_a == 0 means the equipment is unclassified
 
-# --------------- Declare dummies -----------------
 KEYFIRM$province <- factor(KEYFIRM$province)        # Province
 KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    # 2-digit industry
 KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  # key 1, regular 2
 KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    # treatment
 KEYFIRM$type_a <- factor(KEYFIRM$type_a)            # ownership rights
 
-# =========================================================================
-#                   1. Intensity and Firm Size
-# =========================================================================
-
 POL5 <- KEYFIRM[industry_a == 22 | industry_a == 13 | industry_a == 15 
-      | industry_a == 17 | industry_a == 26]
+    | industry_a == 17 | industry_a == 26]
 POL5 <- POL5[product > 0 & cod_e > 0 & type_a != 0]
 POL5$intensity <- with(POL5, intensity <- cod_e/product)
 
-# Regression 1
+# ===================== Regression 1 ==============================
 lm_pol5_all <- lm(log(cod_e) ~ log(product) + province + type_a 
                   + industry_a, data = POL5)
 summary(lm_pol5_all)
 
-# Figure 1
-# ----------------- Update Figure 1 ----------------------------
-# Five industries, residual intensity versus production
+# ===================== Figure 1 ==================================
+# Residual intensity versus production
 lm_pol5_aux1 <- lm(log(intensity) ~ 
       province + type_a + industry_a, data = POL5)
 lm_pol5_aux2 <- lm(log(product) ~ 
@@ -111,7 +106,8 @@ POL5$res_intensity <- residuals(lm_pol5_aux1)
 POL5$res_product <- residuals(lm_pol5_aux2)
 
 pdf("./Results/Figure1.pdf",height=5,width=5)
-plot((POL5$res_intensity)~(POL5$res_product),cex=0.5,mgp=c(1.75, 0.75, 0), 
+plot((POL5$res_intensity)~(POL5$res_product),
+     cex=0.5,mgp=c(1.75, 0.75, 0), 
      xlab="Log Production",ylab="Log Intensity",
      main="Pooled Polluting",cex.main=1.75,cex.lab=1.5)
 pol5_residual <- lm(res_intensity ~ res_product, data = POL5)
@@ -121,9 +117,49 @@ dev.off()
 # =========================================================================
 #                   2. Firm Size and Technology
 # =========================================================================
+# ===================== Clean Share =============================
+# Used in calibration
 dmtb <- table(POL5$dm1_code_a)
 clean_share <- (sum(dmtb[5:6]))/sum(dmtb)
 
+# ===================== Table 2 ==================================
+# Table 2 Column 2
+PAPER <- KEYFIRM[industry_a == 22]
+dmtb <- table(PAPER$dm1_code_a)
+phyrate <- dmtb[2]/sum(dmtb[2:6])
+chemrate <- dmtb[3]/sum(dmtb[2:6])
+biorate <- sum(dmtb[5:6])/sum(dmtb[2:6])
+
+# Table 2 Column 1
+PAPER <- within(PAPER,{
+    cod_eg <- cod_e/cod_g
+    dm1_unit <- dm1_quant/dm1_inv
+    dm1_prod <- dm1_inv/product
+    dm1_prod2 <- (dm1_inv + dm1_oprcost)/product
+    dm1_prod3 <- dm1_oprcost/product
+    int <- cod_e/product
+})
+phyeffc <- 1 -
+  mean(PAPER$cod_eg[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+chemeffc <- 1 - 
+  mean(PAPER$cod_eg[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm = TRUE)
+bioeffc <- 1 - 
+  mean(PAPER$cod_eg[(PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5) 
+                    & PAPER$cod_eg <= 1],na.rm=TRUE)
+
+# Table 2 Column 3
+median(PAPER$dm1_inv[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+median(PAPER$dm1_inv[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm=TRUE)
+median(PAPER$dm1_inv[PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5 
+                     & PAPER$cod_eg <= 1],na.rm=TRUE)
+
+# Table 2 Column 4
+median(PAPER$product[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+median(PAPER$product[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm=TRUE)
+median(PAPER$product[PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5 
+                     & PAPER$cod_eg <= 1],na.rm=TRUE)
+
+# =========== Unumbered Regression in Section I.B =========================
 # Linear Probability Model of Technology Adoption
 POL5$clean <- 0
 sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_code_a == 5)
@@ -133,16 +169,31 @@ lm_clean <- lm(clean ~ log(product) + industry_a
       + province + type_a, data = POL5)
 summary(lm_clean)
 
-# Dirty Technology: Intensity and Size
+# ======================= Regressions 2 and 3 =============================
+# Regression 2
+lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
+        data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
+summary(lm1)
+# Regression 3
 lm_pool <- lm(log(cod_e) ~ log(product) + province 
     + industry_a + type_a + dm1_code_a, 
     data = POL5[dm1_code_a == 2 | dm1_code_a == 1 & intensity > 0])
 summary(lm_pool)
-lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
-    data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
-summary(lm1)
 
-# Calculate ke to y ratio
+# =========== Unumbered 3 Regressions in Appendix C.1 =================
+# The first one
+lm_phy <- lm(log(cod_e) ~ log(product) + province 
+             + industry_a + type_a, 
+             data = POL5[dm1_code_a == 1 & intensity > 0])
+summary(lm_phy)
+# The second one
+lm_chem <- lm(log(cod_e) ~ log(product) + province 
+             + industry_a + type_a, 
+             data = POL5[dm1_code_a == 2 & intensity > 0])
+summary(lm_chem)
+
+# ============ Fixed Cost/Output Ratio of Clean Firms =================
+# Used in calibration
 sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_code_a == 5)
 sum(POL5$dm1_inv[sel], na.rm = TRUE)/sum(POL5$product[sel], na.rm = TRUE)
 
@@ -180,7 +231,7 @@ sel <- which(USall$NAICS == 3221 | USall$NAICS == 311
     | USall$NAICS == 3259 | USall$NAICS == 3121)
 US <- USall[sel]
 
-# Processing the U.S. Data
+# Process the U.S. Data
 sel <- which(US$ENTRSIZE != 1 & US$ENTRSIZE != 6 &  US$ENTRSIZE != 9)
 US <- US[sel]
 USSUM <- US[, list(FIRM=sum(FIRM, na.rm = TRUE), 
@@ -207,7 +258,7 @@ for (i in 2:n1){
           & CH$nbarworkers <= cutoff[i])
   distchn[i-1] <- sum(CH$nbarworkers[sel1])
 }
-# Last category
+# Last group
 sel <- which(USSUM$AVGF > cutoff[n1])
 distus[n1] <- sum(USSUM$EMPL[sel])
 distus <- distus/sum(distus)
@@ -215,6 +266,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
+# =================== Figure 2 ========================================
 pdf("./Results/Figure2_Left.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
     ylim=c(0,1.0),xlab="Firm Size",main="Pooled Polluting", 
@@ -226,7 +278,7 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",cex=1.5)
 dev.off()
 
-# Calculate the five groups used in computation
+# Size Distribution by groups used in computation
 cutoff <- c(1,19,49,99,399)
 n1 <- length(cutoff)
 distchn <- rep(0,n1)
@@ -246,7 +298,7 @@ distus <- distus/sum(distus)
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
-
+# Employment distribution for polluting industries
 distchn
 
 # -------------------------------------------------------------------------
@@ -256,7 +308,7 @@ CH <- CHNall
 sel <- which(USall$NAICS == "31-33")
 US <- USall[sel]
 
-# Processing the U.S. Data
+# Process the U.S. Data
 sel <- which(US$ENTRSIZE != 1 & US$ENTRSIZE != 6 &  US$ENTRSIZE != 9)
 US <- US[sel]
 USSUM <- US[, list(FIRM=sum(FIRM, na.rm = TRUE), 
@@ -291,7 +343,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# Plot a separate one for paper product
+# ==================== Figure 2 ======================================
 pdf("./Results/Figure2_Right.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
     ylim=c(0,1.0),xlab="Firm Size",main="All Manufacturing", 
@@ -303,7 +355,9 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",cex=1.5)
 dev.off()
 
-# Calculate the employment share
+# ----------------------------------------------------------------
+# Compute the calibration target of employment distribution
+# ----------------------------------------------------------------
 cutoff <- c(1,19,49,99,399)
 n1 <- length(cutoff)
 distchn <- rep(0,n1)
@@ -323,36 +377,36 @@ distus <- distus/sum(distus)
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
+# =================== Calibration Target =========================
 # Employment share used in quantitative part
 distchn
 
-# calculate firm size distribution of China
+# ----------------------------------------------------------------
+# Compute the calibration target of firm size distribution
+# ----------------------------------------------------------------
 cutoff <- c(1,19,49,99,399)
 n1 <- length(cutoff)
 distchn <- rep(0,n1)
 # distus <- distchn
 
 for (i in 2:n1){
-  # sel <- which(US$CF > cutoff[i-1] & US$CF <= cutoff[i])
-  # distus[i-1] <- sum(US$PDFF[sel])
   sel1 <- which(CH$nbarworkers > cutoff[i-1] 
           & CH$nbarworkers <= cutoff[i])
   distchn[i-1] <- length(sel1)
 }
-# Last category
-# sel <- which(US$CF > cutoff[n1])
-# distus[n1] <- sum(US$PDFF[sel])
-# distus <- distus/sum(distus)
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- length(sel1)
 distchn <- distchn/sum(distchn)
+# =================== Calibration Target =========================
 # Firm size distribution used in quantitative part
 distchn
 
 # =========================================================================
 #                       4. Distortions
 # =========================================================================
-# compute phi1
+# ----------------------------------------------------------------
+# Compute phi1 following Equation (8)
+# ----------------------------------------------------------------
 rm(list = ls())
 
 load("./Data/CNEC_avgp.RData")
@@ -431,10 +485,13 @@ phiupnew <- mean(CNEC$phil[sel])
 sel <- which(CNEC$phil < phidown)
 phidownnew <- mean(CNEC$phil[sel])
 phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
-# phi1 in calibration
+
+# =================== phi1 in calibration ===========================
 phi_quant
 
-# Figure 3
+# ----------------------------------------------------------------
+# Plot Figure 3
+# ----------------------------------------------------------------
 rm(list = ls())
 load("./Data/CNEC_avgp.RData")
 CNEC <- CNEC_avgp
@@ -461,7 +518,6 @@ CNEC <- within(CNEC,
 # Calculate average factor products
 alpha = 0.5376
 gamma = 0.93
-# gamma = 0.85
 
 CNEC <- within(CNEC,
                {phik   <- product/totcapital
@@ -506,13 +562,19 @@ phiplot <- zplot
 phiplotraw <- zplot
 
 for (i in 2:n1){
-  sel <- which(CNEC_TRIM$logzratio > qcut[i-1] & CNEC_TRIM$logzratio <= qcut[i])
-  zplot[i-1] <- sum(CNEC_TRIM$logzratio[sel]*CNEC_TRIM$product[sel])/sum(CNEC_TRIM$product[sel])
+  sel <- which(CNEC_TRIM$logzratio > qcut[i-1] 
+               & CNEC_TRIM$logzratio <= qcut[i])
+  zplot[i-1] <- 
+    sum(CNEC_TRIM$logzratio[sel]*CNEC_TRIM$product[sel])/
+    sum(CNEC_TRIM$product[sel])
   zplotraw[i-1] <- mean(CNEC_TRIM$logzratio[sel])
-  phiplot[i-1] <- sum(CNEC_TRIM$logphiratio[sel]*CNEC_TRIM$product[sel])/sum(CNEC_TRIM$product[sel])
+  phiplot[i-1] <- 
+    sum(CNEC_TRIM$logphiratio[sel]*CNEC_TRIM$product[sel])/
+    sum(CNEC_TRIM$product[sel])
   phiplotraw[i-1] <- mean(CNEC_TRIM$logphiratio[sel])
 }
 
+# ==================== Figure 3 ======================================
 pdf("./Results/Figure3_Left.pdf",height=5,width=5)
 plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 
      xlab="Log Productivity",ylab="Log AFP",
@@ -549,13 +611,19 @@ phiplot <- zplot
 phiplotraw <- zplot
 
 for (i in 2:n1){
-  sel <- which(CNEC_TRIM$logzratio > qcut[i-1] & CNEC_TRIM$logzratio <= qcut[i])
-  zplot[i-1] <- sum(CNEC_TRIM$logzratio[sel]*CNEC_TRIM$product[sel])/sum(CNEC_TRIM$product[sel])
+  sel <- which(CNEC_TRIM$logzratio > qcut[i-1] 
+               & CNEC_TRIM$logzratio <= qcut[i])
+  zplot[i-1] <- 
+    sum(CNEC_TRIM$logzratio[sel]*CNEC_TRIM$product[sel])/
+    sum(CNEC_TRIM$product[sel])
   zplotraw[i-1] <- mean(CNEC_TRIM$logzratio[sel])
-  phiplot[i-1] <- sum(CNEC_TRIM$logphiratio[sel]*CNEC_TRIM$product[sel])/sum(CNEC_TRIM$product[sel])
+  phiplot[i-1] <- 
+    sum(CNEC_TRIM$logphiratio[sel]*CNEC_TRIM$product[sel])/
+    sum(CNEC_TRIM$product[sel])
   phiplotraw[i-1] <- mean(CNEC_TRIM$logphiratio[sel])
 }
 
+# ==================== Figure 3 ======================================
 pdf("./Results/Figure3_Right.pdf",height=5,width=5)
 plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 
      xlab="Log Productivity",ylab="Log AFP",

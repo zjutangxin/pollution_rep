@@ -32,10 +32,10 @@ clear all;
 % disp('Print Results for the CES No Tax')
 % load('./Results/benchmark_ces3.mat');
 % disp('Print Results for the CES 3 Benchmark')
-% load('./Results/notax_ces3.mat');
-% disp('Print Results for the CES 3 No Tax')
-load('./Results/nodirty_ces3.mat');
-disp('Print Results for the CES 3 No Dirty Tax')
+% load('./Results/nodirty_ces3.mat');
+% disp('Print Results for the CES 3 No Dirty Tax')
+load('./Results/notax_ces3.mat');
+disp('Print Results for the CES 3 No Tax')
 
 % =========================================================================
 %                               Table 5
