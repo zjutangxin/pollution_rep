@@ -8,6 +8,7 @@ Empirical/Data/Raw_Data/*.*
 !Empirical/Results/R_create_log.txt
 Quantitative/Results/*.*
 !Quantitative/Results/*.log
+!Quantitative/Results/*.mat
 Quantitative/*.asv
 bin/*.*
 obj/*.*
