@@ -1,0 +1,238 @@
+Log file of replicating the results in the main text
+
+Executing the Benchmark case
+>
+Equation solved. The sum of squared function values, r = 4.485807e-24, is less than
+sqrt(options.FunctionTolerance) = 1.000000e-04. The relative norm of the gradient of r,
+9.471851e-12, is less than options.OptimalityTolerance = 1.000000e-08.
+
+Optimization Metric                                         Options
+relative norm(grad r) =   9.47e-12              OptimalityTolerance =   1e-08 (selected)
+r =   4.49e-24                              sqrt(FunctionTolerance) =  1.0e-04 (selected)
+
+gamma = 0.93
+Firm Size: Model vs Data
+    0.5090    0.2287    0.1097    0.1263    0.0263
+    0.4698    0.2797    0.1290    0.1020    0.0195
+
+Employment Size: Model vs Data
+    0.1070    0.1343    0.1447    0.4086    0.2055
+    0.0864    0.1611    0.1655    0.3501    0.2369
+
+Average Tax =
+    0.1297
+
+ke to yc
+    0.0236
+
+clean share
+    0.5777
+
+K/Y ratio
+    1.6558
+    
+Executing the No-tax case
+>
+Equation solved. The sum of squared function values, r = 7.285860e-18, is less than
+sqrt(options.FunctionTolerance) = 1.000000e-04. The relative norm of the gradient of r,
+7.626462e-09, is less than options.OptimalityTolerance = 1.000000e-08.
+
+Optimization Metric                                         Options
+relative norm(grad r) =   7.63e-09              OptimalityTolerance =   1e-08 (selected)
+r =   7.29e-18                              sqrt(FunctionTolerance) =  1.0e-04 (selected)
+
+gamma = 0.93
+Firm Size: Model vs Data
+    0.3599    0.2094    0.1256    0.2426    0.0625
+    0.4698    0.2797    0.1290    0.1020    0.0195
+
+Employment Size: Model vs Data
+    0.0322    0.0521    0.0696    0.4202    0.4259
+    0.0864    0.1611    0.1655    0.3501    0.2369
+
+Average Tax =
+     0
+
+ke to yc
+    0.0200
+
+clean share
+    0.8561
+
+K/Y ratio
+    2.0598
+    
+Executing the Regulation case
+>
+Equation solved. The sum of squared function values, r = 6.849363e-24, is less than
+sqrt(options.FunctionTolerance) = 1.000000e-04. The relative norm of the gradient of r,
+1.171334e-11, is less than options.OptimalityTolerance = 1.000000e-08.
+
+Optimization Metric                                         Options
+relative norm(grad r) =   1.17e-11              OptimalityTolerance =   1e-08 (selected)
+r =   6.85e-24                              sqrt(FunctionTolerance) =  1.0e-04 (selected)
+
+gamma = 0.93
+Firm Size: Model vs Data
+    0.4993    0.2331    0.1118    0.1290    0.0267
+    0.4698    0.2797    0.1290    0.1020    0.0195
+
+Employment Size: Model vs Data
+    0.1041    0.1345    0.1449    0.4105    0.2061
+    0.0864    0.1611    0.1655    0.3501    0.2369
+
+Average Tax =
+    0.1306
+
+ke to yc
+    0.0361
+
+clean share
+    0.8510
+
+K/Y ratio
+    1.6559
+
+Executing the Flat-tax case    
+>
+Equation solved. The sum of squared function values, r = 1.363218e-20, is less than
+sqrt(options.FunctionTolerance) = 1.000000e-04. The relative norm of the gradient of r,
+4.852707e-10, is less than options.OptimalityTolerance = 1.000000e-08.
+
+Optimization Metric                                         Options
+relative norm(grad r) =   4.85e-10              OptimalityTolerance =   1e-08 (selected)
+r =   1.36e-20                              sqrt(FunctionTolerance) =  1.0e-04 (selected)
+
+gamma = 0.93
+Firm Size: Model vs Data
+    0.3599    0.2094    0.1256    0.2426    0.0625
+    0.4698    0.2797    0.1290    0.1020    0.0195
+
+Employment Size: Model vs Data
+    0.0322    0.0521    0.0696    0.4202    0.4259
+    0.0864    0.1611    0.1655    0.3501    0.2369
+
+Average Tax =
+    0.1755
+
+ke to yc
+    0.0171
+
+clean share
+    0.7334
+
+K/Y ratio
+    1.6985
+    
+======================================================================
+Print Results for the Benchmark
+===================================================================
+                   Table 4: Aggregate Impacts                      
+===================================================================
+                     Polluting                  Non-polluting      
+-------------------------------------------------------------------
+Aggregate Output      4.394794                    4.470991
+Aggregate Capital     7.295511                    7.398675
+Aggregate Consumption 3.717947
+Output per Worker     4.548950                    4.536514
+Output per Firm       272.831902                236.704029
+Average Productivity  107095.981302           91502.148179
+-------------------------------------------------------------------
+Number of Firms       0.016108                    0.018889
+Mean Size             59.976896                  52.177513
+Median Size           23.674467                  18.608131
+-------------------------------------------------------------------
+Aggregate Pollution   0.008910
+Aggregate Intensity   0.002027
+Clean Share           0.577732
+===================================================================
+===================================================================
+                  Table 5: Distributional Impacts                  
+===================================================================
+Polluting         0.027869    0.042601    0.074451     0.16805     0.68703
+Non-Polluting     0.024264    0.037843    0.066528     0.15386      0.7175
+===================================================================
+
+Print Results for the No-tax case
+===================================================================
+                   Table 4: Aggregate Impacts                      
+===================================================================
+                     Polluting                  Non-polluting      
+-------------------------------------------------------------------
+Aggregate Output      5.764431                    5.795189
+Aggregate Capital     11.895902                    11.931272
+Aggregate Consumption 4.596618
+Output per Worker     5.833962                    5.833962
+Output per Firm       812.011289                738.169576
+Average Productivity  236935.712435           215389.535454
+-------------------------------------------------------------------
+Number of Firms       0.007099                    0.007851
+Mean Size             139.186929                  126.529715
+Median Size           43.089730                  34.310304
+-------------------------------------------------------------------
+Aggregate Pollution   0.006831
+Aggregate Intensity   0.001185
+Clean Share           0.856050
+===================================================================
+===================================================================
+                  Table 5: Distributional Impacts                  
+===================================================================
+Polluting         0.015288     0.02893    0.064635     0.18245     0.70869
+Non-Polluting     0.012972    0.024912    0.056764     0.16965      0.7357
+===================================================================
+
+Print Results for the Regulation case
+===================================================================
+                   Table 4: Aggregate Impacts                      
+===================================================================
+                     Polluting                  Non-polluting      
+-------------------------------------------------------------------
+Aggregate Output      4.350511                    4.483445
+Aggregate Capital     7.222504                    7.419285
+Aggregate Consumption 3.718865
+Output per Worker     4.555633                    4.534460
+Output per Firm       300.578550                237.363393
+Average Productivity  118996.476425           91502.148179
+-------------------------------------------------------------------
+Number of Firms       0.014474                    0.018889
+Mean Size             65.979532                  52.346558
+Median Size           27.883871                  18.668418
+-------------------------------------------------------------------
+Aggregate Pollution   0.007647
+Aggregate Intensity   0.001758
+Clean Share           0.850999
+===================================================================
+===================================================================
+                  Table 5: Distributional Impacts                  
+===================================================================
+Polluting         0.030212    0.046303    0.080107     0.17792     0.66545
+Non-Polluting     0.024264    0.037843    0.066528     0.15386      0.7175
+===================================================================
+
+Print Results for the Flat Tax
+===================================================================
+                   Table 4: Aggregate Impacts                      
+===================================================================
+                     Polluting                  Non-polluting      
+-------------------------------------------------------------------
+Aggregate Output      4.752774                    4.778134
+Aggregate Capital     8.091781                    8.110882
+Aggregate Consumption 3.962355
+Output per Worker     4.810102                    4.810102
+Output per Firm       669.503306                608.620814
+Average Productivity  236935.712435           215389.535454
+-------------------------------------------------------------------
+Number of Firms       0.007099                    0.007851
+Mean Size             139.186929                  126.529714
+Median Size           43.089730                  34.310304
+-------------------------------------------------------------------
+Aggregate Pollution   0.006241
+Aggregate Intensity   0.001313
+Clean Share           0.733354
+===================================================================
+===================================================================
+                  Table 5: Distributional Impacts                  
+===================================================================
+Polluting         0.015288     0.02893    0.064635     0.18245     0.70869
+Non-Polluting     0.012972    0.024912    0.056764     0.16965      0.7357
+===================================================================

@@ -33,66 +33,6 @@ log using cpsc_raw.log, replace ;
 /* ===================================================================
 					1. Merge Regular Firms Data
  ===================================================================== */
-* Rename variables in RegX.dta ;
-* 	- execute only in the first time
-use reg1.dta, clear ;
-rename v1 firm_id;
-rename v2 areacode;
-rename v3 industry;
-rename v4 type;
-rename v5 opr_hours;
-rename v6 product;
-rename v7 quantity1;
-rename v8 qauantity2;
-rename v9 quantity3;
-rename v10 quantity4;
-rename v11 quantity5;
-rename v12 wastewater_g;
-rename v13 wastewater_e;
-rename v14 water_u;
-rename v15 water_r;
-rename v16 cod_g;
-rename v17 cod_e;
-rename v18 nh_g;
-rename v19 nh_e;
-rename v20 pet_g;
-rename v21 pet_e;
-rename v22 phe_g;
-rename v23 phe_e;
-rename v24 bod_g;
-rename v25 bod_e;
-rename v26 cyn_g;
-rename v27 cyn_e;
-rename v28 as_g;
-rename v29 as_e;
-rename v30 chr_g;
-rename v31 chr_e;
-rename v32 chr6_g;
-rename v33 chr6_e;
-rename v34 dm1_inv;
-rename v35 dm1_quant;
-rename v36 dm1_oprcost;
-rename v37 dm1_hours;
-rename v38 dm1_elec;
-rename v39 dm1_ef;
-rename v40 dm1_code;
-rename v41 dm2_inv;
-rename v42 dm2_quant;
-rename v43 dm2_oprcost;
-rename v44 dm2_hours;
-rename v45 dm2_elec;
-rename v46 dm2_ef;
-rename v47 dm2_code;
-rename v48 dm3_inv;
-rename v49 dm3_quant;
-rename v50 dm3_oprcost;
-rename v51 dm3_hours;
-rename v52 dm3_elec;
-rename v53 dm3_ef;
-rename v54 dm3_code;
-
-save reg1.dta, replace ;
-
 * Drop redudant variables and merge the files ;
 local x = 1 ;
 forvalues x = 1/4{;

@@ -31,7 +31,7 @@ log using cec_clean.log, replace ;
  ===================================================================== */
 use cec2004_small.dta, clear ;
 
-* Rename variables
+* Rename variables ;
 rename dm firm_id ;
 rename b056 areacode ;
 rename b07 industry ;
@@ -149,7 +149,7 @@ save cec2004_small.dta, replace ;
  ===================================================================== */
 use cec2004_large_full.dta, clear ;
 
-* Rename variables
+* Rename variables ;
 rename dm firm_id ;
 rename b056 areacode ;
 rename b07 industry ;

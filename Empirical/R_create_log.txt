@@ -1,0 +1,13 @@
+# R create log
+setwd("E:/PaperDrafts_port/Pollution_rep/Empirical/")
+sink("./Results/cpsc_convert.log")
+source("./cpsc_convert.R",echo=T)
+sink()
+
+sink("./Results/cec_convert.log")
+source("./cec_convert.R",echo=T)
+sink()
+
+sink("./Results/empirical_main.log")
+source("./empirical_AEJ.R",echo=T)
+sink()

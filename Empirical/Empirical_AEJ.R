@@ -140,11 +140,6 @@ lm_pool <- lm(log(cod_e) ~ log(product) + province
 summary(lm_pool)
 lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
     data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
-# lm0 <- lm(log(cod_e) ~ log(product) + province 
-#           + industry_a + type_a, data = POL5[dm1_code_a == 1 & intensity > 0])
-# lm1 <- lm(log(cod_e) ~ log(product) + province + industry_a + type_a, 
-#           data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
-summary(lm_pool)
 summary(lm1)
 
 # Calculate ke to y ratio
@@ -328,7 +323,7 @@ distus <- distus/sum(distus)
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
-
+# Employment share used in quantitative part
 distchn
 
 # calculate firm size distribution of China
@@ -351,7 +346,7 @@ for (i in 2:n1){
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- length(sel1)
 distchn <- distchn/sum(distchn)
-
+# Firm size distribution used in quantitative part
 distchn
 
 # =========================================================================
@@ -436,6 +431,7 @@ phiupnew <- mean(CNEC$phil[sel])
 sel <- which(CNEC$phil < phidown)
 phidownnew <- mean(CNEC$phil[sel])
 phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
+# phi1 in calibration
 phi_quant
 
 # Figure 3
@@ -516,12 +512,6 @@ for (i in 2:n1){
   phiplot[i-1] <- sum(CNEC_TRIM$logphiratio[sel]*CNEC_TRIM$product[sel])/sum(CNEC_TRIM$product[sel])
   phiplotraw[i-1] <- mean(CNEC_TRIM$logphiratio[sel])
 }
-
-# raw
-plot(zplotraw[1:n1],phiplotraw[1:n1],type = "l")
-
-# weighted
-plot(zplot[1:n1],phiplot[1:n1],type = "l")
 
 pdf("./Results/Figure3_Left.pdf",height=5,width=5)
 plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 

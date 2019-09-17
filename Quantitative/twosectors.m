@@ -177,8 +177,8 @@ firmmodel = (mud*firmmodeld+(1-mud)*firmmodelc)/totfirm;
 esmodel = (mud*esmodeld+(1-mud)*esmodelc)/tote;
 
 % newly computed
-fsdata = [0.4723 0.2812 0.1296 0.1025 0.0143];
-esdata = [0.0953 0.1776 0.1825 0.3861 0.1585];
+fsdata = [0.4698 0.2797 0.1290 0.1020 0.0195];
+esdata = [0.0864 0.1611 0.1655 0.3501 0.2369];
 
 string = ['gamma = ', num2str(gamma)];
 disp(string)

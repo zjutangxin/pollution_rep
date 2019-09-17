@@ -3,8 +3,11 @@ documentation/*.*
 !documentation/*.pdf
 Empirical/Data/*.*
 Empirical/Results/*.*
-!Empirical/Data/*.log
+Empirical/Data/Raw_Data/*.*
+!Empirical/Results/*.log
+!Empirical/Results/R_create_log.txt
 Quantitative/Results/*.*
+!Quantitative/Results/*.log
 Quantitative/*.asv
 bin/*.*
 obj/*.*

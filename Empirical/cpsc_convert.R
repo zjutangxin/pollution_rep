@@ -22,9 +22,6 @@ rm(list = ls())
 library(foreign)
 library(data.table)
 
-# Set working directory
-setwd("D:/Computation/pollution_rep/Empirical")
-
 # -------------------------------------------------------------------------
 #                           Key Firms
 # -------------------------------------------------------------------------
