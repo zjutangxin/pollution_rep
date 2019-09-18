@@ -1,6 +1,6 @@
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #                       Program Description
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #    
 # Purpose:
 #     - Convert CNEC from Stata format to R binary format
@@ -13,7 +13,7 @@
 #    ============        =================================
 #     05/25/2014                 Original Version
 #     09/16/2019                Improved Annotation
-# =========================================================================
+# ==========================================================================
 
 # Clear memory
 rm(list = ls())
@@ -166,7 +166,8 @@ DSMALL <- as.data.table(DSMALL)
 
 # Merge the two samples
 # Variables Needed:
-# industry, status, industry_a, type_a, founding_y, nbarworkers, product, totcapital, wage, nonwage, province
+# industry, status, industry_a, type_a, 
+#   founding_y, nbarworkers, product, totcapital, wage, nonwage, province
 ljunk <- DLARGE[,list(status,industry, industry_a, type_a, founding_y, 
       province, product, totcapital, nbarworkers, wage, nonwage)]
 sjunk <- DSMALL[,list(status,industry, industry_a, type_a, founding_y, 

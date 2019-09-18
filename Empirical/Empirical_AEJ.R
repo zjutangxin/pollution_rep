@@ -1,17 +1,17 @@
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #                       Program Description
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #    
 # Purpose:
-#     - Produce all the empirical results in the main text.
-#     - 1. log(COD)~log(Sales) and Figure 1
-#     - 2. Inv~log(Sales)
-#     - 3. log(COD)~log(Sales) for Dirty and Clean
-#     - 4. Figure 2
-#     - 5. Distortions
+#     - Produce most of the empirical results in the main text.
+#     - 1. Table 2
+#     - 2. Figures: 1, 2, 3
+#     - 3. Regressions: 1, 2, 3, Section I.B
+#     - 4. Calibration Targets: Size distribution, phi1, clean share
+#             ke/Y
 #     - The Size Distribution of Firms and Industrial Water Pollution: A
 #       Quantitative Analysis of China
-#     - Prepared for AEJM Final Submission
+#     - Prepared for AEJ: Macro
 # 
 # Author:
 #     - Xin Tang @ International Monetary Fund
@@ -21,7 +21,7 @@
 #    ============        =================================
 #       04/06/2019                 Original Version
 #       09/16/2019                Improved Annotation
-# =========================================================================
+# ==========================================================================
 # Clear memory
 rm(list = ls())
 
@@ -32,9 +32,9 @@ library(AER)
 library(scales)
 library(grid)
 
-# =========================================================================
+# ==========================================================================
 #                   1. Intensity and Firm Size
-# =========================================================================
+# ==========================================================================
 load("./Data/KEYFIRM_R.RData")
 # -------------------- Data Processing --------------------------
 # Aggregate ownership rights type
@@ -80,23 +80,23 @@ sel <- which(KEYFIRM$dm1_code >= 5000 & KEYFIRM$dm1_code < 6000)
 KEYFIRM$dm1_code_a[sel] <- 5
 # dm1_code_a == 0 means the equipment is unclassified
 
-KEYFIRM$province <- factor(KEYFIRM$province)        # Province
-KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    # 2-digit industry
-KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  # key 1, regular 2
-KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    # treatment
-KEYFIRM$type_a <- factor(KEYFIRM$type_a)            # ownership rights
+KEYFIRM$province <- factor(KEYFIRM$province)        
+KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    
+KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  
+KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    
+KEYFIRM$type_a <- factor(KEYFIRM$type_a)            
 
 POL5 <- KEYFIRM[industry_a == 22 | industry_a == 13 | industry_a == 15 
     | industry_a == 17 | industry_a == 26]
 POL5 <- POL5[product > 0 & cod_e > 0 & type_a != 0]
 POL5$intensity <- with(POL5, intensity <- cod_e/product)
 
-# ===================== Regression 1 ==============================
+# ===================== Regression 1 =======================================
 lm_pol5_all <- lm(log(cod_e) ~ log(product) + province + type_a 
                   + industry_a, data = POL5)
 summary(lm_pol5_all)
 
-# ===================== Figure 1 ==================================
+# ===================== Figure 1 ===========================================
 # Residual intensity versus production
 lm_pol5_aux1 <- lm(log(intensity) ~ 
       province + type_a + industry_a, data = POL5)
@@ -114,15 +114,15 @@ pol5_residual <- lm(res_intensity ~ res_product, data = POL5)
 abline(pol5_residual,col="red",lwd=4)
 dev.off()
 
-# =========================================================================
+# ==========================================================================
 #                   2. Firm Size and Technology
-# =========================================================================
-# ===================== Clean Share =============================
+# ==========================================================================
+# ===================== Clean Share ========================================
 # Used in calibration
 dmtb <- table(POL5$dm1_code_a)
 clean_share <- (sum(dmtb[5:6]))/sum(dmtb)
 
-# ===================== Table 2 ==================================
+# ===================== Table 2 ============================================
 # Table 2 Column 2
 PAPER <- KEYFIRM[industry_a == 22]
 dmtb <- table(PAPER$dm1_code_a)
@@ -159,7 +159,7 @@ median(PAPER$product[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm=TRUE)
 median(PAPER$product[PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5 
                      & PAPER$cod_eg <= 1],na.rm=TRUE)
 
-# =========== Unumbered Regression in Section I.B =========================
+# =========== Unumbered Regression in Section I.B ==========================
 # Linear Probability Model of Technology Adoption
 POL5$clean <- 0
 sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_code_a == 5)
@@ -169,7 +169,7 @@ lm_clean <- lm(clean ~ log(product) + industry_a
       + province + type_a, data = POL5)
 summary(lm_clean)
 
-# ======================= Regressions 2 and 3 =============================
+# ======================= Regressions 2 and 3 ==============================
 # Regression 2
 lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
         data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
@@ -180,7 +180,7 @@ lm_pool <- lm(log(cod_e) ~ log(product) + province
     data = POL5[dm1_code_a == 2 | dm1_code_a == 1 & intensity > 0])
 summary(lm_pool)
 
-# =========== Unumbered 3 Regressions in Appendix C.1 =================
+# =========== Unumbered 3 Regressions in Appendix C.1 ======================
 # The first one
 lm_phy <- lm(log(cod_e) ~ log(product) + province 
              + industry_a + type_a, 
@@ -192,14 +192,14 @@ lm_chem <- lm(log(cod_e) ~ log(product) + province
              data = POL5[dm1_code_a == 2 & intensity > 0])
 summary(lm_chem)
 
-# ============ Fixed Cost/Output Ratio of Clean Firms =================
+# ============ Fixed Cost/Output Ratio of Clean Firms ======================
 # Used in calibration
 sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_code_a == 5)
 sum(POL5$dm1_inv[sel], na.rm = TRUE)/sum(POL5$product[sel], na.rm = TRUE)
 
-# =========================================================================
+# ==========================================================================
 #                   3. Firm Size Distribution
-# =========================================================================
+# ==========================================================================
 # Clear memory
 rm(list = ls())
 
@@ -216,9 +216,9 @@ sel <- which(CHNall$nbarworkers > 0 & CHNall$nbarworkers < qup
              & CHNall$nbarworkers > qdown)
 CHNall <- CHNall[sel]
 
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #                   Pooled Polluting
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 sel <- which(CHNall$industry_a == 22 | CHNall$industry_a == 13
       | CHNall$industry_a == 15 | CHNall$industry_a == 17
       | CHNall$industry_a == 26)
@@ -266,7 +266,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =================== Figure 2 ========================================
+# =================== Figure 2 =============================================
 pdf("./Results/Figure2_Left.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
     ylim=c(0,1.0),xlab="Firm Size",main="Pooled Polluting", 
@@ -301,9 +301,9 @@ distchn <- distchn/sum(distchn)
 # Employment distribution for polluting industries
 distchn
 
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #                   All Manufacturing
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 CH <- CHNall
 sel <- which(USall$NAICS == "31-33")
 US <- USall[sel]
@@ -343,7 +343,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# ==================== Figure 2 ======================================
+# ==================== Figure 2 ============================================
 pdf("./Results/Figure2_Right.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
     ylim=c(0,1.0),xlab="Firm Size",main="All Manufacturing", 
@@ -377,7 +377,7 @@ distus <- distus/sum(distus)
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
-# =================== Calibration Target =========================
+# =================== Calibration Target ===================================
 # Employment share used in quantitative part
 distchn
 
@@ -397,13 +397,13 @@ for (i in 2:n1){
 sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- length(sel1)
 distchn <- distchn/sum(distchn)
-# =================== Calibration Target =========================
+# =================== Calibration Target ===================================
 # Firm size distribution used in quantitative part
 distchn
 
-# =========================================================================
+# ==========================================================================
 #                       4. Distortions
-# =========================================================================
+# ==========================================================================
 # ----------------------------------------------------------------
 # Compute phi1 following Equation (8)
 # ----------------------------------------------------------------
@@ -486,7 +486,7 @@ sel <- which(CNEC$phil < phidown)
 phidownnew <- mean(CNEC$phil[sel])
 phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
 
-# =================== phi1 in calibration ===========================
+# =================== phi1 in calibration ==================================
 phi_quant
 
 # ----------------------------------------------------------------
@@ -574,7 +574,7 @@ for (i in 2:n1){
   phiplotraw[i-1] <- mean(CNEC_TRIM$logphiratio[sel])
 }
 
-# ==================== Figure 3 ======================================
+# ==================== Figure 3 ============================================
 pdf("./Results/Figure3_Left.pdf",height=5,width=5)
 plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 
      xlab="Log Productivity",ylab="Log AFP",
@@ -623,7 +623,7 @@ for (i in 2:n1){
   phiplotraw[i-1] <- mean(CNEC_TRIM$logphiratio[sel])
 }
 
-# ==================== Figure 3 ======================================
+# ==================== Figure 3 ============================================
 pdf("./Results/Figure3_Right.pdf",height=5,width=5)
 plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 
      xlab="Log Productivity",ylab="Log AFP",

@@ -5,6 +5,7 @@
 % Purpose:
 %     - Main program to solve the stationary equilibrium. 
 %     - Two Sectors Model: CES aggregation
+%     - Table J in Appendix J
 %     - The Size Distribution of Firms and Industrial Water Pollution: A
 %       Quantitative Analysis of China.
 %  
@@ -12,7 +13,7 @@
 %     - Xin Tang @ International Monetary Fund
 % 
 % File Dependence:
-%     - fcn.m: evaluates all the allocations at a given wage and returns 
+%     - fcnces.m: evaluates all the allocations at a given wage and returns 
 %       the excess demand in the labor market.
 %  
 % Record of Revisions:

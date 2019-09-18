@@ -1,17 +1,16 @@
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #                       Program Description
-# -------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #    
 # Purpose:
-#     - Produce all the empirical results in the online appendix.
-#     - 1. log(COD)~log(Sales) and Figure 1
-#     - 2. Inv~log(Sales)
-#     - 3. log(COD)~log(Sales) for Dirty and Clean
-#     - 4. Figure 2
-#     - 5. Distortions
+#     - Produce most of the empirical results in the Online Appendices.
+#     - 1. Tables: C.1, D.1
+#     - 2. Figures: B.1, C.1, C.2, D.1, E.1
+#     - 3. Regressions: Appendix C.1, D.2
+#     - 4. Miscellaneous Info: Appendix D.2
 #     - The Size Distribution of Firms and Industrial Water Pollution: A
 #       Quantitative Analysis of China
-#     - Prepared for AEJM R&R
+#     - Prepared for AEJ: Macro
 # 
 # Author:
 #     - Xin Tang @ International Monetary Fund
@@ -20,7 +19,8 @@
 #          Date:                 Description of Changes
 #    ============        =================================
 #       04/06/2019                 Original Version
-# =========================================================================
+#       09/17/2019                Improved Annotation
+# ==========================================================================
 # Clear memory
 rm(list = ls())
 
@@ -31,10 +31,10 @@ library(AER)
 library(scales)
 library(grid)
 
-# =====================================================================
+# ==========================================================================
 #         1. Firm Size Distribution in Different Datasets
-# =====================================================================
-# ====================== Figure B.1 ===============================
+# ==========================================================================
+# ====================== Figure B.1 ========================================
 # Distribution of output for NGSPS (Key/All), CNEC (All/Large)
 # Read the full sample of CNEC 
 load("./Data/CNEC_avgp.RData")
@@ -98,10 +98,10 @@ plot(tmpden,xlab="Log Output",ylab="Density",main="NGSPS All",
      cex.lab = 1.25, lwd = 2.0, col = 4)
 dev.off()
 
-# =====================================================================
+# ==========================================================================
 #           2. Industry-level Regression Results
-# =====================================================================
-# ---------------------- Individual Industry -----------------------
+# ==========================================================================
+# ---------------------- Individual Industry --------------------------
 # Clear memory
 rm(list = ls())
 
@@ -161,7 +161,7 @@ KEYFIRM$type_a <- factor(KEYFIRM$type_a)            # ownership rights
 KEYFIRM <- KEYFIRM[product > 0 & cod_e > 0]
 KEYFIRM$intensity <- with(KEYFIRM, intensity <- cod_e/product)
 
-# ====================== Table C1 =================================
+# ====================== Table C1 ==========================================
 # -------------------- PAPER -------------------------
 sel <- which(KEYFIRM$industry_a == 22)
 PAPER <- KEYFIRM[sel]
@@ -198,7 +198,7 @@ lm_bever_all <-
   lm(log(cod_e) ~ log(product) + province + type_a, data = BEVER)
 summary(lm_bever_all)
 
-# ====================== Figure C1 =================================
+# ====================== Figure C1 =========================================
 # -------------------- PAPER -------------------------
 lm_paper_aux1 <- lm(log(intensity) ~ 
     province + type_a, data = PAPER)
@@ -346,13 +346,13 @@ sel <- which(POLLUTEALL$product > 0 & POLLUTEALL$product < qup
              & POLLUTEALL$product > qdown)
 POLLUTEALL <- POLLUTEALL[sel]
 
-# ================== Regression (!#) Page 7 ============================
+# ================== Regression (!#) Page 7 ================================
 CODR <- POLLUTEALL[cod_e > 0]
 lm_all <- lm(log(cod_e)~log(product)+industry_a+province+type_a,
              data=CODR)
 summary(lm_all)
 
-# ================== Figure C2 ============================
+# ================== Figure C2 =============================================
 CODR$intensity <- with(CODR, intensity <- cod_e/product)
 lm_codr_aux1 <- lm(log(intensity) ~ 
                      province + type_a + industry_a, data = CODR)
@@ -369,7 +369,7 @@ codr_residual <- lm(res_intensity ~ res_product, data = CODR)
 abline(codr_residual,col="red",lwd=4)
 dev.off()
 
-# ================== Regression (!#) Page 9 ============================
+# ================== Regression (!#) Page 9 ================================
 CODR$clean <- 0
 sel <- which(CODR$dm1_code_a == 4 | CODR$dm1_code_a == 5)
 CODR$clean[sel] <- 1
@@ -395,18 +395,18 @@ sel <- which(KEYFIRM$industry_a == 15 | KEYFIRM$industry_a == 17
     | KEYFIRM$industry_a == 22 | KEYFIRM$industry_a == 26 
     | KEYFIRM$industry_a == 13)
 ALL <- KEYFIRM[sel]
-# ================== Regression (!#) Page 10 ============================
+# ================== Regression (!#) Page 10 ===============================
 lm_all <- lm(log(cod_e) ~ log(product) 
       + province + industry_a + type_a, data = ALL)
 summary(lm_all)
 cl(ALL, lm_all, ALL$province)
 
-# =====================================================================
+# ==========================================================================
 #         3. Additional Information of Treatment Technologies
-# =====================================================================
+# ==========================================================================
 # Clear memory
 rm(list = ls())
-# ====================== Figure D.3 ===================================
+# ====================== Figure D.3 ========================================
 load("./Data/KEYFIRM_R.RData")
 # ------------ Aggregate ownership rights type ------------------
 # 0: missing, 1: State/collective, 3: private, 4: HMT, 5: foreign
@@ -530,7 +530,7 @@ legend("topleft",c("Phy","Chem","Bio"),
        lty=c(1,1,1), col=c(1,2,4),lwd= 2.0)
 dev.off()
 
-# ===================== Results in Appendix D.2 =============================
+# ===================== Results in Appendix D.2 ============================
 # Clear memory
 rm(list = ls())
 
@@ -540,10 +540,10 @@ load("./Data/KEYFIRM_R.RData")
 KEYFIRM$type_a <- 0
 # State and collective
 sel <- which(KEYFIRM$type == 110 | KEYFIRM$type == 141
-             | KEYFIRM$type == 151 | KEYFIRM$type == 120 | KEYFIRM$type == 130
-             | KEYFIRM$type == 140 | KEYFIRM$type == 150 | KEYFIRM$type == 142
-             | KEYFIRM$type == 143 | KEYFIRM$type == 149 | KEYFIRM$type == 159
-             | KEYFIRM$type == 160 | KEYFIRM$type == 100 )
+    | KEYFIRM$type == 151 | KEYFIRM$type == 120 | KEYFIRM$type == 130
+    | KEYFIRM$type == 140 | KEYFIRM$type == 150 | KEYFIRM$type == 142
+    | KEYFIRM$type == 143 | KEYFIRM$type == 149 | KEYFIRM$type == 159
+    | KEYFIRM$type == 160 | KEYFIRM$type == 100 )
 KEYFIRM$type_a[sel] <- 1
 # Private
 sel <- which(KEYFIRM$type == 170 | KEYFIRM$type == 171
@@ -552,11 +552,11 @@ sel <- which(KEYFIRM$type == 170 | KEYFIRM$type == 171
 KEYFIRM$type_a[sel] <- 3
 # Hong Kong, Macau and Taiwan
 sel <- which(KEYFIRM$type == 200 | KEYFIRM$type == 210
-             | KEYFIRM$type == 220 | KEYFIRM$type == 230 | KEYFIRM$type == 240)
+    | KEYFIRM$type == 220 | KEYFIRM$type == 230 | KEYFIRM$type == 240)
 KEYFIRM$type_a[sel] <- 4
 # Foreign
 sel <- which(KEYFIRM$type == 300 | KEYFIRM$type == 310
-             | KEYFIRM$type == 320 | KEYFIRM$type == 330 | KEYFIRM$type == 340)
+    | KEYFIRM$type == 320 | KEYFIRM$type == 330 | KEYFIRM$type == 340)
 KEYFIRM$type_a[sel] <- 5
 
 # ------------ Aggregate treatment technology type ------------------
@@ -599,7 +599,7 @@ qup <- quantile(POL5$dm_y, probs=c(0.99), na.rm = TRUE)
 sel <- which(POL5$dm_y > qdown & POL5$dm_y < qup)
 POL5 <- POL5[sel]
 
-# Ratios on page 14
+# ====================== Ratios on page 14 =================================
 qdown <- quantile(POL5$product, probs=c(0.001), na.rm = TRUE)
 qup <- quantile(POL5$product, probs=c(0.20), na.rm = TRUE)
 sel <- which(POL5$product > qdown & POL5$product < qup)
@@ -628,7 +628,7 @@ quint5 <- mean(POL5$dm_y[sel])
 quint <- c(quint1,quint2,quint3,quint4,quint5)
 quint
 
-# Reg on page 14
+# ================== Regression on Page 14 =================================
 lm_dmy <- lm(log(dm_y) ~ log(product) + province + type_a 
              + industry_a, data = POL5)
 summary(lm_dmy)
@@ -637,7 +637,7 @@ lm_dm <- lm(log(dm1_inv) ~ log(product) + province + type_a
             + industry_a, data = POL5)
 summary(lm_dm)
 
-# =========================== Table D1 ==========================================
+# =========================== Table D1 =====================================
 phy <- POL5[POL5$dm1_code_a == 1]
 qdown <- quantile(phy$dm1_inv, probs=c(0.01), na.rm = TRUE)
 qup <- quantile(phy$dm1_inv, probs=c(0.99), na.rm = TRUE)
@@ -652,10 +652,10 @@ sel <- which(bio$dm1_inv > qdown & bio$product < qup)
 bio <- bio[sel]
 summary(bio$dm1_inv)
 
-# =====================================================================
-#         4. Correlated Distortions
-# =====================================================================
-# ====================== Figure D1 ====================================
+# ==========================================================================
+#                 4. Correlated Distortions
+# ==========================================================================
+# ====================== Figure D1 =========================================
 load("./Data/CNEC_avgp.RData")
 CNEC <- CNEC_avgp
 rm(CNEC_avgp)
@@ -675,17 +675,18 @@ PAPER <- within(PAPER,
                 })
 alpha = 0.5376
 gamma = 0.93
-# gamma = 0.85
+
 # Calculate average factor products
 PAPER <- within(PAPER,
-                {phik <- product/totcapital
-                phil <- product/lcomp
-                phil_1 <- product/nbarworkers
-                phi <- (phik^alpha)*(phil^(1-alpha))
-                phi1 <- product/totcapital*lcomp
-                kappa <- totcapital/lcomp
-                z <- product/(totcapital^alpha * lcomp^(1-alpha))
-                z2 <- (product/(totcapital^alpha * lcomp^(1-alpha))^gamma)^(1/(1-gamma))
+          {phik <- product/totcapital
+           phil <- product/lcomp
+           phil_1 <- product/nbarworkers
+           phi <- (phik^alpha)*(phil^(1-alpha))
+           phi1 <- product/totcapital*lcomp
+           kappa <- totcapital/lcomp
+           z <- product/(totcapital^alpha * lcomp^(1-alpha))
+           z2 <- (product/(totcapital^alpha * lcomp^(1-alpha))^gamma)
+            ^(1/(1-gamma))
                 })
 
 qup <- quantile(PAPER$phik, probs=c(.97),na.rm=TRUE)
@@ -718,6 +719,7 @@ qdown <- quantile(kappaz$z2, probs=c(0.01),na.rm=TRUE)
 sel <- which(kappaz$z2>qdown & kappaz$z2<qup)
 kappaz <- kappaz[sel]
 
+# =================== Figure D1 ============================================
 # Plot ARPK
 pdf("./Results/FigureD1_TopLeft.pdf",height=5,width=5)
 plot(log(phikz$phik)~log(phikz$z2),cex=0.5,mgp=c(1.75, 0.75, 0), 
@@ -745,9 +747,9 @@ p_lm <- lm(log(kappa)~log(z2), data = kappaz)
 abline(p_lm,col="red",lwd=4)
 dev.off()
 
-# =====================================================================
+# ==========================================================================
 #         5. Employment Distributions by Industry
-# =====================================================================
+# ==========================================================================
 rm(list = ls())
 
 # Load in packages
@@ -760,11 +762,12 @@ library(grid)
 
 load("./Data/CNEC_avgp.RData")
 CHNall <- CNEC_avgp
-USall <- read.csv("./Data/susb04.csv",header = TRUE)  # Statistics of US Businesses
+USall <- read.csv("./Data/susb04.csv",header = TRUE)
 USall <- as.data.table(USall)
-USall <- USall[,list(NAICS, ENTRSIZE, FIRM, ESTB, EMPL, NAICSDSCR, ENTRSIZEDSCR)]
+USall <- USall[,list(NAICS, ENTRSIZE, FIRM, 
+                     ESTB, EMPL, NAICSDSCR, ENTRSIZEDSCR)]
 
-# ------------------------ Paper Industry -------------------------------------
+# ------------------------ Paper Industry ---------------------------
 sel <- which(CHNall$industry_a == 22)
 CH <- CHNall[sel]
 qch <- quantile(CH$nbarworkers, probs=c(.99),na.rm=TRUE)
@@ -804,7 +807,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =========================== Figure E1 ===================================
+# =========================== Figure E1 ====================================
 pdf("./Results/FigureE1_TopLeft.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share", 
@@ -814,14 +817,13 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",y.intersp=0.7,x.intersp=0.3,text.width=0.8)
 dev.off()
 
-# ------------------------ Textile Industry -------------------------------------
+# ---------------- Textile Industry -----------------------------
 sel <- which(CHNall$industry_a == 17)
 CH <- CHNall[sel]
 qch <- quantile(CH$nbarworkers, probs=c(.99),na.rm=TRUE)
 sel <- which(CH$nbarworkers < qch)
 CH <- CH[sel]
 
-# sel <- which(USall$NAICS == 3112 | USall$NAICS == 3113 | USall$NAICS == 3116)
 sel <- which(USall$NAICS == 313)
 US <- USall[sel]
 
@@ -856,7 +858,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =========================== Figure E1 ===================================
+# =========================== Figure E1 ====================================
 pdf("./Results/FigureE1_MidLeft.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share",
@@ -866,14 +868,13 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",y.intersp=0.7,x.intersp=0.3,text.width=0.8)
 dev.off()
 
-# ------------------------ Food Industry -------------------------------------
+# ------------------ Food Industry ------------------------------
 sel <- which(CHNall$industry_a == 13)
 CH <- CHNall[sel]
 qch <- quantile(CH$nbarworkers, probs=c(.99),na.rm=TRUE)
 sel <- which(CH$nbarworkers < qch)
 CH <- CH[sel]
 
-# sel <- which(USall$NAICS == 3112 | USall$NAICS == 3113 | USall$NAICS == 3116)
 sel <- which(USall$NAICS == 311)
 US <- USall[sel]
 
@@ -908,7 +909,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =========================== Figure E1 ===================================
+# =========================== Figure E1 ====================================
 pdf("./Results/FigureE1_TopRight.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share",
@@ -918,7 +919,7 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",y.intersp=0.7,x.intersp=0.3,text.width=0.8)
 dev.off()
 
-# ------------------------ Chemistry Industry -------------------------------------
+# --------------- Chemistry Industry ----------------------------
 sel <- which(CHNall$industry_a == 26)
 CH <- CHNall[sel]
 qch <- quantile(CH$nbarworkers, probs=c(.99),na.rm=TRUE)
@@ -966,7 +967,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =========================== Figure E1 ===================================
+# =========================== Figure E1 ====================================
 pdf("./Results/FigureE3_MidRight.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share",
@@ -976,7 +977,7 @@ legend("topleft", c("China","US"),fill=c("red","blue"),
        bty="o",y.intersp=0.7,x.intersp=0.3,text.width=0.8)
 dev.off()
 
-# ------------------------ Beverage Industry -------------------------------------
+# --------------- Beverage Industry ------------------------
 sel <- which(CHNall$industry_a == 15)
 CH <- CHNall[sel]
 qch <- quantile(CH$nbarworkers, probs=c(.99),na.rm=TRUE)
@@ -1017,7 +1018,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
-# =========================== Figure E1 ===================================
+# =========================== Figure E1 ====================================
 pdf("./Results/FigureE3_BotLeft",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share",
