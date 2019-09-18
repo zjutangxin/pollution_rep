@@ -148,7 +148,7 @@ xlabel('Firm Size Groups');
 ylabel('Fraction of Workers');
 title('Employment Distribution: Benchmark vs. No Tax',...
     'FontWeight','Normal');
-saveas(gcf,'./Results/Figure6_BottomLeft.eps','epsc');
+saveas(gcf,'./Results/Figure6_BotLeft.eps','epsc');
 
 % Bench vs Regulation: firm
 figure(5)

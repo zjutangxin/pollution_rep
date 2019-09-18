@@ -1,5 +1,6 @@
 # R create log
 setwd("E:/PaperDrafts_port/Pollution_rep/Empirical/")
+
 sink("./Results/cpsc_convert.log")
 source("./cpsc_convert.R",echo=T)
 sink()
@@ -10,4 +11,20 @@ sink()
 
 sink("./Results/empirical_main.log")
 source("./empirical_AEJ.R",echo=T)
+sink()
+
+sink("./Results/descriptive.log")
+source("./Descriptive.R", echo = TRUE)
+sink()
+
+sink("./Results/empirical_main.log")
+source("./Empirical_AEJ.R", echo = TRUE)
+sink()
+
+sink("./Results/accounting.log")
+source("./Accounting.R", echo = TRUE)
+sink()
+
+sink("./Results/empirical_appendix.log")
+source("./Empirical_Appendix.R", echo = TRUE)
 sink()

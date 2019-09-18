@@ -1,7 +1,7 @@
 
-> # -------------------------------------------------------------------------
+> # --------------------------------------------------------------------------
 > #                       Program Description
-> # ---------------------- .... [TRUNCATED] 
+> # --------------------- .... [TRUNCATED] 
 
 > # Load in packages
 > library(foreign)
@@ -237,7 +237,8 @@
 
 > # Merge the two samples
 > # Variables Needed:
-> # industry, status, industry_a, type_a, founding_y, nbarworkers, product, totcapital, wage, nonwage, .... [TRUNCATED] 
+> # industry, status, industry_a, type_a, 
+> #   founding_y, nbarworkers, product, totcapital, wage, n .... [TRUNCATED] 
 
 > sjunk <- DSMALL[,list(status,industry, industry_a, type_a, founding_y, 
 +       province, product, capital, nbarworkers, wage, nonwage)]

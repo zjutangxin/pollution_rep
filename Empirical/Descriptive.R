@@ -44,7 +44,7 @@ KEYPER_E <- KEYSUM_E[, list(wastewater = 100*wastewater/sum(wastewater),
       chr6 = 100*chr6/sum(chr6), industry_a = industry_a)]
 
 # Chemical Oxygen Demand
-# Table 1, Row 1
+# ==================== Table 1 Row 1 =======================================
 s <- order(-KEYPER_E$cod)
 KEYPER_E <- KEYPER_E[s]
 head(KEYPER_E$cod,5)
@@ -109,14 +109,14 @@ for (i in foo1){
   ALLCOMP_E$product[i+1] <- 100 - ALLCOMP_E$product[i]
 }
 
-# Table 1, Rows 2 and 3
+# ==================== Table 1 Rows 2 and 3 ================================
 ALLCOMP_E[which(ALLCOMP_E$industry_a == 22), list(cod, product)]
 ALLCOMP_E[which(ALLCOMP_E$industry_a == 13), list(cod, product)]
 ALLCOMP_E[which(ALLCOMP_E$industry_a == 17), list(cod, product)]
 ALLCOMP_E[which(ALLCOMP_E$industry_a == 26), list(cod, product)]
 ALLCOMP_E[which(ALLCOMP_E$industry_a == 15), list(cod, product)]
 
-# Table A.1, Row 1
+# ==================== Table A.1 Row 1 =====================================
 # number of firms
 sel <- which(ALLFIRM$Census_Type == 1)
 numkey <- length(sel)

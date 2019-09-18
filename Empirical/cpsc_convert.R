@@ -116,9 +116,7 @@ rm(KEYFIRM)
 # -------------------------------------------------------------------------
 #                           Regular Firms
 # -------------------------------------------------------------------------
-File <- paste(PathIn, "regall.dta", sep = "/")
-
-REGFIRM <- read.dta(File)
+REGFIRM <- read.dta("./Data/regall.dta")
 # For faster processing, save data as data.table
 REGFIRM <- data.table(REGFIRM, key=c("firm_id"))
 
@@ -178,9 +176,7 @@ rm(REGFIRM)
 # -------------------------------------------------------------------------
 #                           All Firms
 # -------------------------------------------------------------------------
-File <- paste(PathIn, "allfirms.dta", sep = "/")
-
-ALLFIRM <- read.dta(File)
+ALLFIRM <- read.dta("./Data/allfirms.dta")
 # For faster processing, save data as data.table
 ALLFIRM <- data.table(ALLFIRM, key=c("firm_id"))
 

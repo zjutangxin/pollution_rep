@@ -49,7 +49,7 @@ deflator <- 96.30/93.50
 CHNprod$rproduct <- (CHNprod$product/10.0)*deflator
 tmpden <- density(log(CHNprod$rproduct),
       kernel = "gaussian", bw =0.50, na.rm = TRUE)
-pdf("./Figures/FigureB1_BotRight.pdf",height=5,width=5)
+pdf("./Results/FigureB1_BotRight.pdf",height=5,width=5)
 plot(tmpden,xlab="Log Output",ylab="Density",main="CNEC All",
      xlim = c(0, 12), ylim=c(0,0.5), cex.lab = 1.25, 
      lwd = 2.0, col = 4)
@@ -66,7 +66,7 @@ deflator <- 96.30/93.50
 DLARGE$rproduct <- (DLARGE$product/10.0)*deflator
 tmpden <- density(log(DLARGE$rproduct),
       kernel = "gaussian", bw =0.50, na.rm = TRUE)
-pdf("./Figures/FigureB1_BotLeft.pdf",height=5,width=5)
+pdf("./Results/FigureB1_BotLeft.pdf",height=5,width=5)
 plot(tmpden,xlab="Log Output",ylab="Density",main="CNEC Large",
      xlim = c(0, 12), ylim=c(0,0.5), cex.lab = 1.25,
      lwd = 2.0, col = 4)
@@ -79,7 +79,7 @@ sel <- which(KEYFIRM$product > 0)
 KEYFIRM <- KEYFIRM[sel]
 tmpden <- density(log(KEYFIRM$product),
       kernel = "gaussian", bw =0.50, na.rm = TRUE)
-pdf("./Figures/FigureB1_TopLeft.pdf",height=5,width=5)
+pdf("./Results/FigureB1_TopLeft.pdf",height=5,width=5)
 plot(tmpden,xlab="Log Output",ylab="Density",main="NGSPS Key",
      xlim = c(0, 12), ylim=c(0,0.5), cex.lab = 1.25, 
      lwd = 2.0, col = 4)
@@ -92,7 +92,7 @@ sel <- which(ALLFIRM$product > 0)
 ALLFIRM <- ALLFIRM[sel]
 tmpden <- density(log(ALLFIRM$product),
       kernel = "gaussian", bw =0.50, na.rm = TRUE)
-pdf("./Figures/FigureB1_TopRight.pdf",height=5,width=5)
+pdf("./Results/FigureB1_TopRight.pdf",height=5,width=5)
 plot(tmpden,xlab="Log Output",ylab="Density",main="NGSPS All",
      xlim = c(0, 12), ylim=c(0,0.5), 
      cex.lab = 1.25, lwd = 2.0, col = 4)
@@ -206,7 +206,7 @@ lm_paper_aux2 <- lm(log(product) ~
     province + type_a, data = PAPER)
 PAPER$res_intensity <- residuals(lm_paper_aux1)
 PAPER$res_product <- residuals(lm_paper_aux2)
-pdf("./Figures/FigureC1_TopLeft.pdf",height=5,width=5)
+pdf("./Results/FigureC1_TopLeft.pdf",height=5,width=5)
 plot(PAPER$res_intensity~PAPER$res_product,cex=0.5,
      mgp=c(1.75, 0.75, 0),
      xlab="Log Production",ylab="Log Intensity",main="Paper",
@@ -222,7 +222,7 @@ lm_agri_aux2 <- lm(log(product) ~
       province + type_a, data = AGRI)
 AGRI$res_intensity <- residuals(lm_agri_aux1)
 AGRI$res_product <- residuals(lm_agri_aux2)
-pdf("./Figures/FigureC1_TopRight.pdf",height=5,width=5)
+pdf("./Results/FigureC1_TopRight.pdf",height=5,width=5)
 plot(AGRI$res_intensity~AGRI$res_product,
      cex=0.5,mgp=c(1.75, 0.75, 0),
      xlab="Log Production",ylab="Log Intensity",
@@ -239,7 +239,7 @@ lm_text_aux2 <- lm(log(product) ~
       province + type_a, data = TEXT)
 TEXT$res_intensity <- residuals(lm_text_aux1)
 TEXT$res_product <- residuals(lm_text_aux2)
-pdf("./Figures/FigureC1_MidLeft.pdf",height=5,width=5)
+pdf("./Results/FigureC1_MidLeft.pdf",height=5,width=5)
 plot(TEXT$res_intensity~TEXT$res_product,
      cex=0.5,mgp=c(1.75, 0.75, 0),
      xlab="Log Production",ylab="Log Intensity",
@@ -256,7 +256,7 @@ lm_chem_aux2 <- lm(log(product) ~
       province + type_a, data = CHEM)
 CHEM$res_intensity <- residuals(lm_chem_aux1)
 CHEM$res_product <- residuals(lm_chem_aux2)
-pdf("./Figures/FigureC1_MidRight.pdf",height=5,width=5)
+pdf("./Results/FigureC1_MidRight.pdf",height=5,width=5)
 plot(CHEM$res_intensity~CHEM$res_product,
      cex=0.5,mgp=c(1.75, 0.75, 0),
      xlab="Log Production",ylab="Log Intensity",
@@ -273,7 +273,7 @@ lm_bever_aux2 <- lm(log(product) ~
       province + type_a, data = BEVER)
 BEVER$res_intensity <- residuals(lm_bever_aux1)
 BEVER$res_product <- residuals(lm_bever_aux2)
-pdf("./Figures/FigureC1_BotLeft.pdf",height=5,width=5)
+pdf("./Results/FigureC1_BotLeft.pdf",height=5,width=5)
 plot(BEVER$res_intensity~BEVER$res_product,
      cex=0.5,mgp=c(1.75, 0.75, 0),
      xlab="Log Production",ylab="Log Intensity",
@@ -380,6 +380,7 @@ summary(lm_clean_all)
 # ----------------- Cluster Standard Errors ----------------------------
 # Cluster the standard error at provincial level
 # Inline Function for Calculating Clustered Standard Errors
+rm(list = ls())
 cl <- function(dat,fm, cluster){
   require(sandwich, quietly = TRUE)
   require(lmtest, quietly = TRUE)
@@ -391,10 +392,61 @@ cl <- function(dat,fm, cluster){
   vcovCL <- dfc*sandwich(fm, meat=crossprod(uj)/N)
   coeftest(fm, vcovCL) }
 
+load("./Data/KEYFIRM_R.RData")
+# ------------ Aggregate ownership rights type ------------------
+# 0: missing, 1: state/collective, 3: private, 4: HMT, 5: foreign
+KEYFIRM$type_a <- 0
+# State and collective
+sel <- which(KEYFIRM$type == 110 | KEYFIRM$type == 141
+    | KEYFIRM$type == 151 | KEYFIRM$type == 120 | KEYFIRM$type == 130
+    | KEYFIRM$type == 140 | KEYFIRM$type == 150 | KEYFIRM$type == 142
+    | KEYFIRM$type == 143 | KEYFIRM$type == 149 | KEYFIRM$type == 159
+    | KEYFIRM$type == 160 | KEYFIRM$type == 100 )
+KEYFIRM$type_a[sel] <- 1
+# Private
+sel <- which(KEYFIRM$type == 170 | KEYFIRM$type == 171
+    | KEYFIRM$type == 172 | KEYFIRM$type == 173
+    | KEYFIRM$type == 174 | KEYFIRM$type == 190)
+KEYFIRM$type_a[sel] <- 3
+# Hong Kong, Macau and Taiwan
+sel <- which(KEYFIRM$type == 200 | KEYFIRM$type == 210
+    | KEYFIRM$type == 220 | KEYFIRM$type == 230 | KEYFIRM$type == 240)
+KEYFIRM$type_a[sel] <- 4
+# Foreign
+sel <- which(KEYFIRM$type == 300 | KEYFIRM$type == 310
+    | KEYFIRM$type == 320 | KEYFIRM$type == 330 | KEYFIRM$type == 340)
+KEYFIRM$type_a[sel] <- 5
+
+# ------------ Aggregate treatment technology type ------------------
+# For disposal equipment type
+KEYFIRM$dm1_code_a <- 0
+# Physical
+sel <- which(KEYFIRM$dm1_code >= 1000 & KEYFIRM$dm1_code < 2000)
+KEYFIRM$dm1_code_a[sel] <- 1
+# Chemical
+sel <- which(KEYFIRM$dm1_code >= 2000 & KEYFIRM$dm1_code < 3000)
+KEYFIRM$dm1_code_a[sel] <- 2
+# Physiochemical
+sel <- which(KEYFIRM$dm1_code >= 3000 & KEYFIRM$dm1_code < 4000)
+KEYFIRM$dm1_code_a[sel] <- 3
+# Biological
+sel <- which(KEYFIRM$dm1_code >= 4000 & KEYFIRM$dm1_code < 5000)
+KEYFIRM$dm1_code_a[sel] <- 4
+# Combination
+sel <- which(KEYFIRM$dm1_code >= 5000 & KEYFIRM$dm1_code < 6000)
+KEYFIRM$dm1_code_a[sel] <- 5
+
+# --------------- Declare dummies -----------------
+KEYFIRM$province <- factor(KEYFIRM$province)        # Province
+KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    # 2-digit industry
+KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  # key 1, regular 2
+KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    # treatment
+KEYFIRM$type_a <- factor(KEYFIRM$type_a)            # ownership rights
 sel <- which(KEYFIRM$industry_a == 15 | KEYFIRM$industry_a == 17 
     | KEYFIRM$industry_a == 22 | KEYFIRM$industry_a == 26 
     | KEYFIRM$industry_a == 13)
 ALL <- KEYFIRM[sel]
+ALL <- ALL[product > 0 & cod_e > 0]
 # ================== Regression (!#) Page 10 ===============================
 lm_all <- lm(log(cod_e) ~ log(product) 
       + province + industry_a + type_a, data = ALL)
@@ -476,7 +528,7 @@ GB <- within(GB,{
 })
 
 # Plot Densities
-pdf("./Figures/FigureD3_TopRight.pdf",height=5,width=5)
+pdf("./Results/FigureD3_TopRight.pdf",height=5,width=5)
 tmpden <- density(log(GB$dm1_inv[GB$dm1_code_a == 1]),
                   kernel = "gaussian", bw =0.50, na.rm = TRUE)
 plot(tmpden,xlab="Costs",ylab="Density",main="Costs",
@@ -486,12 +538,12 @@ lines(density(log(GB$dm1_inv[GB$dm1_code_a == 2]),
       col=2, lwd = 2.0)
 lines(density(log(GB$dm1_inv[GB$dm1_code_a == 5 | GB$dm1_code_a == 4]),
               kernel = "gaussian", bw =0.50, na.rm = TRUE),
-      col=4, kernel = "gaussian", bw =0.50, na.rm = TRUE,lwd = 2.0)
+      col=4, lwd = 2.0)
 legend("topleft",c("Phy","Chem","Bio"),
        lty=c(1,1,1), col=c(1,2,4),lwd = 2.0)
 dev.off()
 
-pdf("./Figures/FigureD3_TopLeft.pdf",height=5,width=5)
+pdf("./Results/FigureD3_TopLeft.pdf",height=5,width=5)
 tmpden <- density(log(GB$dm1_quant[GB$dm1_code_a == 1]),
                   kernel = "gaussian", bw =0.50, na.rm = TRUE)
 plot(tmpden,xlab="Capacity",ylab="Density",main="Processing Capacity",
@@ -504,7 +556,7 @@ legend("topleft",c("Phy","Chem","Bio"),
        lty=c(1,1,1), col=c(1,2,4),lwd =2.0)
 dev.off()
 
-pdf("./Figures/FigureD3_BotLeft.pdf",height=5,width=5)
+pdf("./Results/FigureD3_BotLeft.pdf",height=5,width=5)
 tmpden <- density(log(GB$dm1_unit[GB$dm1_code_a == 1]),
                   kernel = "gaussian", bw =0.50, na.rm = TRUE)
 plot(tmpden,xlab="Unit-cost",ylab="Density",main="Unit Capacity Cost",
@@ -517,7 +569,7 @@ legend("topleft",c("Phy","Chem","Bio"),
        lty=c(1,1,1), col=c(1,2,4),lwd = 2.0)
 dev.off()
 
-pdf("./Figures/FigureD3_BotRight.pdf",height=5,width=5)
+pdf("./Results/FigureD3_BotRight.pdf",height=5,width=5)
 tmpden <- density(log(GB$product[GB$dm1_code_a == 1]),
                   kernel = "gaussian", bw =0.50, na.rm = TRUE)
 plot(tmpden,xlab="Production",ylab="Density",main="Production Scale",
@@ -633,10 +685,6 @@ lm_dmy <- lm(log(dm_y) ~ log(product) + province + type_a
              + industry_a, data = POL5)
 summary(lm_dmy)
 
-lm_dm <- lm(log(dm1_inv) ~ log(product) + province + type_a 
-            + industry_a, data = POL5)
-summary(lm_dm)
-
 # =========================== Table D1 =====================================
 phy <- POL5[POL5$dm1_code_a == 1]
 qdown <- quantile(phy$dm1_inv, probs=c(0.01), na.rm = TRUE)
@@ -655,6 +703,7 @@ summary(bio$dm1_inv)
 # ==========================================================================
 #                 4. Correlated Distortions
 # ==========================================================================
+rm(list = ls())
 # ====================== Figure D1 =========================================
 load("./Data/CNEC_avgp.RData")
 CNEC <- CNEC_avgp
@@ -685,37 +734,36 @@ PAPER <- within(PAPER,
            phi1 <- product/totcapital*lcomp
            kappa <- totcapital/lcomp
            z <- product/(totcapital^alpha * lcomp^(1-alpha))
-           z2 <- (product/(totcapital^alpha * lcomp^(1-alpha))^gamma)
-            ^(1/(1-gamma))
-                })
+           z2 <- (product/(totcapital^alpha * 
+                             lcomp^(1-alpha))^gamma)^(1/(1-gamma))})
 
 qup <- quantile(PAPER$phik, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(PAPER$phik, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(PAPER$phik, probs=c(0.03),na.rm=TRUE)
 sel <- which(PAPER$phik>qdown & PAPER$phik<qup)
 phikz <- PAPER[sel]
 
 qup <- quantile(phikz$z2, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(phikz$z2, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(phikz$z2, probs=c(0.03),na.rm=TRUE)
 sel <- which(phikz$z2>qdown & phikz$z2<qup)
 phikz <- phikz[sel]
 
 qup <- quantile(PAPER$phil, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(PAPER$phil, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(PAPER$phil, probs=c(0.03),na.rm=TRUE)
 sel <- which(PAPER$phil>qdown & PAPER$phil<qup)
 philz <- PAPER[sel]
 
 qup <- quantile(philz$z2, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(philz$z2, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(philz$z2, probs=c(0.03),na.rm=TRUE)
 sel <- which(philz$z2>qdown & philz$z2<qup)
 philz <- philz[sel]
 
 qup <- quantile(PAPER$kappa, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(PAPER$kappa, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(PAPER$kappa, probs=c(0.03),na.rm=TRUE)
 sel <- which(PAPER$kappa>qdown & PAPER$kappa<qup)
 kappaz <- PAPER[sel]
 
 qup <- quantile(kappaz$z2, probs=c(.97),na.rm=TRUE)
-qdown <- quantile(kappaz$z2, probs=c(0.01),na.rm=TRUE)
+qdown <- quantile(kappaz$z2, probs=c(0.03),na.rm=TRUE)
 sel <- which(kappaz$z2>qdown & kappaz$z2<qup)
 kappaz <- kappaz[sel]
 
@@ -1019,7 +1067,7 @@ distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 
 # =========================== Figure E1 ====================================
-pdf("./Results/FigureE3_BotLeft",height=6,width=7.5)
+pdf("./Results/FigureE3_BotLeft.pdf",height=6,width=7.5)
 barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
         ylim=c(0,1.0),xlab="Firm Size",ylab="Employment Share",
         main="Beverage", cex.main = 2.5, cex.lab = 1.75,

@@ -58,14 +58,14 @@ ksic_1 = -0.3288 ;          % Clean technology: slope
 rss    = 1/beta-1+delta ;   % Equilibrium interest rate
 
 % CES = 1.5
-% sigmaces = 1.5;
-% ke     = 1.50 ;             % Fixed cost of clean technology
-% varces = 0.31 ;   % Share of polluting good in final production
+sigmaces = 1.5;
+ke     = 1.50 ;             % Fixed cost of clean technology
+varces = 0.31 ;   % Share of polluting good in final production
 
 % CES = 3.0
-ke = 1.30 ;
-sigmaces = 3.0 ;
-varces = 0.42 ; % ces = 3.0 
+% ke = 1.30 ;
+% sigmaces = 3.0 ;
+% varces = 0.42 ; % ces = 3.0 
 
 % Size Distribution
 mud   = 0.20 ;               % Share of entrepreneurs in polluting sector
@@ -112,12 +112,12 @@ zprob = [zprob*(1-zendw); zendw] ;
 zgrid = (zgrid/(phi0^(1/(1-gamma)))).^((1-gamma)/(1-gamma+phi1));
 
 % benchmark
-% tauzd = max(0,1-phi0*zgrid.^phi1);
-% tauzc = max(0,1-phi0*zgrid.^phi1);
+tauzd = max(0,1-phi0*zgrid.^phi1);
+tauzc = max(0,1-phi0*zgrid.^phi1);
 
 % no tax
-tauzd = zeros(zn,1);
-tauzc = zeros(zn,1);
+% tauzd = zeros(zn,1);
+% tauzc = zeros(zn,1);
 
 % =========================================================================
 %               Allocate memory to remaining variables
@@ -139,8 +139,8 @@ yc   = zeros(zn,1) ;     % output
 % =========================================================================
 % CES = 1.5
 % Benchmark
-% wage = 0.4847;
-% priced = 0.5617;
+wage = 0.4847;
+priced = 0.5617;
 
 % No polluting tax
 % wage = 0.5429 ;
@@ -160,8 +160,8 @@ yc   = zeros(zn,1) ;     % output
 % priced = 0.4618 ;
 
 % No tax
-wage = 0.6739;
-priced = 0.5286 ;
+% wage = 0.6739;
+% priced = 0.5286 ;
 
 pguess = [wage priced];
 
@@ -253,9 +253,9 @@ cleanshare = sum(zprob(indztilded:end))/sum(zprob(indzhatd:end));
 disp('Clean Share')
 disp(cleanshare)
 
-% save('./Results/benchmark_ces.mat');
+save('./Results/benchmark_ces.mat');
 % save('./Results/nodirty_ces.mat');
 % save('./Results/notax_ces.mat');
 % save('./Results/benchmark_ces3.mat');
 % save('./Results/nodirty_ces3.mat');
-save('./Results/notax_ces3.mat');
+% save('./Results/notax_ces3.mat');

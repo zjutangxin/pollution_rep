@@ -639,6 +639,10 @@ pch <- sum(par_int*distchn2)
 ppar_bever <- pus/pch
 
 # ======================= Table F.1 ========================================
-pmed <- cat(pmed_paper,pmed_agri,pmed_text,pmed_chem,pmed_bever)
-preg <- cat(preg_paper,preg_agri,preg_text,preg_chem,-1)
-ppar <- cat(ppar_paper,ppar_agri,ppar_text,ppar_chem,ppar_bever)
+pmed <- c(pmed_paper,pmed_agri,pmed_text,pmed_chem,pmed_bever)
+preg <- c(preg_paper,preg_agri,preg_text,preg_chem,-1)
+ppar <- c(ppar_paper,ppar_agri,ppar_text,ppar_chem,ppar_bever)
+
+pmed
+preg
+ppar

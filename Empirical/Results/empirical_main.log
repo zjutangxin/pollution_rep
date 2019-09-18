@@ -1,9 +1,9 @@
 
-> # -------------------------------------------------------------------------
+> # --------------------------------------------------------------------------
 > #                       Program Description
-> # ---------------------- .... [TRUNCATED] 
+> # --------------------- .... [TRUNCATED] 
 
-> # Load in packages
+> # Load packages
 > library(foreign)
 
 > library(data.table)
@@ -14,13 +14,13 @@
 
 > library(grid)
 
-> # =========================================================================
-> #                   0. Aggregating Categorical Variables
-> # ========= .... [TRUNCATED] 
+> # ==========================================================================
+> #                   1. Intensity and Firm Size
+> # ================== .... [TRUNCATED] 
 
-> # ------------ Aggregate ownership rights type ------------------
-> # 0: missing, 1: State/collective, 3: private, 4: HMT, 5: foreign
-> KEYFIRM$type .... [TRUNCATED] 
+> # -------------------- Data Processing --------------------------
+> # Aggregate ownership rights type
+> # 0: missing, 1: State/collective, 3: privat .... [TRUNCATED] 
 
 > # State and collective
 > sel <- which(KEYFIRM$type == 110 | KEYFIRM$type == 141
@@ -47,8 +47,7 @@
 
 > KEYFIRM$type_a[sel] <- 5
 
-> # ------------ Aggregate treatment technology type ------------------
-> # For disposal equipment type
+> # Aggregate treatment technology type
 > KEYFIRM$dm1_code_a <- 0
 
 > # Physical
@@ -76,28 +75,28 @@
 
 > KEYFIRM$dm1_code_a[sel] <- 5
 
-> # --------------- Declare dummies -----------------
-> KEYFIRM$province <- factor(KEYFIRM$province)        # Province
+> # dm1_code_a == 0 means the equipment is unclassified
+> 
+> KEYFIRM$province <- factor(KEYFIRM$province)        
 
-> KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    # 2-digit industry
+> KEYFIRM$industry_a <- factor(KEYFIRM$industry_a)    
 
-> KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  # key 1, regular 2
+> KEYFIRM$Census_Type <- factor(KEYFIRM$Census_Type)  
 
-> KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    # treatment
+> KEYFIRM$dm1_code_a <- factor(KEYFIRM$dm1_code_a)    
 
-> KEYFIRM$type_a <- factor(KEYFIRM$type_a)            # ownership rights
+> KEYFIRM$type_a <- factor(KEYFIRM$type_a)            
 
-> # =========================================================================
-> #                   1. Intensity and Firm Size
-> # =================== .... [TRUNCATED] 
+> POL5 <- KEYFIRM[industry_a == 22 | industry_a == 13 | industry_a == 15 
++     | industry_a == 17 | industry_a == 26]
 
 > POL5 <- POL5[product > 0 & cod_e > 0 & type_a != 0]
 
 > POL5$intensity <- with(POL5, intensity <- cod_e/product)
 
-> # Regression 1
+> # ===================== Regression 1 =======================================
 > lm_pol5_all <- lm(log(cod_e) ~ log(product) + province + type_a 
-+                   + industry_a, data = POL5)
++    .... [TRUNCATED] 
 
 > summary(lm_pol5_all)
 
@@ -151,17 +150,16 @@ industry_a17  0.70557    0.03988  17.695  < 2e-16 ***
 industry_a22  1.34876    0.03972  33.960  < 2e-16 ***
 industry_a26 -1.65741    0.03646 -45.454  < 2e-16 ***
 ---
-Signif. codes:  0 ¡®***¡¯ 0.001 ¡®**¡¯ 0.01 ¡®*¡¯ 0.05 ¡®.¡¯ 0.1 ¡® ¡¯ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 2.121 on 29014 degrees of freedom
 Multiple R-squared:  0.4137,	Adjusted R-squared:  0.4129 
 F-statistic: 538.7 on 38 and 29014 DF,  p-value: < 2.2e-16
 
 
-> # Figure 1
-> # ----------------- Update Figure 1 ----------------------------
-> # Five industries, residual intensity versus production
-> lm_pol5_au .... [TRUNCATED] 
+> # ===================== Figure 1 ===========================================
+> # Residual intensity versus production
+> lm_pol5_aux1 <- lm(log(inten .... [TRUNCATED] 
 
 > lm_pol5_aux2 <- lm(log(product) ~ 
 +       province + type_a + industry_a, data = POL5)
@@ -172,9 +170,10 @@ F-statistic: 538.7 on 38 and 29014 DF,  p-value: < 2.2e-16
 
 > pdf("./Results/Figure1.pdf",height=5,width=5)
 
-> plot((POL5$res_intensity)~(POL5$res_product),cex=0.5,mgp=c(1.75, 0.75, 0), 
+> plot((POL5$res_intensity)~(POL5$res_product),
++      cex=0.5,mgp=c(1.75, 0.75, 0), 
 +      xlab="Log Production",ylab="Log Intensity",
-+      main="Pooled P ..." ... [TRUNCATED] 
++      main=" ..." ... [TRUNCATED] 
 
 > pol5_residual <- lm(res_intensity ~ res_product, data = POL5)
 
@@ -184,12 +183,84 @@ F-statistic: 538.7 on 38 and 29014 DF,  p-value: < 2.2e-16
 null device 
           1 
 
-> # =========================================================================
+> # ==========================================================================
 > #                   2. Firm Size and Technology
-> # ================== .... [TRUNCATED] 
+> # ================= .... [TRUNCATED] 
 
 > clean_share <- (sum(dmtb[5:6]))/sum(dmtb)
 
+> # ===================== Table 2 ============================================
+> # Table 2 Column 2
+> PAPER <- KEYFIRM[industry_a == 22]
+
+> dmtb <- table(PAPER$dm1_code_a)
+
+> phyrate <- dmtb[2]/sum(dmtb[2:6])
+
+> chemrate <- dmtb[3]/sum(dmtb[2:6])
+
+> biorate <- sum(dmtb[5:6])/sum(dmtb[2:6])
+
+> phyrate
+        1 
+0.2588981 
+
+> chemrate
+        2 
+0.3364213 
+
+> biorate
+[1] 0.3859906
+
+> # Table 2 Column 1
+> PAPER <- within(PAPER,{
++     cod_eg <- cod_e/cod_g
++     dm1_unit <- dm1_quant/dm1_inv
++     dm1_prod <- dm1_inv/product
++     .... [TRUNCATED] 
+
+> phyeffc <- 1 -
++   mean(PAPER$cod_eg[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+
+> chemeffc <- 1 - 
++   mean(PAPER$cod_eg[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm = TRUE)
+
+> bioeffc <- 1 - 
++   mean(PAPER$cod_eg[(PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5) 
++                     & PAPER$cod_eg <= 1],na.rm=TRUE)
+
+> phyeffc
+[1] 0.633705
+
+> chemeffc
+[1] 0.7496254
+
+> bioeffc
+[1] 0.8090434
+
+> # Table 2 Column 3
+> median(PAPER$dm1_inv[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 13
+
+> median(PAPER$dm1_inv[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 40
+
+> median(PAPER$dm1_inv[PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5 
++                      & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 120
+
+> # Table 2 Column 4
+> median(PAPER$product[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 500
+
+> median(PAPER$product[PAPER$dm1_code_a == 2 & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 1093
+
+> median(PAPER$product[PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5 
++                      & PAPER$cod_eg <= 1],na.rm=TRUE)
+[1] 2500
+
+> # =========== Unumbered Regression in Section I.B ==========================
 > # Linear Probability Model of Technology Adoption
 > POL5$clean <- 0
 
@@ -252,17 +323,81 @@ type_a3       0.006451   0.006094   1.059 0.289796
 type_a4       0.037742   0.011694   3.228 0.001250 ** 
 type_a5       0.030796   0.010290   2.993 0.002767 ** 
 ---
-Signif. codes:  0 ¡®***¡¯ 0.001 ¡®**¡¯ 0.01 ¡®*¡¯ 0.05 ¡®.¡¯ 0.1 ¡® ¡¯ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.4504 on 29014 degrees of freedom
 Multiple R-squared:  0.1748,	Adjusted R-squared:  0.1737 
 F-statistic: 161.7 on 38 and 29014 DF,  p-value: < 2.2e-16
 
 
-> # Dirty Technology: Intensity and Size
+> # ======================= Regressions 2 and 3 ==============================
+> # Regression 2
+> lm1 <- lm(log(intensity) ~ log(product) + province + .... [TRUNCATED] 
+
+> summary(lm1)
+
+Call:
+lm(formula = log(intensity) ~ log(product) + province + industry_a + 
+    type_a, data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & 
+    intensity > 0])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.7304 -1.2138  0.0905  1.3078  6.7582 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -4.374769   0.201832 -21.675  < 2e-16 ***
+log(product) -0.328767   0.008516 -38.605  < 2e-16 ***
+province12    0.889520   0.238464   3.730 0.000192 ***
+province13    1.957752   0.199367   9.820  < 2e-16 ***
+province14    1.507262   0.251767   5.987 2.19e-09 ***
+province15    1.334745   0.305127   4.374 1.23e-05 ***
+province21    0.837918   0.208160   4.025 5.71e-05 ***
+province22    1.065066   0.248824   4.280 1.88e-05 ***
+province23    1.046365   0.244212   4.285 1.84e-05 ***
+province31    0.060901   0.207311   0.294 0.768941    
+province32    0.650567   0.192645   3.377 0.000734 ***
+province33    0.985663   0.192656   5.116 3.15e-07 ***
+province34    0.733646   0.209165   3.507 0.000454 ***
+province35    0.823319   0.203296   4.050 5.15e-05 ***
+province36    0.991369   0.230861   4.294 1.76e-05 ***
+province37    0.984008   0.193573   5.083 3.75e-07 ***
+province41    1.364155   0.205159   6.649 3.04e-11 ***
+province42    1.006770   0.224382   4.487 7.28e-06 ***
+province43    1.253971   0.225356   5.564 2.67e-08 ***
+province44    0.095277   0.192749   0.494 0.621096    
+province45    2.172592   0.219463   9.900  < 2e-16 ***
+province46    1.043812   0.240177   4.346 1.39e-05 ***
+province50    0.728835   0.219800   3.316 0.000915 ***
+province51    0.641214   0.199636   3.212 0.001321 ** 
+province52    0.863803   0.289354   2.985 0.002837 ** 
+province53    1.222854   0.225320   5.427 5.81e-08 ***
+province54   -0.265770   1.407365  -0.189 0.850219    
+province61    1.634067   0.240529   6.794 1.13e-11 ***
+province62    1.385544   0.289341   4.789 1.69e-06 ***
+province63    1.234785   0.623177   1.981 0.047559 *  
+province64    2.401801   0.417353   5.755 8.83e-09 ***
+province65    1.630515   0.284198   5.737 9.79e-09 ***
+industry_a15  0.927166   0.065424  14.172  < 2e-16 ***
+industry_a17  1.379724   0.046669  29.564  < 2e-16 ***
+industry_a22  1.976992   0.055367  35.707  < 2e-16 ***
+industry_a26 -0.911262   0.046754 -19.490  < 2e-16 ***
+type_a3      -0.148889   0.036002  -4.136 3.56e-05 ***
+type_a4      -0.418407   0.061753  -6.775 1.28e-11 ***
+type_a5      -0.494661   0.054677  -9.047  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.971 on 16444 degrees of freedom
+Multiple R-squared:  0.341,	Adjusted R-squared:  0.3395 
+F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
+
+
+> # Regression 3
 > lm_pool <- lm(log(cod_e) ~ log(product) + province 
 +     + industry_a + type_a + dm1_code_a, 
-+     data = .... [TRUNCATED] 
++     data = POL5[dm1_code_a == 2 |  .... [TRUNCATED] 
 
 > summary(lm_pool)
 
@@ -318,85 +453,150 @@ type_a4      -0.622441   0.111481  -5.583 2.41e-08 ***
 type_a5      -0.305781   0.095740  -3.194 0.001407 ** 
 dm1_code_a2  -0.009086   0.048002  -0.189 0.849879    
 ---
-Signif. codes:  0 ¡®***¡¯ 0.001 ¡®**¡¯ 0.01 ¡®*¡¯ 0.05 ¡®.¡¯ 0.1 ¡® ¡¯ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 2.21 on 11636 degrees of freedom
 Multiple R-squared:  0.4143,	Adjusted R-squared:  0.4124 
 F-statistic: 211.1 on 39 and 11636 DF,  p-value: < 2.2e-16
 
 
-> lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
-+     data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
+> # =========== Unumbered 3 Regressions in Appendix C.1 ======================
+> # The first one
+> lm_phy <- lm(log(cod_e) ~ log(product) + province 
+ .... [TRUNCATED] 
 
-> summary(lm1)
+> summary(lm_phy)
 
 Call:
-lm(formula = log(intensity) ~ log(product) + province + industry_a + 
-    type_a, data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & 
-    intensity > 0])
+lm(formula = log(cod_e) ~ log(product) + province + industry_a + 
+    type_a, data = POL5[dm1_code_a == 1 & intensity > 0])
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--9.7304 -1.2138  0.0905  1.3078  6.7582 
+     Min       1Q   Median       3Q      Max 
+-13.7156  -1.3293   0.1174   1.4785   6.9085 
 
 Coefficients:
               Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  -4.374769   0.201832 -21.675  < 2e-16 ***
-log(product) -0.328767   0.008516 -38.605  < 2e-16 ***
-province12    0.889520   0.238464   3.730 0.000192 ***
-province13    1.957752   0.199367   9.820  < 2e-16 ***
-province14    1.507262   0.251767   5.987 2.19e-09 ***
-province15    1.334745   0.305127   4.374 1.23e-05 ***
-province21    0.837918   0.208160   4.025 5.71e-05 ***
-province22    1.065066   0.248824   4.280 1.88e-05 ***
-province23    1.046365   0.244212   4.285 1.84e-05 ***
-province31    0.060901   0.207311   0.294 0.768941    
-province32    0.650567   0.192645   3.377 0.000734 ***
-province33    0.985663   0.192656   5.116 3.15e-07 ***
-province34    0.733646   0.209165   3.507 0.000454 ***
-province35    0.823319   0.203296   4.050 5.15e-05 ***
-province36    0.991369   0.230861   4.294 1.76e-05 ***
-province37    0.984008   0.193573   5.083 3.75e-07 ***
-province41    1.364155   0.205159   6.649 3.04e-11 ***
-province42    1.006770   0.224382   4.487 7.28e-06 ***
-province43    1.253971   0.225356   5.564 2.67e-08 ***
-province44    0.095277   0.192749   0.494 0.621096    
-province45    2.172592   0.219463   9.900  < 2e-16 ***
-province46    1.043812   0.240177   4.346 1.39e-05 ***
-province50    0.728835   0.219800   3.316 0.000915 ***
-province51    0.641214   0.199636   3.212 0.001321 ** 
-province52    0.863803   0.289354   2.985 0.002837 ** 
-province53    1.222854   0.225320   5.427 5.81e-08 ***
-province54   -0.265770   1.407365  -0.189 0.850219    
-province61    1.634067   0.240529   6.794 1.13e-11 ***
-province62    1.385544   0.289341   4.789 1.69e-06 ***
-province63    1.234785   0.623177   1.981 0.047559 *  
-province64    2.401801   0.417353   5.755 8.83e-09 ***
-province65    1.630515   0.284198   5.737 9.79e-09 ***
-industry_a15  0.927166   0.065424  14.172  < 2e-16 ***
-industry_a17  1.379724   0.046669  29.564  < 2e-16 ***
-industry_a22  1.976992   0.055367  35.707  < 2e-16 ***
-industry_a26 -0.911262   0.046754 -19.490  < 2e-16 ***
-type_a3      -0.148889   0.036002  -4.136 3.56e-05 ***
-type_a4      -0.418407   0.061753  -6.775 1.28e-11 ***
-type_a5      -0.494661   0.054677  -9.047  < 2e-16 ***
+(Intercept)  -3.500637   0.403139  -8.683  < 2e-16 ***
+log(product)  0.582348   0.013274  43.872  < 2e-16 ***
+province12    0.846645   0.507475   1.668 0.095292 .  
+province13    3.096634   0.408158   7.587 3.71e-14 ***
+province14    2.484245   0.441634   5.625 1.93e-08 ***
+province15    2.871060   0.432071   6.645 3.27e-11 ***
+province21    1.851277   0.429662   4.309 1.67e-05 ***
+province22    1.844069   0.464755   3.968 7.33e-05 ***
+province23    1.801350   0.457662   3.936 8.37e-05 ***
+province31    0.367272   0.444393   0.826 0.408573    
+province32    1.174934   0.404203   2.907 0.003663 ** 
+province33    1.803062   0.405948   4.442 9.07e-06 ***
+province34    1.751814   0.460865   3.801 0.000145 ***
+province35    1.828152   0.417334   4.381 1.20e-05 ***
+province36    2.008088   0.423044   4.747 2.11e-06 ***
+province37    1.402372   0.414149   3.386 0.000713 ***
+province41    2.112781   0.444800   4.750 2.08e-06 ***
+province42    2.493308   0.430359   5.794 7.19e-09 ***
+province43    2.543748   0.406858   6.252 4.29e-10 ***
+province44    1.232054   0.399293   3.086 0.002040 ** 
+province45    3.088893   0.403751   7.650 2.27e-14 ***
+province46    2.852169   0.559446   5.098 3.52e-07 ***
+province50    0.981104   0.425045   2.308 0.021015 *  
+province51    2.016241   0.405682   4.970 6.86e-07 ***
+province52    2.532615   0.453468   5.585 2.43e-08 ***
+province53    2.635054   0.413783   6.368 2.04e-10 ***
+province61    2.094637   0.443755   4.720 2.40e-06 ***
+province62    3.811586   0.432909   8.805  < 2e-16 ***
+province63    3.401091   0.637907   5.332 1.00e-07 ***
+province64    4.139412   0.459758   9.003  < 2e-16 ***
+province65    2.278728   0.423618   5.379 7.73e-08 ***
+industry_a15 -0.111130   0.162809  -0.683 0.494896    
+industry_a17 -0.293487   0.112760  -2.603 0.009267 ** 
+industry_a22  0.562485   0.078578   7.158 9.01e-13 ***
+industry_a26 -2.453962   0.072406 -33.892  < 2e-16 ***
+type_a3      -0.136418   0.060497  -2.255 0.024166 *  
+type_a4      -0.553279   0.174231  -3.176 0.001502 ** 
+type_a5      -0.006735   0.133354  -0.051 0.959723    
 ---
-Signif. codes:  0 ¡®***¡¯ 0.001 ¡®**¡¯ 0.01 ¡®*¡¯ 0.05 ¡®.¡¯ 0.1 ¡® ¡¯ 1
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 1.971 on 16444 degrees of freedom
-Multiple R-squared:  0.341,	Adjusted R-squared:  0.3395 
-F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
+Residual standard error: 2.249 on 6900 degrees of freedom
+Multiple R-squared:  0.3888,	Adjusted R-squared:  0.3855 
+F-statistic: 118.6 on 37 and 6900 DF,  p-value: < 2.2e-16
 
 
-> # Calculate ke to y ratio
-> sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_code_a == 5)
+> # The second one
+> lm_chem <- lm(log(cod_e) ~ log(product) + province 
++              + industry_a + type_a, 
++              data = POL5[dm1_code_a  .... [TRUNCATED] 
+
+> summary(lm_chem)
+
+Call:
+lm(formula = log(cod_e) ~ log(product) + province + industry_a + 
+    type_a, data = POL5[dm1_code_a == 2 & intensity > 0])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.8953 -1.1604  0.2451  1.3255  7.3782 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -4.58718    0.49127  -9.337  < 2e-16 ***
+log(product)  0.77137    0.01837  41.990  < 2e-16 ***
+province12    0.57384    0.54098   1.061 0.288858    
+province13    1.11495    0.46934   2.376 0.017563 *  
+province14    2.11332    0.52997   3.988 6.78e-05 ***
+province15    1.76706    0.65011   2.718 0.006590 ** 
+province21    1.18859    0.47385   2.508 0.012163 *  
+province22    0.44509    0.55706   0.799 0.424334    
+province23    0.93514    0.56862   1.645 0.100123    
+province31   -0.35811    0.48449  -0.739 0.459862    
+province32    0.43475    0.45875   0.948 0.343340    
+province33    1.03523    0.45649   2.268 0.023388 *  
+province34    0.92300    0.48814   1.891 0.058702 .  
+province35    0.96699    0.47187   2.049 0.040492 *  
+province36    1.41880    0.48978   2.897 0.003787 ** 
+province37    0.59127    0.46660   1.267 0.205154    
+province41    0.54242    0.48801   1.111 0.266415    
+province42    1.17812    0.49269   2.391 0.016834 *  
+province43    1.37782    0.47316   2.912 0.003609 ** 
+province44   -0.08719    0.45725  -0.191 0.848777    
+province45    1.22942    0.47623   2.582 0.009865 ** 
+province46    0.04499    1.14165   0.039 0.968570    
+province50    1.48362    0.51536   2.879 0.004010 ** 
+province51    0.93969    0.47376   1.983 0.047373 *  
+province52    0.94591    0.60478   1.564 0.117873    
+province53    1.26253    0.50438   2.503 0.012343 *  
+province54   -2.50401    2.18486  -1.146 0.251823    
+province61    1.08927    0.57867   1.882 0.059847 .  
+province62    1.59209    0.73537   2.165 0.030436 *  
+province63    1.93016    1.04072   1.855 0.063712 .  
+province64    1.92502    0.71889   2.678 0.007437 ** 
+province65    2.20191    0.63455   3.470 0.000525 ***
+industry_a15  0.31078    0.41469   0.749 0.453641    
+industry_a17  0.67574    0.17430   3.877 0.000107 ***
+industry_a22  1.67873    0.16256  10.327  < 2e-16 ***
+industry_a26 -1.60910    0.16327  -9.855  < 2e-16 ***
+type_a3      -0.20871    0.07240  -2.883 0.003962 ** 
+type_a4      -0.74229    0.14168  -5.239 1.68e-07 ***
+type_a5      -0.65906    0.13443  -4.903 9.77e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.098 on 4699 degrees of freedom
+Multiple R-squared:  0.4799,	Adjusted R-squared:  0.4757 
+F-statistic: 114.1 on 38 and 4699 DF,  p-value: < 2.2e-16
+
+
+> # ============ Fixed Cost/Output Ratio of Clean Firms ======================
+> # Used in calibration
+> sel <- which(POL5$dm1_code_a == 4 | POL5$dm1_ .... [TRUNCATED] 
 
 > sum(POL5$dm1_inv[sel], na.rm = TRUE)/sum(POL5$product[sel], na.rm = TRUE)
 [1] 0.02500509
 
-> # =========================================================================
+> # ==========================================================================
 > #                   3. Firm Size Distribution
-> # ==================== .... [TRUNCATED] 
+> # =================== .... [TRUNCATED] 
 
 > load("./Data/CNEC_avgp.RData")
 
@@ -420,9 +620,9 @@ F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
 
 > CHNall <- CHNall[sel]
 
-> # -------------------------------------------------------------------------
+> # --------------------------------------------------------------------------
 > #                   Pooled Polluting
-> # ----------------------------- .... [TRUNCATED] 
+> # ---------------------------- .... [TRUNCATED] 
 
 > CH <- CHNall[sel]
 
@@ -432,7 +632,7 @@ F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
 
 > US <- USall[sel]
 
-> # Processing the U.S. Data
+> # Process the U.S. Data
 > sel <- which(US$ENTRSIZE != 1 & US$ENTRSIZE != 6 &  US$ENTRSIZE != 9)
 
 > US <- US[sel]
@@ -463,7 +663,7 @@ F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
 +   distus[i-1] <- sum(USSUM$EMPL[sel])
 +   sel1 <- which(CH$n .... [TRUNCATED] 
 
-> # Last category
+> # Last group
 > sel <- which(USSUM$AVGF > cutoff[n1])
 
 > distus[n1] <- sum(USSUM$EMPL[sel])
@@ -476,6 +676,7 @@ F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
 
 > distchn <- distchn/sum(distchn)
 
+> # =================== Figure 2 =============================================
 > pdf("./Results/Figure2_Left.pdf",height=6,width=7.5)
 
 > barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
@@ -491,7 +692,7 @@ F-statistic:   224 on 38 and 16444 DF,  p-value: < 2.2e-16
 null device 
           1 
 
-> # Calculate the five groups used in computation
+> # Size Distribution by groups used in computation
 > cutoff <- c(1,19,49,99,399)
 
 > n1 <- length(cutoff)
@@ -518,18 +719,19 @@ null device
 
 > distchn <- distchn/sum(distchn)
 
+> # Employment distribution for polluting industries
 > distchn
 [1] 0.0906827 0.1594206 0.1597259 0.3495389 0.2406319
 
-> # -------------------------------------------------------------------------
+> # --------------------------------------------------------------------------
 > #                   All Manufacturing
-> # ---------------------------- .... [TRUNCATED] 
+> # --------------------------- .... [TRUNCATED] 
 
 > sel <- which(USall$NAICS == "31-33")
 
 > US <- USall[sel]
 
-> # Processing the U.S. Data
+> # Process the U.S. Data
 > sel <- which(US$ENTRSIZE != 1 & US$ENTRSIZE != 6 &  US$ENTRSIZE != 9)
 
 > US <- US[sel]
@@ -573,7 +775,7 @@ null device
 
 > distchn <- distchn/sum(distchn)
 
-> # Plot a separate one for paper product
+> # ==================== Figure 2 ============================================
 > pdf("./Results/Figure2_Right.pdf",height=6,width=7.5)
 
 > barplot(rbind(distchn,distus),beside=TRUE,col=c("red","blue"),
@@ -589,8 +791,9 @@ null device
 null device 
           1 
 
-> # Calculate the employment share
-> cutoff <- c(1,19,49,99,399)
+> # ----------------------------------------------------------------
+> # Compute the calibration target of employment distribution
+> # --------------- .... [TRUNCATED] 
 
 > n1 <- length(cutoff)
 
@@ -616,12 +819,14 @@ null device
 
 > distchn <- distchn/sum(distchn)
 
+> # =================== Calibration Target ===================================
 > # Employment share used in quantitative part
 > distchn
 [1] 0.08640851 0.16107471 0.16553707 0.35010698 0.23687273
 
-> # calculate firm size distribution of China
-> cutoff <- c(1,19,49,99,399)
+> # ----------------------------------------------------------------
+> # Compute the calibration target of firm size distribution
+> # ---------------- .... [TRUNCATED] 
 
 > n1 <- length(cutoff)
 
@@ -630,27 +835,24 @@ null device
 > # distus <- distchn
 > 
 > for (i in 2:n1){
-+   # sel <- which(US$CF > cutoff[i-1] & US$CF <= cutoff[i])
-+   # distus[i-1] <- sum(US$PDFF[sel])
-+   se .... [TRUNCATED] 
++   sel1 <- which(CH$nbarworkers > cutoff[i-1] 
++           & CH$nbarworkers <= cutoff[i])
++   distchn[i-1 .... [TRUNCATED] 
 
-> # Last category
-> # sel <- which(US$CF > cutoff[n1])
-> # distus[n1] <- sum(US$PDFF[sel])
-> # distus <- distus/sum(distus)
-> sel1 <- which(CH$nbarwor .... [TRUNCATED] 
+> sel1 <- which(CH$nbarworkers > cutoff[n1])
 
 > distchn[n1] <- length(sel1)
 
 > distchn <- distchn/sum(distchn)
 
+> # =================== Calibration Target ===================================
 > # Firm size distribution used in quantitative part
 > distchn
 [1] 0.46980903 0.27976175 0.12895600 0.10196701 0.01950621
 
-> # =========================================================================
+> # ==========================================================================
 > #                       4. Distortions
-> # =========================== .... [TRUNCATED] 
+> # ========================== .... [TRUNCATED] 
 
 > load("./Data/CNEC_avgp.RData")
 
@@ -733,6 +935,7 @@ null device
 
 > phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
 
+> # Five polluting industries only
 > phi_quant
 [1] -0.02887093
 
@@ -767,12 +970,14 @@ null device
 
 > phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
 
-> # phi1 in calibration
+> # =================== phi1 in calibration ==================================
+> # All manufacturing
 > phi_quant
 [1] -0.02811157
 
-> # Figure 3
-> rm(list = ls())
+> # ----------------------------------------------------------------
+> # Plot Figure 3
+> # ----------------------------------------------------------- .... [TRUNCATED] 
 
 > load("./Data/CNEC_avgp.RData")
 
@@ -811,12 +1016,10 @@ null device
 
 > gamma = 0.93
 
-> # gamma = 0.85
-> 
 > CNEC <- within(CNEC,
 +                {phik   <- product/totcapital
 +                phil   <- product/lcomp
-+                ph .... [TRUNCATED] 
++                phil_1 <- product/nbar .... [TRUNCATED] 
 
 > CNEC_RSV = CNEC
 
@@ -865,9 +1068,12 @@ null device
 > phiplotraw <- zplot
 
 > for (i in 2:n1){
-+   sel <- which(CNEC_TRIM$logzratio > qcut[i-1] & CNEC_TRIM$logzratio <= qcut[i])
-+   zplot[i-1] <- sum(CNEC_TRIM$logzratio[sel]*C .... [TRUNCATED] 
++   sel <- which(CNEC_TRIM$logzratio > qcut[i-1] 
++                & CNEC_TRIM$logzratio <= qcut[i])
++   zplot[i-1] <- 
++     sum(C .... [TRUNCATED] 
 
+> # ==================== Figure 3 ============================================
 > pdf("./Results/Figure3_Left.pdf",height=5,width=5)
 
 > plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 
@@ -917,9 +1123,12 @@ null device
 > phiplotraw <- zplot
 
 > for (i in 2:n1){
-+   sel <- which(CNEC_TRIM$logzratio > qcut[i-1] & CNEC_TRIM$logzratio <= qcut[i])
-+   zplot[i-1] <- sum(CNEC_TRIM$logzratio[sel]*C .... [TRUNCATED] 
++   sel <- which(CNEC_TRIM$logzratio > qcut[i-1] 
++                & CNEC_TRIM$logzratio <= qcut[i])
++   zplot[i-1] <- 
++     sum(C .... [TRUNCATED] 
 
+> # ==================== Figure 3 ============================================
 > pdf("./Results/Figure3_Right.pdf",height=5,width=5)
 
 > plot(phiplot~zplot,cex=0.5,mgp=c(1.75, 0.75, 0), 

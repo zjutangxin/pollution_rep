@@ -129,6 +129,9 @@ dmtb <- table(PAPER$dm1_code_a)
 phyrate <- dmtb[2]/sum(dmtb[2:6])
 chemrate <- dmtb[3]/sum(dmtb[2:6])
 biorate <- sum(dmtb[5:6])/sum(dmtb[2:6])
+phyrate
+chemrate
+biorate
 
 # Table 2 Column 1
 PAPER <- within(PAPER,{
@@ -146,6 +149,9 @@ chemeffc <- 1 -
 bioeffc <- 1 - 
   mean(PAPER$cod_eg[(PAPER$dm1_code_a == 4 | PAPER$dm1_code_a == 5) 
                     & PAPER$cod_eg <= 1],na.rm=TRUE)
+phyeffc
+chemeffc
+bioeffc
 
 # Table 2 Column 3
 median(PAPER$dm1_inv[PAPER$dm1_code_a == 1 & PAPER$cod_eg <= 1],na.rm=TRUE)
@@ -467,6 +473,7 @@ phiupnew <- mean(philz_pol$phil[sel])
 sel <- which(philz_pol$phil < phidown)
 phidownnew <- mean(philz_pol$phil[sel])
 phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
+# Five polluting industries only
 phi_quant
 
 # All Manufacturing Industries
@@ -487,6 +494,7 @@ phidownnew <- mean(CNEC$phil[sel])
 phi_quant <- (log(phidownnew/phiupnew))/(log(zupnew/zdownnew))
 
 # =================== phi1 in calibration ==================================
+# All manufacturing
 phi_quant
 
 # ----------------------------------------------------------------

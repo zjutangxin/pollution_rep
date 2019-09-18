@@ -102,16 +102,16 @@ zprob = [zprob*(1-zendw); zendw] ;
 % Now we transform z' to z
 zgrid = (zgrid/(phi0^(1/(1-gamma)))).^((1-gamma)/(1-gamma+phi1));
 % benchmark tax
-% tauzd = max(0,1-phi0*zgrid.^phi1);
-% tauzc = max(0,1-phi0*zgrid.^phi1);
+tauzd = max(0,1-phi0*zgrid.^phi1);
+tauzc = max(0,1-phi0*zgrid.^phi1);
 
 % no tax
 % tauzd = zeros(zn,1);
 % tauzc = zeros(zn,1);
 
 % flat tax
-tauzd = 0.1755*ones(zn,1);
-tauzc = tauzd;
+% tauzd = 0.1755*ones(zn,1);
+% tauzc = tauzd;
 
 % =========================================================================
 %               Allocate memory to remaining variables
@@ -209,7 +209,7 @@ aggyc = sum(yc(indzhatc:end).*zprob(indzhatc:end));
 aggy  = mud*aggyd+(1-mud)*aggyc;
 disp(aggk/aggy)
 
-% save('./Results/benchmark_new.mat');
+save('./Results/benchmark_new.mat');
 % save('./Results/notax_new.mat');
 % save('./Results/regulation_new.mat');
-save('./Results/flattax_new.mat');
+% save('./Results/flattax_new.mat');

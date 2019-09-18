@@ -1,8 +1,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  E:\PaperDrafts_Port\pollution_rep\Empirical\data\cpsc_raw.log
   log type:  text
- opened on:  16 Sep 2019, 22:25:10
+ opened on:  18 Sep 2019, 15:53:07
 
 . /* ===================================================================
 >                                         1. Merge Regular Firms Data
@@ -598,7 +597,6 @@ file allfirms.dta saved
 
 . log close ;
       name:  <unnamed>
-       log:  E:\PaperDrafts_Port\pollution_rep\Empirical\data\cpsc_raw.log
   log type:  text
- closed on:  16 Sep 2019, 22:26:18
+ closed on:  18 Sep 2019, 15:54:04
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,271 @@
+
+> # --------------------------------------------------------------------------
+> #                       Program Description
+> # --------------------- .... [TRUNCATED] 
+
+> # Load in packages
+> library(foreign)
+
+> library(AER)
+
+> library(data.table)
+
+> ########################### Key Firms ##################################
+> load("./Data/KEYFIRM_R.RData")
+
+> setkey(KEYFIRM,industry_a)
+
+> KEYSUM_E <- KEYFIRM[, list(wastewater=sum(wastewater_e, na.rm = TRUE), 
++       cod=sum(cod_e, na.rm = TRUE), nh=sum(nh_e, na.rm = TRUE), 
++       p .... [TRUNCATED] 
+
+> # Calculate the percentage
+> KEYPER_E <- KEYSUM_E[, list(wastewater = 100*wastewater/sum(wastewater), 
++       cod = 100*cod/sum(cod), nh = 100*nh/s .... [TRUNCATED] 
+
+> # Chemical Oxygen Demand
+> # ==================== Table 1 Row 1 =======================================
+> s <- order(-KEYPER_E$cod)
+
+> KEYPER_E <- KEYPER_E[s]
+
+> head(KEYPER_E$cod,5)
+[1] 33.40897 15.14991 13.95119 10.37806  4.26675
+
+> rm(list = ls())
+
+> ########################### All Firms ##################################
+> 
+> load("./Data/ALLFIRM_R.RData")
+
+> setkey(ALLFIRM,industry_a)
+
+> ALLSUM_E <- ALLFIRM[, list(wastewater=sum(wastewater_e, na.rm = TRUE), 
++         cod=sum(cod_e, na.rm = TRUE), nh=sum(nh_e, na.rm = TRUE), 
++       .... [TRUNCATED] 
+
+> ## Compare the relative contribution of key and regular firms
+> ALLCOMP_E <- ALLFIRM[, list(wastewater=sum(wastewater_e, na.rm = TRUE), 
++         c .... [TRUNCATED] 
+
+> AC_PRES <- ALLCOMP_E
+
+> # Calculate the relative percentage
+> ALLAUX_E <- ALLFIRM[, list(wastewater=sum(wastewater_e, na.rm = TRUE), 
++         cod=sum(cod_e, na.rm = TRUE) .... [TRUNCATED] 
+
+> # For safety consideration, sort the two datasets again
+> # Sort ALLCOMP_E
+> s <- order(ALLCOMP_E$industry_a, ALLCOMP_E$Census_Type)
+
+> ALLCOMP_E <- ALLCOMP_E[s]
+
+> # Sort ALLAUX_E
+> s <- order(ALLAUX_E$industry_a)
+
+> ALLAUX_E <- ALLAUX_E[s]
+
+> foo1 <- seq(from = 1, to = 79, by = 2)
+
+> for (i in foo1){
++   ALLCOMP_E$wastewater[i] <- 
++     100*ALLCOMP_E$wastewater[i]/ALLAUX_E$wastewater[(i+1)/2]
++   ALLCOMP_E$wastewater[i+1] <- 100 .... [TRUNCATED] 
+
+> # ==================== Table 1 Rows 2 and 3 ================================
+> ALLCOMP_E[which(ALLCOMP_E$industry_a == 22), list(cod, product)]
+          cod  product
+1: 99.6279273 87.21329
+2:  0.3720727 12.78671
+
+> ALLCOMP_E[which(ALLCOMP_E$industry_a == 13), list(cod, product)]
+         cod  product
+1: 91.806901 69.25607
+2:  8.193099 30.74393
+
+> ALLCOMP_E[which(ALLCOMP_E$industry_a == 17), list(cod, product)]
+         cod  product
+1: 91.076747 48.25329
+2:  8.923253 51.74671
+
+> ALLCOMP_E[which(ALLCOMP_E$industry_a == 26), list(cod, product)]
+          cod   product
+1: 99.6800328 98.609103
+2:  0.3199672  1.390897
+
+> ALLCOMP_E[which(ALLCOMP_E$industry_a == 15), list(cod, product)]
+        cod  product
+1: 65.10233 88.08397
+2: 34.89767 11.91603
+
+> # ==================== Table A.1 Row 1 =====================================
+> # number of firms
+> sel <- which(ALLFIRM$Census_Type == 1)
+
+> numkey <- length(sel)
+
+> # wastewater
+> sel <- which(ALLFIRM$wastewater_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.7624049
+
+> # COD
+> sel <- which(ALLFIRM$cod_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.7318864
+
+> # Petro
+> sel <- which(ALLFIRM$pet_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.3135754
+
+> # NH4
+> sel <- which(ALLFIRM$nh_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.2520199
+
+> # BOD
+> sel <- which(ALLFIRM$bod_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.1744841
+
+> # CN
+> sel <- which(ALLFIRM$cyn_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.04899733
+
+> # Cr6
+> sel <- which(ALLFIRM$chr6_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.04856364
+
+> # Phenol
+> sel <- which(ALLFIRM$phe_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.02422054
+
+> # As
+> sel <- which(ALLFIRM$as_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.02280634
+
+> # Cr
+> sel <- which(ALLFIRM$chr_e>0 & ALLFIRM$Census_Type == 1)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.02006279
+
+> # Table A.1, Row 2
+> # number of firms
+> sel <- which(ALLFIRM$Census_Type == 2)
+
+> numkey <- length(sel)
+
+> # wastewater
+> sel <- which(ALLFIRM$wastewater_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.3515597
+
+> # COD
+> sel <- which(ALLFIRM$cod_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.2829483
+
+> # Petro
+> sel <- which(ALLFIRM$pet_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.07908219
+
+> # NH4
+> sel <- which(ALLFIRM$nh_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.06487373
+
+> # BOD
+> sel <- which(ALLFIRM$bod_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.02555167
+
+> # CN
+> sel <- which(ALLFIRM$cyn_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.001281081
+
+> # Cr6
+> sel <- which(ALLFIRM$chr6_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0
+
+> # Phenol
+> sel <- which(ALLFIRM$phe_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.0004307081
+
+> # As
+> sel <- which(ALLFIRM$as_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0.0006552654
+
+> # Cr
+> sel <- which(ALLFIRM$chr_e>0 & ALLFIRM$Census_Type == 2)
+
+> num1 <- length(sel)
+
+> num1/numkey
+[1] 0
