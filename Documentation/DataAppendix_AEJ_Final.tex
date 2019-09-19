@@ -225,7 +225,7 @@ A firm is categorized as a regular source firm, if none of the above conditions 
 %    & Waste & COD & Petrochemicals & Ammonian & BOD & Cyanidum & Hex-Chromium & Phenol & Arsenium & Chromium \\
                     & Waste & COD  & Petro & $\text{NH}_4^+$ & BOD  & CN   & $\text{Cr}^{6+}$ & Phenol & As   & Cr      \\   %& Total\\
     \midrule
-    Key Sources     & 76.2  & 73.2 & 31.4 & 25.2             & 17.5 & 4.90 & 4.86             & 2.42   & 2.27 & 2.01    \\ %& 106,067 \\
+    Key Sources     & 76.2  & 73.2 & 31.4 & 25.2             & 17.4 & 4.90 & 4.86             & 2.42   & 2.28 & 2.01    \\ %& 106,067 \\
     Regular Sources & 35.2  & 28.3 & 7.91 & 6.49             & 2.56 & 0.13 & N/A              & 0.04   & 0.07 & N/A     \\  %& 814,937 \\
     \bottomrule
 \end{tabular}
@@ -510,7 +510,7 @@ The assumption that the cost of technology adoption is independent of firm size 
 
 %\textit{Fixed Costs Proportional to Production Level.}---In our model, we have assumed that the treatment technology investment is a fixed cost independent of the production scale. This has two implications. First, larger firms are more likely to adopt clean technology, and as a result, we should see positive correlation between production scale with both the possibility and total expenditure in treatment technology. The linear probability model in the main text shows that output is positively correlated with clean technology adoption rate. Here we calculate the correlation between the log value of production and treatment equipment investment as well. Not surprisingly, we find that it is positive (0.64) as well.
 
-The second and perhaps more important implication is that the ratio of treatment technology expenditure over output should decrease with the size of the firm. We find that it is also the case in the NGSPS data. For firms in the top-5 polluting industries, we calculate the average of the ratio of treatment equipment expenditure to output value within each quintile of output. The means of the ratio from the first (smallest) to the fifth (largest) quintile are 22\%, 11\%, 6.7\%, 5.0\%, and 2.7\%, respectively. A linear regression model that controls for the same set of covariates as in the main text delivers the same message:
+The second and perhaps more important implication is that the ratio of treatment technology expenditure over output should decrease with the size of the firm. We find that it is also the case in the NGSPS data. For firms in the top-5 polluting industries, we calculate the average of the ratio of treatment equipment expenditure to output value within each quintile of output. The means of the ratio from the first (smallest) to the fifth (largest) quintile are 23\%, 11\%, 6.7\%, 5.0\%, and 2.7\%, respectively. A linear regression model that controls for the same set of covariates as in the main text delivers the same message:
 %The second and perhaps more important implication is that treatment technology investment cost should decrease with the size of the firm. We find that it is also the case. By using the NGSPS, for firms in the top-5 polluting industries, we calculate the average of the ratio of treatment equipment expenditure to output value within each quintile of output. The means of the ratio from the first (smallest) to the fifth (largest) quintile are respectively 22\%, 11\%, 6.7\%, 5.0\%, and 2.7\%. A linear regression model controlling for the same set of covariates as in the main text delivers the same message
 \begin{equation*}
     \log \left(\frac{\text{Investment}_i}{\text{Output}_i} \right) = \underset{(0.11)}{-0.73} - \underset{(0.004)}{0.40} \times \log (\text{Output}_i) + \vec{X} \gvec{\upgamma} + \varepsilon_i,
@@ -527,8 +527,8 @@ which shows a negative correlation as well. Together, the evidence supports our 
     \hline \hline
     Technologies    & 25\%      & 50\%      & 75\%      & Maximum   & Mean \\
     \midrule
-    Physical        & 2      & 6      & 25    & 800   & 36.14 \\
-    Biological      & 30     & 85     & 260    & 4000   & 249.90 \\
+    Physical        & 1.4       & 3.5       & 10        & 1000      & 12.4 \\
+    Biological      & 20        & 50        & 120       & 3056      & 109.6 \\
     \bottomrule
     \end{tabular}
     \floatfoot{Source: 2007 NGSPS. All the numbers are measured in CNY 10,000.}
@@ -629,8 +629,8 @@ This section provides details on the accounting exercises.
     \hline \hline
     Methods             & Paper  & Agricultural Food   & Textile    & Chemistry    & Beverage     & Average \\
     \midrule
-    Non-parametric      & 39.8\% & 60.7\%              & 81.6\%     & 102.5\%      & 103.7\%      & 63.5\%  \\
-    Piecewise-linear    & 34.8\% & 69.4\%              & 93.5\%     & 180.1\%      & N/A\tnote{a} & 75.4\%  \\
+    Non-parametric      & 39.8\% & 60.7\%              & 81.6\%     & 102.5\%      & 103.8\%      & 63.5\%  \\
+    Piecewise-linear    & 34.8\% & 69.4\%              & 93.5\%     & 180.2\%      & N/A\tnote{a} & 75.4\%  \\
     Parametric          & 43.5\% & 61.1\%              & 97.5\%     & 101.2\%      & 89.0\%       & 67.0\%  \\
     \bottomrule
 \end{tabular}
@@ -1597,7 +1597,7 @@ Interestingly, if we compare Experiment (ii) with (i)---recall that the only dif
 
 \phantomsection
 \addcontentsline{toc}{section}{REFERENCES}
-\bibliography{D:/Dissertation/Literature/Dissertation1}
+\bibliography{./Dissertation1}
 \bibliographystyle{aea}
 
 \end{document}
