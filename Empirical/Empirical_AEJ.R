@@ -177,7 +177,7 @@ summary(lm_clean)
 
 # ======================= Regressions 2 and 3 ==============================
 # Regression 2
-lm1 <- lm(log(intensity) ~ log(product) + province + industry_a + type_a, 
+lm1 <- lm(log(cod_e) ~ log(product) + province + industry_a + type_a, 
         data = POL5[(dm1_code_a == 4 | dm1_code_a == 5) & intensity > 0])
 summary(lm1)
 # Regression 3
@@ -305,6 +305,7 @@ sel1 <- which(CH$nbarworkers > cutoff[n1])
 distchn[n1] <- sum(CH$nbarworkers[sel1])
 distchn <- distchn/sum(distchn)
 # Employment distribution for polluting industries
+# NOT used in calibration
 distchn
 
 # --------------------------------------------------------------------------

@@ -1,0 +1,1603 @@
+% Article Format: American Economic Review
+% Xin Tang @ Stony Brook University
+% Last Updated: August 2014
+\documentclass[twoside,11pt,leqno]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Text Layout                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Layout
+\usepackage[hmargin={1.2in,1.2in},vmargin={1.5in,1.5in}]{geometry}
+\topmargin -1cm        % read Lamport p.163
+\oddsidemargin 0.04cm   % read Lamport p.163
+\evensidemargin 0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm
+\renewcommand\baselinestretch{1.15}
+\parskip 0.25em
+\parindent 1em
+\linespread{1}
+
+% Set header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+%\fancyhead[CE]{\textit{X. TANG}}
+%\fancyhead[CO]{\textit{DATA APPENDIX: FIRM-SIZE AND POLLUTION}}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt}
+
+% Font
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+%\usepackage[lite]{mtpro2}
+% use Palatinho-Roman as default font family
+%\renewcommand{\rmdefault}{ppl}
+\usepackage[scaled=0.88]{helvet}
+\makeatletter   % Roman Numbers
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+\usepackage{CJK}
+
+% Section Titles
+\renewcommand\thesection{\textnormal{{\Alph{section}}}}
+\renewcommand\thesubsection{\thesection.\textnormal{\arabic{subsection}}}
+\usepackage{titlesec}
+\titleformat*{\section}{ \center}
+\titleformat*{\subsection}{\it \center}
+\renewcommand{\refname}{\textnormal{REFERENCES}}
+
+% Appendix
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{APPENDIX}
+
+% Citations
+\usepackage[authoryear,comma]{natbib}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0em}
+\usepackage[%dvipdfmx,%
+            bookmarks=true,%
+            pdfstartview=FitH,%
+            breaklinks=true,%
+            colorlinks=true,%
+            %allcolors=black,%
+            citecolor=blue,
+            linkcolor=red,
+            pagebackref=true]{hyperref}
+
+% Functional Package
+\usepackage{enumerate}
+\usepackage{url}      % This package helps to typeset urls
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Mathematics                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs,upgreek}
+% Operators
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\plim}{plim}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\gvec}[1]{{\boldsymbol{#1}}}
+
+% New Environments
+\newtheorem{result}{Result}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}[section]
+\setlength{\unitlength}{1mm}
+
+% Equations
+\renewcommand{\theequation}{\arabic{equation}}
+%\renewcommand{\thefigure}{\thesection\arabic{figure}}
+%\renewcommand{\thefigure}{\arabic{figure}}
+%\renewcommand{\thefigure}{A\arabic{figure}}
+\renewcommand{\thetable}{\thesection\arabic{table}}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 Tables and Figures                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{threeparttable,booktabs,multirow,array} % This allows notes in tables
+\usepackage{floatrow} % For Figure Notes
+\floatsetup[table]{capposition=top}
+\usepackage[font={sc,footnotesize}]{caption}
+\DeclareCaptionLabelSeparator{aer}{---}
+\captionsetup[table]{labelsep=aer}
+\captionsetup[figure]{labelsep=period}
+\usepackage{graphicx,pstricks,epstopdf}
+
+\usepackage{tocloft}
+\renewcommand{\contentsname}{\large\sc Contents}
+\renewcommand{\cfttoctitlefont}{\hfill \normalfont}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand\cftsecfont{\normalfont}
+\renewcommand\cftsecpagefont{\normalfont}
+\renewcommand{\cftsecleader}{\normalfont\cftdotfill{\cftsecdotsep}}
+\renewcommand\cftsecdotsep{5}%{\cftdot}
+%\renewcommand\cftsubsecdotsep{\cftdot}
+
+\title{For Online Publication \\ Appendix for ``The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China''}
+\author{
+  \normalsize{{Ji Qi}} \\
+  \normalsize{{Chinese Academy of Environmental Science}}
+  \and
+  \normalsize{{Xin Tang}}\footnote{Corresponding Author: zjutangxin@gmail.com} \\
+  \normalsize{{Wuhan University}} \\
+  \normalsize{{International Monetary Fund}}
+  \and
+  \normalsize{{Xican Xi}} \\
+  \normalsize{{Fudan University}}
+}
+\date{{\today}}
+
+\begin{document}
+\maketitle
+
+{\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{1}
+\tableofcontents}
+
+\newpage
+\section{National General Survey of Pollution Sources}
+
+The most important data source that we draw upon in Section \rom{1}.B of the main text is the 2007 \textit{National General Survey of Pollution Sources} (henceforth NGSPS). In this section, we provide a detailed description of the dataset, which is based on the following documents:
+
+%The most important data source that we draw upon in Section \rom{1}.B of the main text is the 2007 \textit{National General Survey of Pollution Sources} (henceforth, NGSPS). Since to the best of our knowledge, the data were not used before in economic studies, we provide a detailed description of the dataset in this section. The content in this section is combined from:
+\begin{itemize}
+    \item
+    \textit{Census Program of the National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查方案)\end{CJK}};
+    \item
+    \textit{Regulation on National General Survey of Pollution Sources [Decree of the State Council of the People's Republic of China (No.508)]} {\begin{CJK}{GBK}{kai}(全国污染源普查条例[中华人民共和国国务院令第508号])\end{CJK}}.
+    \item
+    \textit{Technical Specifications Requirements of the First National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查技术规定)\end{CJK}}.
+\end{itemize}
+
+For an official introduction to the NGSPS and declassified information at the aggregated level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}), which is publicly available.
+
+\subsection{General Introduction}
+
+The NGSPS was a joint effort of multiple national ministries in China. The survey was organized directly by the State Council with data collection and quality control done by specially trained field staffs. According to the Regulation on National General Survey of Pollution Sources [Decree of the State Council of the People's Republic of China (No. 508)], faking data would lead to financial penalties or even lawsuits. The purpose of the NGSPS is to understand the number of pollution sources and their distribution in different industries and regions; to understand the generation, discharge and treatment of major pollutants; to establish records for key pollution sources; to build a pollution source information database and an environmental statistics platform; and to provide basis for formulating policies and plans for economic and social development and environmental protection. The term ``pollution source'' here refers to premises, facilities and equipment which discharge pollutants to environment in the process of production, living or other activities or have adverse impact on environment, as well as other sources that result in pollution.
+
+The survey covers all of the pollution units from agricultural, industrial, domestic sources, and facilities for the centralized treatment of pollution within the borders of the People's Republic of China. In this study, we focus on the {industrial pollution sources}, which consist of businesses from 39 manufacturing industries according to the \textit{Industrial Classification for National Economic Activities} (GB/T4547-2002).
+
+%The purpose of the NGSPS is to understand the number of pollution sources and their distribution in different industries and regions; to understand the generation, discharge and treatment of major pollutants; to establish records for key pollution sources; to build a pollution source information database and an environmental statistics platform; and to provide basis for formulating policies and plans for economic and social development and environmental protection.
+
+%The term ``pollution source'' here refers to premises, facilities and equipment which discharge pollutants to environment in the process of production, living or other activities or have adverse impact on environment, as well as other sources that result in pollution.
+
+%The NGSPS surveys all entities and self-employed households which have pollution sources within the borders of the People's Republic of China. The scope of the survey includes industrial pollution sources, agricultural pollution sources, domestic pollution sources, facilities for centralized treatment of pollution, and other facilities generating or discharging pollutants. In this paper, we focus on the industrial sources. The industrial sources include all production entities that belong to any of the 39 manufacturing industries according to the \textit{Industrial Classification for National Economic Activities} (GB/T4547-2002).
+
+\textit{Key and Regular Sources.---}The firms in the industrial sources are divided into two groups, \textit{key sources} and \textit{regular sources}. A key source firm is required to file questionnaires that are more detailed than those filed by the regular source firms. A firm is categorized as a key source, if one of the following condition is satisfied:
+\begin{enumerate}
+    \item
+    All production entities that discharge pollutants that contain heavy metal, hazardous waste, and radioactive substance.
+    \item
+    All production entities that belong to the 11 heavily polluting industries, which include: Paper and Paper Products; Food Processing; Raw Chemical Materials and Chemical Products; Textile; Ferrous Metal Smelting and Rolling Processing; Food Manufacturing; Production and Supply of Electric and Heating Power; Manufacturing of Leather, Fur, and Feather; Processing of Petroleum, Coking, and Nuclear Fuel; Manufacturing of Non-metallic Mineral Goods; Ferrous Metal Smelting and Rolling Processing.
+    \item
+    Firms with more than CNY 5 million in revenue that belong to the 16 key industries, which include: Beverage Manufacturing; Medicine Manufacturing; Chemical Fibers Manufacturing; Transportation Equipment Manufacturing; Coal Mining and Washing; Non-ferrous Metal Mining; Processing of Timber, and Manufacture of Wood, Bamboo, Rattan, Palm and Straw Products; Petroleum and Natural Gas Exploitation; General Purpose Machinery Manufacturing; Ferrous Metal Mining; Non-metal Mining; Apparel, Footwear and Caps Manufacturing; Water Production and Supply; Metal Products Manufacturing; Special Purpose Machinery Manufacturing; Communication Equipment, Computers and Other Electronic Equipment.
+\end{enumerate}
+A firm is categorized as a regular source firm, if none of the above conditions holds.
+
+\textit{Variables.---}The survey collects information on the following variables for the industrial sources.
+\begin{enumerate}
+    \item
+    Firm's basic registration information, geographic latitude and longitude, the receiving water body of firm's discharged wastewater, etc.
+    \item
+    The consumption of raw and intermediate inputs, including: water consumption, energy consumption (coal, petroleum, gas, electricity, etc.), the sulfur content of fuel, the consumption of hazardous intermediate input, etc.
+    \item
+    The quantity of each of the products produced by the firm.
+    \item
+    The type, size and number of the pollutants treatment equipment that the firms own.
+    \item
+    The generation, abatement, discharge and comprehensive utilization of various types of pollutants; and the operation of various kinds of pollution prevention and control facilities.
+    \item
+    The monitoring of pollutants emissions, including: the date and frequency of the monitoring; the type, quantity, and concentration of the pollutant.
+\end{enumerate}
+
+\textit{Pollutants.---}The pollutants included for the industrial sources are those that have general implications on pollution control. In particular, these pollutants are as follows.
+\begin{enumerate}
+    \item
+    Wastewater: Chemical Oxygen Demand (COD), Ammonian, Petrochemicals, Volatile Phenols, Mercury, Cadmium, Plumbum, Arsenium, Hexavalent Chromium, Cyanidium. For Paper and Paper Product, Food Processing, Food Manufacturing and Beverage Manufacturing Industries, Five-days Biochemical Oxygen Demand ($\text{BOD}_5$) is added. For Urban Sewage Treatment Plants, Total Phosphorus, Total Nitrogen, and $\text{BOD}_5$ are added.
+    \item
+    Exhaust: Soot, Industrial Dust, Sulfur Dioxide. For Electrolytic Aluminium, Cement, Ceramic, Frosted Glass industries, Fluoride is added. For Vehicle Exhaust Census, Carbon Monoxide and Hydrocarbon are added.
+    \item
+    Industrial Solid Waste: Hazardous Waste (according to the \textit{National Catalogue of Hazardous Wastes}), Smelting Waste, Flying-Ash, Slag, Coal Refuse, Gangue, Radioactive Slag.
+    \item
+    Plaster discharged by Desulfurization Facilities, Sludge generated by waste water treatment facilities, and the remaining from burning hazardous waste.
+    \item
+    Radioactive pollution sources from the utilization of Concomitant Radioactive Mineral and from Civil Nuclear Power Generation.
+\end{enumerate}
+
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{Percentage of Firms with Positive Emissions by Pollutants}
+\begin{tabular}{lccccccccccc}
+    \hline \hline
+%    & Waste & COD & Petrochemicals & Ammonian & BOD & Cyanidum & Hex-Chromium & Phenol & Arsenium & Chromium \\
+                    & Waste & COD  & Petro & $\text{NH}_4^+$ & BOD  & CN   & $\text{Cr}^{6+}$ & Phenol & As   & Cr      \\   %& Total\\
+    \midrule
+    Key Sources     & 76.2  & 73.2 & 31.4 & 25.2             & 17.5 & 4.90 & 4.86             & 2.42   & 2.27 & 2.01    \\ %& 106,067 \\
+    Regular Sources & 35.2  & 28.3 & 7.91 & 6.49             & 2.56 & 0.13 & N/A              & 0.04   & 0.07 & N/A     \\  %& 814,937 \\
+    \bottomrule
+\end{tabular}
+\begin{tablenotes}
+     \footnotesize{\item[$\dagger$]
+     Source: The 2007 National General Survey of Pollution Sources (NGSPS). The acronyms are respectively referring to: Wastewater, Chemical Oxygen Demand, Petrochemicals, Ammonian, Biochemical Oxygen Demand, Cyanidium, Hexavalent Chromium, Volatile Phenols, Arsenium and Chromium.}
+\end{tablenotes}
+\label{tab:nfirmPollutant}
+\end{threeparttable}
+\end{table}
+
+Table \ref{tab:nfirmPollutant} lists the percentage of key and regular firms that report positive emissions of different water pollutants, respectively.
+
+\subsection{Methods of Measurement}
+
+There are three different methods to measure the level of pollutant emissions, which are \textit{Monitoring Method, Method of Emission Coefficient}, and \textit{Material Balance Method}. In this section, we describe these three methods and explain which method is used to determine the level of pollutant emissions in practice.
+
+%There are three different methods that the data of pollutants emissions are collected, which in the priority of adoption when data from multiple sources are available, are \textit{Monitoring, Method of Emission Coefficient}, and \textit{Material Balance Method}. In this section, we describe these three methods and the principles that the three methods are used in practice.
+
+\textit{Monitoring Method.---}In this method, the actual quantity and concentration of pollutants are measured, which are used to infer the annual quantity of the generation and discharge of different pollutants. In practice, there are three sources from which the monitored data are obtained, ranked by the priority of adoption when data from multiple sources are available: \textit{NGSPS monitoring, historical monitoring}, and \textit{online monitoring}. The NGSPS monitoring data are collected by the field staff in the survey year (2007). The historical monitoring data are measured and recorded in the past three years, with the latest data having the highest priority.\footnote{There are four different sources of historical data, ranked again by the priority of adoption when data from multiple sources are available: the historical data monitored by the local environmental authorities, the data monitored upon the completion of a newly constructed project, the data monitored by a third-party agency, and those self-reported by the firms.} The online monitoring data are those automatically uploaded by computerized and Internet-connected pollutants treatment equipment. Before the historical and online monitoring data are adopted, the field staff of the survey would ensure that the production condition and pollutant treatment technology have not undergone substantial changes.
+
+%\textit{Monitoring.---}Monitored data are collected by measuring the actual quantity and pollutants concentration of wastewater and exhaust to infer the annual quantity of generation and discharge of certain types of pollutants. In addition, three sources from which the monitored data are obtained, which in the priority of adoption when data from multiple sources are available are: \textit{NGSPS monitoring, historical monitoring}, and \textit{online monitoring}. The NGSPS monitoring data are measured by the field staff of the survey in the survey year. The historical monitoring data are those measured and recorded in past three years, with the latest data having the highest priority.\footnote{There are in addition four different sources of historical data, in the order of adoption when more than one source are available, these four sources are: the historical data monitored by the local environmental authorities, the data monitored upon the completion of a newly constructed project, the data monitored by a third-party agency, and those that are self-reported by the firms.} The online monitoring data are those that are automatically uploaded by computerized and Internet-connected pollutants treatment equipment. Before historical and online monitoring data are accepted, the field staff of the survey examine to ensure that the production and pollutants treatment technology have not undergone substantial changes.
+
+A pollution source needs to report monitored data, if any of the following four criteria is met:
+\begin{enumerate}
+    \item
+    Nationally Monitored Key Pollution Sources {\begin{CJK}{GBK}{kai}(国控重点污染源)\end{CJK}}: all firms listed in the \textit{List of National Intensively Monitored Firms} {\begin{CJK}{GBK}{kai}(国家重点监控企业名单,环办函[2007]93号)\end{CJK}}.
+    \item
+    Facilities for Centralized Treatment of Pollution.
+    \item
+    Provincially Monitored Key Pollution Sources {\begin{CJK}{GBK}{kai}(省控重点污染源)\end{CJK}} that in sum account for 65\% of total provincial emission as is recorded in the \textit{2005 Environmental Statistic Yearbook}. That is for each of the major pollutants, starting from the most polluting firm and adding up the quantity of emission, all firms until the summation reaches the 65\% of the total provincial emission are recorded. The collection of the list of firms for all major pollutants provides the firms in this category.
+    \item
+    Newly established projects since 2005 whose pollutants discharge is higher than the least polluting firms in the Provincial Monitored Key Pollution Sources.
+\end{enumerate}
+These firms are later referred to as the \textit{monitored firms} in this document.
+
+Starting from 2007Q1, for all Nationally Monitored Key Pollution Sources, Centralized Treatment Facilities, and Provincially Monitored Key Pollution Sources, waste water sources have to be monitored at least once per quarter, and exhaust sources have to be monitored at least once per six months.
+
+The actual monitoring practice is subject to the following guidelines:
+\begin{enumerate}
+    \item
+    The monitoring of Mercury, Cadmium, Hexavalent Chromium, Plumbum, and Arsenium must be conducted at the discharging outlets of individual factory workshops, with each outlets monitored separately.
+    \item
+    Other water-based pollutants are monitored at the outlets of the factory.
+    \item
+    The flow rates of wastewater and exhaust are monitored at the same time with the monitoring of pollutants discharges.
+    \item
+    The monitoring of pollution sources are conducted at the representative production and polluting time periods.
+    \item
+    All monitoring technical standards of wastewater pollutants follow \textit{The Technical Specifications Requirements for the Monitoring of Surface Water and Wastewater} {\begin{CJK}{GBK}{kai}(地表水和污水监测技术规范, HJ/T91-2002)\end{CJK}} and \textit{The Technical Specifications Requirements for the Monitoring of Wastewater Pollutants Emission} {\begin{CJK}{GBK}{kai}(水污染物排放总量监测技术规范, HJ/T92-2002)\end{CJK}}.
+    \item
+    For unstable wastewater sources, the samples are collected using the \textit{Water Ratio Automatic Sampler}.
+    \item
+    All monitoring technical standards of exhaust pollutants follow \textit{The Determination of Particulates and Sampling Methods of Gaseous Pollutants from Exhaust Gas of Stationary Sources} {\begin{CJK}{GBK}{kai}(固定污染源排气中颗粒物测定和气态污染物采样方法, GB/T16157-1996)\end{CJK}}.
+\end{enumerate}
+
+\textit{Method of Emission Coefficient.---}In this method, the generation and discharge of pollutants are calculated according to the \textit{Handbook of Emission Coefficient}, edited by the \textit{Chinese Academy of Sciences}. The benchmark coefficients are estimated based on firm's production technology, production scale, etc. The actual coefficients used are modified from the benchmark coefficients according to firm's use of intermediate inputs, its managerial practice, and the pollution treatment equipment installed. The actual pollutants generation and discharge are then calculated according to the actual production scale of the firm in year 2007.
+
+\textit{Material Balance Method.---}In this method, the quantities of the materials entering and leaving a system are measured, and therefore the material flows which might have been unknown or difficult to measure without this method are identified. The exact rule of conservation used in the analysis of the system depends on the specific context, but all rules revolve around mass conservation, i.e., that matter cannot disappear or be created spontaneously. In parctice, a firm's usage of intermediate inputs, energy consumption, water consumption, and production technology are used simultaneously, in order that the calculated pollutants generation and discharge can realistically reflect the actual production and emission of the firm in reality.
+%\textit{Material Balance Method.---}The Material Balance Method is an application of conservation of mass to the analysis of physical systems. By accounting for material entering and leaving a system, mass flows can be identified which might have been unknown, or difficult to measure without this technique. The exact conservation law used in the analysis of the system depends on the context of the problem, but all revolve around mass conservation, i.e. that matter cannot disappear or be created spontaneously. When applied, a firm's usage of intermediate inputs, energy consumption, water consumption, and production technology are considered simultaneously, in order that the calculated pollutants generation and discharge can realistically reflect the actual production and emission of the firm in reality.
+
+\textit{Which Method Will Be Used in Practice?---}To determine which measurement method will be used in practice, the survey follows the following guidelines.
+\begin{enumerate}
+    \item
+    The data of the Key Pollution Sources are obtained mainly through monitoring and the method of emission coefficient, while the material balance method is only used when the other two methods are not feasible. More specifically, the data of all firms that are identified as the monitored firms are obtained by monitoring. The data of other firms in the key sources are obtained by the method of emission coefficient.
+    \item
+    The data of the Regular Pollution Sources are obtained mainly through the method of emission coefficient, while the material balance method is used only when the method of emission coefficient is not feasible.
+    \item
+    Before being accepted, the monitored data are compared with those calculated from the method of emission coefficient. If the discrepancy is less than 20\% of the monitored value, the monitored value is used. If the discrepancy is larger than 20\%, the production technology and operating status of the firm are examined. If the operating status is in compliance with that specified in the technical regulations of the monitoring practice (for example, the firm has to reach at least 75\% of its production capacity when the emission is monitored), the monitored data are accepted. Otherwise, the emissions are calculated using the method of emission coefficient.
+\end{enumerate}
+
+
+\section{A Comparison of Firm Size Distributions for Different Samples}
+%\section{Firm Size Distribution in NGSPS and CNEC}
+This section compares the firm size distributions for different samples of firms in China. In Figure \ref{fig:distcomp}, we present the kernel densities of firm size estimated using different samples in NGSPS and CNEC.
+%This section shows the firm size distributions by output value from the NGSPS and CNEC. In Figure \ref{fig:distcomp}, we present kernel densities of firm sizes estimated using different samples in NGSPS and CNEC.
+\begin{figure}[t]
+    \begin{center}
+    \includegraphics[width=0.4\textwidth]{./Figures/ngsps_den_key_appen.pdf}%
+    \includegraphics[width=0.4\textwidth]{./Figures/ngsps_den_all_appen.pdf} \\
+    \includegraphics[width=0.4\textwidth]{./Figures/cnec_den_large_appen.pdf}
+    \includegraphics[width=0.4\textwidth]{./Figures/cnec_den_all_appen.pdf}
+    \caption{Firm Size Distributions in Various Data Sources}
+    \floatfoot{Sources: NGSPS and CNEC. In all panels, the horizontal axes are in log-scale.}
+    \label{fig:distcomp}
+    \end{center}
+\end{figure}
+On the upper panels, we plot the firm size distributions for the samples that consist of the key source firms (the left panel) and all firms (the right panel) in the NGSPS, respectively. On the lower panels, we plot the firm size distributions for the \textit{Annual Surveys of Industrial Firms (ASIF)} sample (the left panel), which consists of all state-owned firms and private firms with sales above CNY 5 million, and the sample of all firms (the right panel) in the CNEC. There are two findings that we would like to emphasize:
+%On the upper panel, we plot the firm size distribution by using only the key firms (left) and all firms (right) in NGSPS. On the lower panel, we plot those estimated using only the Annual Survey samples (left) and all firms (right). There are two findings that we would like to emphasize.
+\begin{enumerate}
+    \item
+    Although the key source firms are on average larger than the firms in the full sample, they include both small and large firms, and the empirical density of the log output of the key source firms resembles a bell shape. This suggests that the key source firms are reflecting the characteristics of the firms over the entire range of firm size. As a result, no systematic bias will be introduced when we use the key source firms to empirically analyze the relationship between pollution intensity/treatment technology adoption and firm size in Section \rom{1}.B.
+    %The key firms in NGSPS cover broadly firms of all sizes. Though the key firms tend to be larger than an average firm from the full sample, a fair amount of small firms are included. Hence both densities from the key and all firms resemble those bell-shaped densities from the normal distribution family. This also suggests that the estimated elasticity in Regression (1) of the main text is likely to reflect the correlation between production and emissions over the entire range of firm size.
+    \item
+    There are marked differences in the firm size distributions between the ASIF sample and CNEC full sample, with the ASIF sample missing most of the small firms. As a result, while the ASIF data are widely used in the studies of Chinese economy, we use the CNEC full sample in our paper, because both the small and large firms play a critical role in our empirical and quantitative analysis.
+   % The densities estimated from the CNEC full sample and the Annual Surveys of Industrial Production subsample show marked difference, with the Annual Survey samples missing all the small firms, of which a lot are covered by the NGSPS key firms.
+\end{enumerate}
+
+In sum, the two take away points from the four panels in Figure \ref{fig:distcomp} are that the key firms in NGSPS are representative of both large and small firms, and that we have to use the CNEC full sample in companion with the NSGPS for our purpose.
+
+\section{Additional Results on Firm Size and Pollution Intensity}
+
+In this section, we present additional results on the statistical relationship between firm size and pollution intensity. In Section C.1, we show the scatter-plots and regression results for individual polluting industries and and for the whole manufacturing sector as well. In addition, we show that the negative relationship between firm size and pollution intensity holds conditional on whether the firms are using physical, chemical or biological technologies. We also show that our results in Section \rom{1}.B remain robust if we cluster the standard errors by provinces. In Section C.2, we explain our estimates on coefficients of the dummy variables, and compare our findings with those from the existing literature.
+
+%In this section, we present more results about the statistical relationship between firm size and pollution intensity. In Section 1, we show the scatterplots and regression results obtained using individual industries. We further show that the estimates pooling all polluting industries together remain significant if we cluster the standard errors by provinces. In Section 2, we explain the estimates of the dummy variables and compare our study with some of the existing literature.
+
+\subsection{Additional Scatter-plots and Regression Results}
+
+For each industry among the top five polluting industries, we regress the following equation:
+\begin{equation*}
+    \log (\text{COD}_i) = \beta_0 + \beta_1 \log (\text{Output}_i) + \vec{X_p} \gvec{\upgamma}_1 + \vec{X_o} \gvec{\upgamma}_2+ \varepsilon_i,
+\end{equation*}
+where $\vec{X_p}$ is the provincial dummy, and $\vec{X_o}$ is the ownership dummy. The estimation results are summarized in Table \ref{tab:olsresults}, with the corresponding scatterplots plotted in Figure \ref{fig:codscatters}. We also include the scatterplot with the top five industries pooled together in Figure \ref{fig:codscatters} for completeness.
+\begin{figure}[htbp]
+    \begin{center}
+    \includegraphics[width=0.40\textwidth]{./Figures/paper_ez.pdf}%
+    \includegraphics[width=0.40\textwidth]{./Figures/agri_ez.pdf} \\
+    \includegraphics[width=0.40\textwidth]{./Figures/text_ez.pdf}
+    \includegraphics[width=0.40\textwidth]{./Figures/chem_ez.pdf} \\
+    \includegraphics[width=0.40\textwidth]{./Figures/bever_ez.pdf}
+    \includegraphics[width=0.40\textwidth]{./Figures/pooled_intensity_size.pdf} \\
+ % \includegraphics[width=0.40\textwidth]{./Figures/all_manufacturing_cod_size.png} \\
+%    \vspace{-1em}
+    \caption{Firm Size and Pollution Intensity}
+    \floatfoot{Source: NGSPS. Line: Least square fit.}
+    \label{fig:codscatters}
+    \end{center}
+\end{figure}
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{Firm Size and Pollution Intensity by Industry}
+\begin{tabular}{cccccc}
+    \hline \hline
+    Parameters & Paper           & Food    & Textiles         & Chemical Materials  & Beverages   \\
+    \midrule
+    $\beta_0$  & $-$4.14         & $-$2.15              & $-$3.71          & $-$7.12             & $-$2.86     \\
+               & (0.56)          & (0.26)               & (0.57)           & (0.33)              & (0.39)      \\
+    $\beta_1$  & 0.74            & 0.39                 & 0.70             & 0.88                & 0.59        \\
+               & (0.02)          & (0.01)               & (0.01)           & (0.01)              & (0.02)      \\
+    $R^2$      & 0.38            & 0.31                 & 0.38             & 0.40                & 0.34        \\
+    \midrule
+    $N$        & 5,632           & 6,893                & 6,284            & 8,686               & 1,558       \\
+    \bottomrule
+\end{tabular}
+\begin{tablenotes}
+     \footnotesize{
+     \item[$\dagger$]
+     Data Source: NGSPS.}
+\end{tablenotes}
+\label{tab:olsresults}
+\end{threeparttable}
+\end{table}
+All the estimates are significant both statistically and economically with reasonable levels of $R^2$. %perhaps with Chemistry Materials being the one possible abnormal exception. Further investigation into the data reveals that the reason that we do not observe a negative correlation in the Chemistry Materials industry as evident as in the other industries is because there are many sub-industry level heterogeneities pooled at the two-digit level. To show that this is indeed the case, we repeat the exercise for the top polluting four-digit industry within the Chemistry Material industry, {Nitrogen Fertilizer} (C2621) which ranks the sixth among all four-digit industries by pollution. The results are shown in the bottom right panel of Figure \ref{fig:codscatters} where the negative correlation is clear, and the last column of Table \ref{tab:olsresults}. Put differently, the ``circle'' we see in the Chemistry case is in fact a combination of several ``ellipses,'' each with a downward sloping transverse diameter. This is confirmed by including four-digit industry dummy in the regression for Chemistry industry specified below. After introducing four-digit industry dummies, the magnitude estimates for $\beta_1$ decreases to 0.79 and the $R^2$ increases to 0.26. Both numbers are now of comparable magnitudes with the other industries.
+
+If we apply Regression (1) in Section \rom{1}.B of the main text to the whole manufacturing sector, we get the following results
+\begin{equation*}
+    \log (\text{COD}_i) = \underset{(0.84)}{-11.05} + \underset{(0.00)}{0.63} \times \log (\text{Output}_i) + \vec{X} \gvec{\upgamma} + \varepsilon_i,
+\end{equation*}
+which implies a negative correlation between firm size and pollution intensity. However, as we mentioned in Section \rom{1}.A of the main text, because industrial water pollutants are typically concentrated in a handful of industries, when we apply the above analysis to the whole manufacturing sector, we lose about two thirds of the manufacturing firms, as firms in many industries did not report positive COD emissions. Figure \ref{fig:codscatter} visualizes the above regression by plotting residuals after controlling for all the covariates. Likewise, if we apply the linear regression of technology adoption in Section \rom{1}.B of the main text to the whole manufacturing sector, we get the following results:
+\begin{equation*}
+    y_i = \underset{(0.11)}{-0.16} + \underset{(0.000)}{0.04} \times \log (\text{Output}_i) + \vec{X} \gvec{\upgamma} + \varepsilon_i,
+        %\label{eq:poolols}
+\end{equation*}
+implying again a similar positive correlation between firm size and the adoption of clean technology.
+\begin{figure}[t]
+    \begin{center}
+    \includegraphics[width=0.40\textwidth]{./Figures/all_manufacturing_cod_size.png}%
+    \caption{Firm Size and Pollution Intensity: All Manufacturing Industries}
+    \floatfoot{Source: NGSPS. Line: Least square fit. Residuals after controlling for the covariates are plotted.}
+    \label{fig:codscatter}
+    \end{center}
+\end{figure}
+
+For the size-intensity relationship conditional on treatment equipment, in Section \rom{1}.B of the main text, we group physical and chemical equipments together with an extra dummy variable for chemical equipment. Here, we show that the relationship holds as well when we estimate the relation for each type of equipment separately:
+\begin{align*}
+%\label{eq:poolols_physical}
+    \text{Physical:}   \quad \log (\text{COD}_i) &= \underset{(0.40)}{-3.50} + \underset{(0.01)}{0.58} \times \log (\text{Output}_i) + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i, \\
+%\label{eq:poolols_chemical}
+    \text{Chemical:}   \quad \log (\text{COD}_i) &= \underset{(0.49)}{-4.59} + \underset{(0.01)}{0.77} \times \log (\text{Output}_i) + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i, \\
+%\label{eq:poolols_biological}
+    \text{Biological:} \quad \log (\text{COD}_i) &= \underset{(0.20)}{-4.37} + \underset{(0.01)}{0.67} \times \log (\text{Output}_i) + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 +\varepsilon_i.
+\end{align*}
+
+For Regression (1) in the main text, we have also clustered standard errors at the provincial level. We confirm that the statistical significance does not change:
+\begin{equation*}
+    \log (\text{COD}_i) = \underset{(0.30)}{-3.75} + \underset{(0.03)}{0.63} \times \log (\text{Output}_i) + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i.
+\end{equation*}
+
+\subsection{Locations and Ownership Rights}
+
+The pollution intensity also exhibits rich provincial level variations. We take the regression results on the paper industry for example. Using Beijing as the benchmark, of all the remaining 29 provinces and municipalities, only the coefficient of Shanghai is negative and statistically insignificant. For the remainders, all estimates are positive and highly significant.\footnote{One province, Hebei is significant at 10\% level. Four others are significant at 1\% level while all others are significant at 0.1\% level. We notice here that Hebei, a province that is commonly considered as heavily affected by industrial pollution, is in fact an outlier, since the paper manufacturing is not its pillar industry.} The five most polluting provinces are Ningxia, Inner Mongolia, Gansu, Shaanxi and Xinjiang, for which the rankings of their provincial GDP in 2007 are respectively 29, 16, 27, 19 and 25 out of 31 provincial administrative regions (not including Hong Kong and Macau). Geographically, these are also inland provinces. In fact, despite that the majority of the paper manufacturers are located in Zhejiang and Guangdong (ranked 1st and 4th by GDP), the pollution level is lower comparing to those inland less developed regions. These patterns are highly robust across various specifications of our regressions. The general message we get from these dummy coefficients are the following. First, Beijing and Shanghai, arguably the political and economic center of China, exert pollution control standard far more stringent than the rest provinces. Second, inland and less developed provinces in general have worse control over and are more prone to the industrial pollution problem. These two patterns are broadly consistent with the environmental Kuznetz curve and the results from previous literature. However, unlike \citet{Jiangetal:2014}, ownership rights do not seem to have significant effects. If anything, the Foreign and Hong Kong, Macau and Taiwan based firms have only weakly better pollution controls. However, the statistical significance of the estimates never exceed 10\% across all our regressions. We conjecture that this could be because \citet{Jiangetal:2014}'s estimates are derived using a different sample of firms (in total 1,931 firms), while our data cover more firms.
+
+\section{Evidence Supporting the Modeling Assumptions}
+
+In this section, we provide some evidence in support of our modeling assumptions. In Section \ref{sec:distortions}, we present the evidence that motivates us to model the distortions as progressive taxes on output. In Section \ref{sec:appen_techspec}, we justify our choice of modeling the adoption of advanced treatment technology as fixed costs. We also describe additional distributional features of the treatment technology, including the {processing efficiency, designed processing capacity}, and {installation costs}, using the Paper and Paper Product industry as an example. Section \ref{sec:china_regulation} contains a brief summary of the environmental regulations in China.
+
+%In this section, we provide the evidence in support of some of our modeling assumptions. In Section \ref{sec:distortions}, we show the evidence that motivates us to model the distortions as a generic tax on output. In Section \ref{sec:appen_techspec}, we justify our choice of modeling the adoption of advanced treatment technology as a one-time fixed costs. We also describe some additional distributional feature of the treatment technology, including the {processing efficiency, designed processing capacity}, and {installation costs}, for the Paper and Paper Product industry. Section \ref{sec:china_regulation} contains a brief summary of the environmental regulations in China.
+
+\subsection{Firm-level Distortions}
+\label{sec:distortions}
+
+Recent studies of the Chinese economy have described large distortions at both the sector and the firm levels, which negatively affect aggregate productivity and output considerably.\footnote{See \citet{HsiehKlenow:2009}, \citet{Songetal:2011}, \citet{Brandtetal:2013}, and \citet{TombeZhu:2015}, among others.} Following the seminal approach developed by \citet{HsiehKlenow:2009,HsiehKlenow:2014}, we model and estimate firm-level distortions by using variations in the average products of capital and labor across firms.\footnote{Though average factor product dispersion could arise due to dynamic capital adjustment [\citet{Askeretal:2014}], for the case of China, \citet{DavidVenkateswaran:2017} show that dynamic adjustment costs only accounts for about 10\% of the variation in average factor product in the data. Naturally, we also cannot separate out variations in average factor product caused by firm-specific characteristics, for instance firm-specific markup or capital share. However, we argue that it would require empirical implausible variations of such parameters to generate the patterns of the data we observe.} %An important feature of Cobb-Douglas production function is that the ratio of average factor products to marginal factor products is constant. Therefore, the average factor products also provide information on marginal factor products.\footnote{In particular, using the notations later in this section, we can verify that $\partial y/\partial k = \alpha \gamma z^{1-\gamma} k^{\alpha \gamma - 1} l^{(1-\alpha)\gamma} = \alpha \gamma (y/k)$. Similarly, we can show that $\partial y/\partial k = (1-\alpha) \gamma (y/l)$.}
+More specifically, if we let $\tau_{z_i}, \tau_{k_i}$, and $\tau_{l_i}$ be the wedges that firm $i$ faces in the product, capital, and labor markets, respectively, the profit maximization problem of firm $i$ is:
+\begin{equation*}
+    \pi_i = \max_{k_i,l_i} \left\{ (1-\tau_{z_i}) z_i^{1-\gamma} (k_i^{\alpha} l_i^{1-\alpha})^{\gamma} - (1+\tau_{k_i})Rk_i - (1+\tau_{l_i})W l_i \right\}.
+\end{equation*}
+By using the first-order conditions, the firm level average product of capital $\phi_{k_i}$, labor $\phi_{l_i}$, and the capital/labor ratio $\kappa_i$ can be expressed as
+\begin{align}
+    \label{eq:phik}
+    \phi_{k_i} &= \frac{y_i}{k_i} = \frac{(1+\tau_{k_i})R}{\alpha \gamma (1-\tau_{z_i})}, \\
+    \label{eq:phil}
+    \phi_{l_i} &= \frac{y_i}{l_i} = \frac{(1+\tau_{l_i})W}{(1-\alpha) \gamma (1-\tau_{z_i})}, \\
+    \label{eq:kappa}
+    \kappa_i &= \frac{k_i}{l_i} = \frac{\alpha}{1-\alpha} \cdot \frac{(1+\tau_{l_i})W}{(1+\tau_{k_i})R}.
+\end{align}
+The above equations show that in the absence of any distortions ($\tau_{z_i} = \tau_{k_i} = \tau_{l_i} = $ 0), $\phi_{k_i}, \phi_{l_i}$, and $\kappa_i$ should be equalized across firms. Equations (\ref{eq:phik}) and (\ref{eq:phil}) state that firms that face higher distortions in the capital (labor) and/or product markets demonstrate a higher average product of capital (labor). In addition, according to Equation (\ref{eq:kappa}), the capital/labor ratio increases with the {relative} size of labor to the capital market wedge. By using firm-level data on total production value, the book value of capital stock, and labor compensation from the CNEC, we calculate $z_i, \phi_{k_i}, \phi_{l_i}$, and $\kappa_i$ for each firm in our sample. Here we set $\gamma = $ 0.93, which is the calibrated value of returns to scale in the main text. Figure \ref{fig:phiklkappa} shows on log scales the scatterplots of $\phi_{k_i}, \phi_{l_i}$, and $\kappa_i$ against firm-level productivity $z_i$ for the Paper and Paper Products industry. We plot the Paper industry for demonstration purpose, qualitatively the results for all five polluting industries as well as all manufacturing industries combined are the same.
+\begin{figure}[t]
+    \begin{center}
+%    \includegraphics[width=0.4\textwidth]{./Figures/arpk.pdf}%
+%    \includegraphics[width=0.4\textwidth]{./Figures/arpl.pdf} \\
+%    \includegraphics[width=0.4\textwidth]{./Figures/klratio.pdf}
+    \includegraphics[width=0.4\textwidth]{./Figures/FigureD1_TopLeft.pdf}%
+    \includegraphics[width=0.4\textwidth]{./Figures/FigureD1_TopRight.pdf} \\
+    \includegraphics[width=0.4\textwidth]{./Figures/FigureD1_Bot.pdf}
+    \caption{Average Factor Products and Capital-Labor Ratio across Firm TFP Levels}
+    \floatfoot{Source: CNEC. All panels are plot in log scale. Lines are least square fit. Data of the Paper and Paper Product Industry are plotted.}
+    \label{fig:phiklkappa}
+    \end{center}
+\end{figure}
+
+Two patterns emerge from Figure \ref{fig:phiklkappa}. First, from the two upper panels, we see that both $\phi_{k_i}$ and $\phi_{l_i}$ are positively correlated with $z_i$, which suggests that more productive firms have higher average products of both capital and labor. Expressed in wedges, this means that both $(1+\tau_{k_i})/(1-\tau_{z_i})$ and $(1+\tau_{l_i})/(1-\tau_{z_i})$ are higher for more productive firms.
+%If we assume $\gamma = 0.85$ following \citet{AtkesonKehoe:2005}, then the elasticities of $\phi_k$ and $\phi_l$ to $z$ are both about 0.25, meaning that doubling firm productivity is associated with a 25\% increase in the average revenue product of factor inputs.\footnote{Generally speaking, the estimated elasticity depends on the value of $\gamma$, since $z$ is calculated for a given $\gamma$. However, because we are using a \citet{Lucas:1978b} model, while \citet{HsiehKlenow:2014} and \citet{BentoRestuccia:2016} both use the \citet{Melitz:2003} model, our results are not directly comparable with theirs. Yet broadly speaking, our estimates are quantitatively consistent with theirs. By using comprehensive micro data, \citet{HsiehKlenow:2014} find that the elasticity is 0.1 for the United States and between 0.5 and 0.6 for India and Mexico. By using data from the World Bank's Enterprise Surveys, \citet{BentoRestuccia:2016} find that the elasticities range from 0.22 to 0.74, averaging 0.52.}
+This could be because more productive firms are subject to higher factor or product market distortions or both. %Statistically, if we regress the average factor products to $\log z$, then for the five polluting industries, we get
+%\begin{align*}
+%    \text{Labor:}   \quad \log \phi_{l,i} &= \underset{(0.01)}{1.10} + \underset{(0.00)}{0.04} \times \log z_i + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i, \quad R^2 = 0.49, \\
+%    \text{Capital:} \quad \log \phi_{k,i} &= \underset{(0.01)}{-1.03} + \underset{(0.00)}{0.06} \times \log z_i + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i, \quad R^2 = 0.62.
+%\end{align*}
+Second, from the lower panel, we see that the capital/labor ratio is at best weakly negatively correlated with $z$. %Statistically, a similar regression specification as above yields
+%\begin{equation*}
+%    \log \kappa_i = \underset{(0.02)}{1.66} - \underset{(0.00)}{0.009} \times \log z_i + \vec{X_s} \gvec{\upgamma}_1 + \vec{X_p} \gvec{\upgamma}_2 + \vec{X_o} \gvec{\upgamma}_3 + \varepsilon_i, \quad R^2 = 0.065.
+%\end{equation*}
+%Notice that the $R^2$s differ sharply between the two groups of regressions.\footnote{Generally speaking, the estimated elasticities of $\phi_k$ and $\phi_l$ to $z$ depend on the value of $\gamma$, since $z$ is calculated for a given $\gamma$. For $\gamma = 0.93$ used here, if taken at its face value, the elasticities of $\phi_k$ and $\phi_l$ to $z$ seem well below the estimates in the literature. For instance, by using comprehensive micro data, \citet{HsiehKlenow:2014} find that the elasticity is 0.1 for the United States and between 0.5 and 0.6 for India and Mexico. By using data from the World Bank's Enterprise Surveys, \citet{BentoRestuccia:2016} find that the elasticities range from 0.22 to 0.74, averaging 0.52. However, we argue that this is because in the calibration of our general equilibrium model, as is explained in details in Section \rom{3}, in order that our model generates a wide range of firm size, a value of $\gamma$ that is higher than commonly used in the literature is needed. If we assume $\gamma = 0.85$ following \citet{AtkesonKehoe:2005}, then the elasticities of $\phi_k$ and $\phi_l$ to $z$ are both about 0.25, which are quantitatively consistent with those in the literature. The value of $\gamma$ used, however, will not affect the qualitative conclusion that large firms are subject to more distortions, which is the purpose here. In addition, because when calculating $z$, a $\gamma$ closer to one will greatly amplify measurement errors. As a result, we use only the samples between the first and last deciles in the estimation. Qualitatively, our results are not affected as well.}\textsuperscript{, }\footnote{For all three regressions, using the manufacturing sector as a whole lead to the same estimates (0.04, 0.06, and $-$0.01) and $R^2$s (0.50, 0.63, and 0.09).}
+
+Qualitatively, these findings indicate that the {relative} wedge firms face in the capital and labor markets does not depend strongly on the idiosyncratic productivity of firms, which in the context of our model implies $1+\tau_{k_i} \approx 1+\tau_{l_i}$.\footnote{This also explains the reason why $\phi_{k_i} \approx \phi_{l_i}, \forall i$.} Since we cannot separately identify the three wedges, for simplicity, we assume $\tau_{k_i} = \tau_{l_i} = $ 0 and attribute all the variations in the average product of factors to the wedges in the product market $\tau_{z_i}$. Whether we assume $\tau_{k_i} = \tau_{l_i} = $ 0 or alternatively $\tau_{z_i} = $ 0 does not affect our results, but the interpretations need to be changed accordingly.\footnote{For example, we cannot distinguish between the data-generating process we use here and another process where $\tau_{k_i}$ and $\tau_{l_i}$ increase simultaneously, while $\tau_{z_i}$ is equal to zero.}
+
+\begin{figure}[t]
+    \begin{center}
+    \includegraphics[width=0.50\textwidth]{./Figures/tax.eps}
+    \caption{The Output Tax Fuction $\tau_z$}
+     \floatfoot{The actual output tax function used in the quantitative exercises, given the calibrated values for $\phi_0$ and $\phi_1$}
+    \label{fig:tauz}
+    \end{center}
+\end{figure}
+%In the spirit of \citet{BentoRestuccia:2016}, we implement these idiosyncratic wedges in the model by positing a generic ``tax'' function that specifies the wedges as a function of a firm's productivity $z$:\footnote{This tax function has a long history in macro-public finance literature, for instance \citet{Benabou:2002}. We thank a referee for pointing this out. Recent studies that adopt the same tax functions include \citet{AdamopoulosRestuccia:2014}, \citet{HsiehKlenow:2014}, and \citet{Guneretal:2017}.}
+
+As a result, following \citet{HsiehKlenow:2014} and \citet{BentoRestuccia:2016}, we model these distortions as implicit progressive output taxes, and the tax rate function takes the form used in the main text:%\footnote{This tax function has a long history in macro-public finance literature, which dates back to at least \citet{Benabou:2002}. We thank a referee for pointing this out. Recent studies that use this function include \citet{BentoRestuccia:2016} and \citet{Guneretal:2017}.}
+\begin{equation}
+    \tau_z = \max \left\{ 0, 1 - \phi_0 z^{\phi_1} \right\}.
+\label{eq:tax}
+\end{equation}
+where the parameter $\phi_0$ determines the mean level of the taxes, and the parameter $\phi_1$ determines the progressiveness of the taxes. When $\phi_1<0$, the tax rates are increasing in firm TFP $z$, and the progressiveness of the taxes is decreasing in the value of $\phi_1$.\footnote{Notice that since $\phi_1 < $0, decreasing $\phi_1$ increases its absolute value.} %\footnote{There is one difference between Equation (\ref{eq:tax}) and the tax function used by \citet{AdamopoulosRestuccia:2014}. To model the progressiveness, in their specification, the authors use an exponential function as opposed to the power function here. We choose the power function because it is consistent with the log-linearity of $\phi_k$ ($\phi_l$) and $z$, while the exponential function implies a tax scheme that is much steeper than what our data suggest.}
+The actual tax function used in the quantitative exercises is plotted against log productivity in Figure \ref{fig:tauz}, which is increasing and concave in $z$ given our calibrated values for $\phi_0$ and $\phi_1$.
+%From now on, we use $\tau_z$ instead of $\tau_y$ to denote the product market frictions.We assume that the taxes collected are returned to the household as lump-sum transfers.
+%Anticipating the benchmark calibration in the next section, the wedge function specified in Equation (\ref{eq:tax}) is increasing and concave in $z$, with the lower and upper bounds being 0 and 1, respectively. The shape of the function captures the size dependency of the product market distortions where the wedges are higher for larger firms. The actual tax function used in the quantitative exercises is plotted against log productivity in Figure \ref{fig:tauz}. %\footnote{There is one difference between Equation (\ref{eq:tax}) and the tax function used by \citet{AdamopoulosRestuccia:2014}. To model the size dependency, in their specification, the authors use an exponential function as opposed to the power function here. We choose the power function because it is consistent with the log-linearity of $\phi_k$ ($\phi_l$) and $z$, while the exponential function implies a tax scheme that increases much sharper with respect to productivity than the empirical counterpart for our case.} %We rule out subsidies ($\tau_z < 0$) because $\lim_{z \downarrow 0} \tau_z = -\infty$ which leads to unrealistic solutions.}
+
+As we explained in the main text, the firm-level distortions $\tau_z$ are meant to capture a variety of policies and institutions that reallocate production factors from large productive to small unproductive firms, following the \emph{indirect} approach in the misallocation literature [\citet{RestucciaRogerson:2013}]. Examples include size-dependent taxes and subsidies that favor small firms, imperfect tax enforcement that induces tax evasion among small firms, financial constraints and contractual frictions that impede the growth of productive firms [\citet{CooleyQuadrini:2001}, \citet{ClementiHopenhayn:2006} and \citet{Akcigitetal:2018}], and local protectionism and internal trade barriers that disproportionately affect large productive firms [\citet{Eberhardtetal:2016} and \citet{TombeZhu:2015}]. While it is of great policy interest to study specific policies and institutions underlying $\tau_z$, we leave this important task to future work.\footnote{\citet{AdamopoulosRestuccia:2014} and \citet{AGpaper} are two recent examples where observable policy distortions are investigated. \citet{AdamopoulosRestuccia:2014} study the observable farm-level price distortions while our own work \citet{AGpaper} focuses on distortions created by migration and land distribution policies in China.}
+
+%The idiosyncratic $\tau_z$ is meant to capture implicitly a variety of policies and institutions that allocate factors away from large productive firms. For example, this is consistent with the fact that large productive firms face transportation costs, additional management costs, and/or local protectionism and trade barriers that impede the inter-regional flow of goods [\citet{Young:2000}, \citet{HsiehKlenow:2014}, \citet{TombeZhu:2015}, and \citet{Eberhardtetal:2016}]. It could also be that smaller firms are subject to preferential tax treatment.\footnote{For instance, value added taxes for firms with an annual industrial output value of less than CNY 1 million is 3\%, while firms with a production scale larger than CNY 1 million are subject to a 13\% tax rate.} Some of these examples, for instance transportation costs and management costs, are not exactly the ``distortions'' narrowly defined as inefficiencies from policy interventions. Hence a more accurate interpretation of the distortions captured by our model is any factors that prevent firms from reaching their full potentials in a frictionless world. We stick to the word \textit{distortion} mainly for convenience. From a policy perspective, it would be of great interest to follow the so-called direct approach in \citet{RestucciaRogerson:2013} and study the specific policies and regulations that we observe in the economy. We leave this important task to future work.\footnote{\citet{AdamopoulosRestuccia:2014} and \citet{AGpaper} are two recent examples where observable policy distortions are investigated. \citet{AdamopoulosRestuccia:2014} study the observable farm-level price distortions while our own work \citet{AGpaper} focus on distortions created by migration and land distribution policies in China.}
+
+\subsection{Treatment Technologies}
+\label{sec:appen_techspec}
+
+In the main text, we model the cost of adopting the clean technology as a fixed cost $k_E$ independent of the production scale of firms. In this subsection, we provide additional empirical evidence in support of this assumption using the firm-level data from the NGSPS.
+
+%In the paper, we model the costs of adopting abatement technology as a fixed costs $k_E$, regardless of the production scale of firms. The readers may concern that this could be a mis-specification. Two alternatives arise naturally: fixed costs plus operating costs and scale-related fixed costs. In this section, we show that each alternative contradicts some of the empirical evidence we document from the data.
+
+%\textit{Operating Costs.}---Trimming the top 1\% observations for outliers, we calculate the ratio of operating costs of treatment equipments to total output. On average, operating costs of abatement equipment takes about 1.5\% of a firm's annual value of production. The ratios at the 25\%, 50\%, and 75\% percentile are 0.13\%, 0.49\%, and 1.43\% respectively. This suggests that operating costs are negligible for more than 50\% of the firms. For simplicity, we omit them from the model.
+
+The assumption that the cost of technology adoption is independent of firm size has two implications. First, larger firms are more likely to adopt clean technology, and as a result, we should see positive correlations between production scale with both the possibility of adoption and total expenditure in treatment technology. The linear probability model in the main text shows the first. Here we calculate the correlation between the log value of production and treatment equipment investment as well. Not surprisingly, we find that it is positive (0.64) as well.
+
+%\textit{Fixed Costs Proportional to Production Level.}---In our model, we have assumed that the treatment technology investment is a fixed cost independent of the production scale. This has two implications. First, larger firms are more likely to adopt clean technology, and as a result, we should see positive correlation between production scale with both the possibility and total expenditure in treatment technology. The linear probability model in the main text shows that output is positively correlated with clean technology adoption rate. Here we calculate the correlation between the log value of production and treatment equipment investment as well. Not surprisingly, we find that it is positive (0.64) as well.
+
+The second and perhaps more important implication is that the ratio of treatment technology expenditure over output should decrease with the size of the firm. We find that it is also the case in the NGSPS data. For firms in the top-5 polluting industries, we calculate the average of the ratio of treatment equipment expenditure to output value within each quintile of output. The means of the ratio from the first (smallest) to the fifth (largest) quintile are 22\%, 11\%, 6.7\%, 5.0\%, and 2.7\%, respectively. A linear regression model that controls for the same set of covariates as in the main text delivers the same message:
+%The second and perhaps more important implication is that treatment technology investment cost should decrease with the size of the firm. We find that it is also the case. By using the NGSPS, for firms in the top-5 polluting industries, we calculate the average of the ratio of treatment equipment expenditure to output value within each quintile of output. The means of the ratio from the first (smallest) to the fifth (largest) quintile are respectively 22\%, 11\%, 6.7\%, 5.0\%, and 2.7\%. A linear regression model controlling for the same set of covariates as in the main text delivers the same message
+\begin{equation*}
+    \log \left(\frac{\text{Investment}_i}{\text{Output}_i} \right) = \underset{(0.11)}{-0.73} - \underset{(0.004)}{0.40} \times \log (\text{Output}_i) + \vec{X} \gvec{\upgamma} + \varepsilon_i,
+\end{equation*}
+which shows a negative correlation as well. Together, the evidence supports our choice of modeling the adoption cost of clean technology as a fixed cost.
+
+\textit{Prices of Physical versus Biological Equipment.}---We assume in the main text that only the installation of biological technologies requires a fixed cost. Here we provide evidence in support of this choice. The distributions of the prices for physical and biological equipments in absolute term (in CNY 10,000) are listed in Table \ref{tab:fixcosts_appen}.
+\begin{table}[t]
+    \footnotesize
+    \centering
+    \begin{threeparttable}
+    \caption{Prices of Different Treatment Equipments}
+    \begin{tabular}{lccccc}
+    \hline \hline
+    Technologies    & 25\%      & 50\%      & 75\%      & Maximum   & Mean \\
+    \midrule
+    Physical        & 2      & 6      & 25    & 800   & 36.14 \\
+    Biological      & 30     & 85     & 260    & 4000   & 249.90 \\
+    \bottomrule
+    \end{tabular}
+    \floatfoot{Source: 2007 NGSPS. All the numbers are measured in CNY 10,000.}
+    \label{tab:fixcosts_appen}
+    \end{threeparttable}
+\end{table}
+As is shown in the table, the prices of biological equipments are 7 to 15 times of those of physical equipments. In addition, the total installation costs of physical equipment for the top-5 polluting industries over those of biological equipment is only 0.087. %, implying that the installation costs of physical equipment when aggregated across the economy are only 9\% of those of the biological equipments. These evidence suggest that comparing to biological equipment, the costs of installing physical treatment equipments are small. Therefore in our model we assume that only the adoption of biological equipment is costly.%In addition, the total investment of physical equipment over biological equipment is 0.087, meaning that the installation costs of physical equipments when aggregated across the economy are only 9\% of those of the biological equipments. These evidence suggest that comparing to biological equipment, the costs of installing physical treatment equipments are small. Therefore in our model we assume that only the adoption of biological equipment is costly.
+These facts again point to the importance of the fixed costs associated with the adoption of the clean technology. Therefore in our model we assume that only the adoption of biological equipment is costly.\footnote{In fact, what is crucial here is that the cost to install clean technology is higher than that of dirty technology.} %and support our somewhat extreme assumption that only the installation of biological technologies requires a fixed cost.
+
+%In summary, the evidence suggests that firms' investment in abatement equipment is increasing with production scale but to a much lesser extent in absolute term. Again for simplicity and without loss of generality, we choose the fixed costs modeling strategy.
+
+%\subsection{Treatment Technologies}
+
+\textit{Additional Technical Features of the Treatment Technologies.---}We are interested in the following features of these technologies: {processing efficiency, designed processing capacity} and {installation costs}. We proxy the {processing efficiency} using one minus the ratio of {emitted COD} to {generated COD}. The {designed processing capacity} (in tons) and {actual installation costs} are recorded directly by the data. We then calculate the {unit capacity costs} by dividing the installation costs by the processing capacity. We use the unit capacity costs as an indicator of returns to scale of clean treatment equipment. In Figure \ref{fig:techdiff}, in clockwise order we plot the density functions of processing capacity, installation costs, total value of industrial output and unit capacity cost by technology types. For all panels, log-scale is used in the horizontal axes.
+\begin{figure}[t]
+    \begin{center}
+    \includegraphics[width=0.4\textwidth]{./Figures/abate_cap.pdf}%
+    \includegraphics[width=0.4\textwidth]{./Figures/abate_inv.pdf} \\
+    \includegraphics[width=0.4\textwidth]{./Figures/abate_unit.pdf}
+    \includegraphics[width=0.4\textwidth]{./Figures/abate_prod.pdf}
+    \caption{Technical Features of Different Treatment Technologies}
+    \floatfoot{Source: NGSPS. In all panels, the horizontal axes are in log-scale.}
+    \label{fig:techdiff}
+    \end{center}
+\end{figure}
+
+Broadly speaking, biological technologies have the {best} processing efficiency, the {largest} processing capacity, the {highest} installation costs but the {lowest} unit capacity cost. More specifically, the mean and median processing efficiency of biological technology are 17 and 10 percentage points higher than the physical technology. %The density functions of processing capacity, installation costs and production scale for physical, chemical and biological equipments order from left to right while those of the unit capacity costs order from right to left.
+The evidence again points to a fixed costs type of mechanism behind the lower pollution intensity by large firms. That is, although biological technologies are more advanced in terms of processing capacity and efficiency, they are also more costly. Therefore, small firms lack the profit margins needed to take advantage of the returns to scale exhibited by biological technologies, and hence large firms are more likely to adopt these more advanced technologies. %This could also be seen by calculating the ratio of the \textit{summed} costs of treatment equipment to the \textit{summed} value of output for firms of different sizes. While this ratio is equal to 18\% when only firms with output level below the median are included, the ratio decreases dramatically to 4\% when up to 95\% firms are included, which point to the importance of fixed adoption costs.
+
+\subsection{Environmental Regulations in China}
+\label{sec:china_regulation}
+In this section, we briefly summarize the environmental regulations in China. We follow the descriptions in \citet{Lin:2013} closely here.
+
+Environmental regulations in China are specified in \textit{The Environmental Protection Law of the People's Republic of China (EPL)}. The EPL was launched on trial basis in 1979 and was officially enacted by the National People's Congress in 1989. It was later amended in 1993 and 2003. The Ministry of Environmental Protection (MEP, previously the State Environmental Protection Administration) is in charge of the monitoring and administration of China's environmental issues. Two major policy instruments that the MEP uses are a pollution levy system and command-and-control instruments.
+
+\textit{The Pollution Levy System.---}The pollution levy system charges firms a pollution fee based on their quantity of effluent discharge of pollutants. Before 1993, firms were required to pay for the emissions that go beyond the national standard. If a firm discharges multiple pollutants and the levels of more than one of the pollutants are above the national standard, it only has to pay for the one that exceeds the standard by the greatest amount (calculated according to the \textit{Pollutants Equivalent Factor}). Starting from 1993, firms also have to pay for within-standard emissions. After 2003, pollution levies are calculated based on the top three above standard pollutants instead of only the top one. The 2015 revision of the EPL significantly increases the financial penalties by allowing the environmental authorities to multiply the original penalties by the number of days that firms are incompliant with the regulations specified in the law.
+
+In practice, the MEP oversees the enforcement of the EPL and the implementation of environmental policies. Local Environmental Protection Bureaus (EPBs) are the main authorities that do the field work. In general, larger polluters are monitored by municipal EPBs while smaller ones are by district and county EPBs. All polluting firms are required to submit an annual predicted volume of emissions at the beginning of a year. Based on the actual production and abatement practice, firms are also required to revise the actual emissions during the year. The EPBs send field staff to verify the credibility of firms' reports. The inspections include consistence between emissions, output, material usage, and across historical data. Field inspectors also conduct random on-site inspections of the emissions by firms without prior warning.
+
+Pollution levies are then calculated based on the verified reports. False reporting are subject to financial penalty with a ceiling. Serious fraudulent reports could lead to further non-financial penalties, including temporary shut down from production, administrative detention of directly responsible personnel, and even criminal charges.
+
+\textit{The Command-and-Control Instruments.---}The command-and-control instruments usually involve temporary shut down of firms incompliant with environmental emission standards, which would cost these firms a fraction of their profits. Serious violation sometimes also leads administrative detention and criminal charges similar to the case of fraudulent report of emissions. Because the pollution levy system is widely acknowledged for being ineffective in providing firms with incentives to control pollution [\citet{Dasguptaetal:2001}, \citet{WangWheeler:2005} and \citet{Lin:2013}], command-and-control instruments are usually used as a deterrence for potential violation by polluting firms. The command-and-control instruments prove to be effective in many government-led campaigns against pollution. See for example, Te-Ping Chen, ``China Cracks Down on Water-Polluting Industries,'' the Wall Street Journal, April 17th, 2015; or Trevor Nace, ``China shuts down tens of thousands of factories in widespread pollution crackdown,'' Forbes, October 24th 2017.
+
+%\section{The Firm Size Distribution of the United States}
+\section{The Firm Size Distributions of Individual Industries}
+
+In the main text, we present the firm size distributions for the pooled polluting industries and the manufacturing sector as a whole. In this section, we explain in details how the firm size distributions are constructed, especially those for the U.S., and present the firm size distributions for each of the five polluting industries in China and in the U.S.
+
+%In this section, we explain in details how the firm size distributions of the United States are constructed from the SUSB. We also present the size distribution of firms based on the number of firms in each size category. We refer to this in the current section as the \textit{firm size distribution}, and we call the distributions defined in the main text as \textit{employment distribution}. In the main text, we present only the employment distribution for the pooled polluting industries and the manufacturing sector as a whole. At the end of this Section, we also plot the employment distributions for each of the five polluting industries.
+
+We use the 2004 CNEC and 2004 Statistics of U.S. Businesses (SUSB) data to construct the firm size distributions in China and in the U.S., respectively. The SUSB organizes data around the so-called {enterprise} size groups instead of firm size groups. According to the definition in SUSB, a large enterprise could consist of firms that belong to different industries. For each size bin, the SUSB reports the total number of firms, establishments and employees along with other variables summed up across all {enterprises} that fall in that size bin. As a result, we approximate the firm size distribution using the average firm size of a particular size group, which is calculated by dividing the total employment by the number of firms. We then assign groups of firms to different size bins according to their average size. Such imputation introduces approximation errors. %, but it is less likely for enterprises with less than 100 employees to have multiple firms.
+To further reduce the approximation noise, we group the size bins into four main groups: 1--19, 20--99, 100--399 and 400+. The firm size distributions for each of the top polluting industries and all industries pooled together are shown in Figure \ref{fig:es}. As we can see, while there is substantial heterogeneity across individual industries, large firms in China account for much smaller employment shares than those in the U.S. for each industry.
+
+%The SUSB organizes data according to {enterprise} size group rather than firm or establishment size which relates closer to what we want. In particular, for each size bin, the SUSB reports the total number of firms, establishments and employees along with other variables summed up across all {enterprises} that fall in that size bin. We cannot use the size and share distribution of the enterprises because according to the definition in SUSB, a large enterprise could consist of firms and establishments in different locations, of different sizes and even in different sectors. However, the number of firms includes only those firms that are categorized as belonging to one particular industry. Therefore, we approximate the firm size distribution using the average firm size of a particular size group, which is calculated by dividing the total employment by the number of firms. We then assign groups of firms to different size bins according to their average size. Such imputation introduces approximation errors. However, we argue that most approximation errors lie in the upper tail of the distribution since it is less common for enterprises with less than 200 employees to have multiple firms or establishments. To further reduce the approximation noise, we group the size bins into four main groups: 1--19, 20--99, 100--399 and 400+. We drop firms with less than 19 employees when plotting the size distribution because we think many of them may not be engaged in the actual production process but will significantly change the shape of the {firm size distribution}. Including or dropping these firms does \emph{not} change the employment distribution because the calculation is essentially a weighted average with the number of employees as the weight. These small firms are thus weighted much less compared to the large ones. However, the firm size distributions are affected because the sheer amount of these firms.\footnote{We choose not to use establishment as the unit of our analysis because more noise is likely to be introduced by the approximation procedure that we adopt. However, results regarding the employment distributions, which are our ultimate interest here, is quite robust across variations. What is less robust is the firm size distribution, which by itself is less relevant to our conclusions. All results along with robustness checks with different size bin cut-offs are available upon request.} The firm size distributions for each of the top polluting industries and all industries pooled together are shown in Figure \ref{fig:dist}. The corresponding employment distributions are shown in Figure \ref{fig:es}.
+
+%\begin{figure}[htbp]
+%    \begin{center}
+%    \includegraphics[width=0.45\textwidth]{./Figures/paperdist_R.pdf}%
+%    \includegraphics[width=0.45\textwidth]{./Figures/agridist_R.pdf} \\
+%    \includegraphics[width=0.45\textwidth]{./Figures/textiledist_R.pdf}
+%    \includegraphics[width=0.45\textwidth]{./Figures/chemmatdist_R.pdf} \\
+%    \includegraphics[width=0.45\textwidth]{./Figures/beverdist_R.pdf}
+%    \includegraphics[width=0.45\textwidth]{./Figures/pooldist_R.pdf}
+    %\vspace{-1em}
+%    \caption{Firm Size Distribution}
+%    \floatfoot{Source: CNEC and SUSB.}
+%    \label{fig:dist}
+%    \end{center}
+%\end{figure}
+
+\begin{figure}[htbp]
+    \begin{center}
+    \includegraphics[width=0.45\textwidth]{./Figures/paperES_R.pdf}%
+    \includegraphics[width=0.45\textwidth]{./Figures/agriES_R.pdf} \\
+    \includegraphics[width=0.45\textwidth]{./Figures/textileES_R.pdf}
+    \includegraphics[width=0.45\textwidth]{./Figures/chemmatES_R.pdf} \\
+    \includegraphics[width=0.45\textwidth]{./Figures/beverES_R.pdf}
+    \includegraphics[width=0.45\textwidth]{./Figures/poolES_R_1.pdf}
+    %\vspace{-1em}
+    \caption{Employment Distribution}
+    \floatfoot{Sources: CNEC and SUSB.}
+    \label{fig:es}
+    \end{center}
+\end{figure}
+
+\section{Accounting Exercises}
+
+This section provides details on the accounting exercises.
+
+\textit{Estimation Strategies.}---Ideally, we would like to have information on pollution intensity over firms' \emph{employment} size bins. Unfortunately, the NGSPS only reports total output value and total amount of pollution at the firm level. Therefore, we need to construct pollution intensity over the number of employees. To do this, we use the CNEC to estimate a relationship between employment and output.
+
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{Size Distribution on Pollution}
+\begin{tabular}{lccccccc}
+    \hline \hline
+    Methods             & Paper  & Agricultural Food   & Textile    & Chemistry    & Beverage     & Average \\
+    \midrule
+    Non-parametric      & 39.8\% & 60.7\%              & 81.6\%     & 102.5\%      & 103.7\%      & 63.5\%  \\
+    Piecewise-linear    & 34.8\% & 69.4\%              & 93.5\%     & 180.1\%      & N/A\tnote{a} & 75.4\%  \\
+    Parametric          & 43.5\% & 61.1\%              & 97.5\%     & 101.2\%      & 89.0\%       & 67.0\%  \\
+    \bottomrule
+\end{tabular}
+\begin{tablenotes}
+     \footnotesize{
+     \item[$\dagger$]
+     Note: For individual industries, the numbers reported are the pollution intensity from using the U.S. firm size distribution as percentage of that using China's distribution. We use the 1st and 3rd quartile as the ends of the output range corresponding to each employment bin in the non-parametric calculation. Column 6 (Average) calculates the weighted average of these ratios using the percentage contribution in the first row of Table 1 in the main text as weights.}
+     \item[a]
+     Since the beverage industry has fewer firms than the others, there are employment size bins with no corresponding firms in China, which invalidates the method. We set the ratio to 100\% in the calculation of the last average.
+\end{tablenotes}
+\label{tab:accounting_appen}
+\end{threeparttable}
+\end{table}
+\begin{enumerate}
+  \item
+  \textit{Non-parametric}:
+    \begin{itemize}
+    \item
+    For each U.S. employment bin, we compute the 1st and 3rd quartile of output level for Chinese firms within that employment bin. The two quartiles are used as the lower and upper bounds for the output bins in NGSPS.
+    \item
+    We then use the median pollution intensity of firms within the newly defined output bins as the average pollution intensity for those bins.
+    \item
+    Lastly, we calculate the aggregate pollution by assigning to each bin the corresponding share of output. %The NGSPS production bins are used for China and the employment bins are used for U.S.
+    \end{itemize}
+  \item
+  \textit{Piecewise Linear}:
+  \begin{itemize}
+    \item
+    For each U.S. employment bin, we regress log-output on log-employment using the subset of Chinese firms within that employment bin. The lower and upper bounds for the output bins in this case are calculated as the predicted value of the above regression.
+    \item
+    We then run piecewise log-linear regression of pollution intensity on output within each new production bin. The average pollution intensity is chosen to be the predicted intensity at the midpoint of the new log-output bin.
+    \item
+    Lastly, the average intensity is applied to the output share distributions. %The U.S distribution does not change, however, a new distribution for China is calculated since the endpoints of the output bins are different.
+    \end{itemize}
+  \item
+  \textit{Parametric}:
+  \begin{itemize}
+    \item
+    Using the CNEC, we regress log-output on log-number of workers, which yields a {parametric} relationship between the number of workers and output.
+    \item
+    Using the NGSPS, we regress log-intensity on log-output, which yields a {parametric} relationship between intensity and output. From these two relationships, we can subsequently construct a new \emph{parametric} relationship between intensity and number of employees. The average intensity is chosen to be the midpoint of each U.S. employment bin. Notice that in this case we have a direct functional form for employment and intensity).
+    \item
+    Lastly, the average intensity is applied to the output share distributions. %The U.S. distribution does not change, but a new distribution for China is calculated since the endpoints of the production bins are different. Notice that this distribution for China is the one we use in Section \rom{1}.C.
+\end{itemize}
+\end{enumerate}
+
+The estimation results are shown in Table \ref{tab:accounting_appen}. Each of the three methods has its own advantages and disadvantages. The two non-parametric methods capture more of the variation at the local level, which could be washed out in the parametric estimation across the whole state space. However, this local nature also introduces a lot of instability on the estimates. Further, there are situations when there are gaps not covered by adjacent output bins and situations when these output bins overlap with each other. Under these conditions, some information will be lost while others are used for multiple times. Nevertheless, the results are robust across different estimation strategies. In the Section \rom{1}.C of the main text, we use the results from the parametric method.
+
+\section{Proofs and Additional Analytical Results}
+
+In this section, we provide formal proofs to Propositions 1 and 2 in Section \rom{2}.D of the main text. The two propositions are proved respectively in Sections \ref{sec:appen_proof_tech} and \ref{sec:appen_proof_pollution}. We also include additional analytical results in this section. Specifically, in Section \ref{sec:appen_proof_tech}, Lemma \ref{lemma:nofrictionpi_appen} and Corollary \ref{lemma:frictionpi_appen} highlight the key trade-off that firms face in deciding which type of treatment technology to install, when firms are and are not subject to correlated distortions respectively. Lemma \ref{prop:threshold_appen} shows the standard results of the \citet{Lucas:1978b} model where household members choose their occupations according to their comparative advantage. In Section \ref{sec:appen_proof_pollution}, in a simple one-sector model with a fixed number of firms and \emph{exogenous} firm-level pollution intensity, we present the conditions under which removing the progressiveness of the distortions would reduce average pollution intensity. In Section \ref{sec:appen_proof_melitz}, we show the qualitative equivalence between the effects of distortions on aggregate output and pollution in the \citet{Lucas:1978b} model with those in the closed-economy version of the \citet{Melitz:2003} model. Many researchers working with heterogeneous firms models are more familiar with the \citet{Melitz:2003} setup as opposed to the \citet{Lucas:1978b} setting, especially in the trade and environment community. We demonstrate in this section that the differences between the two settings are immaterial to our main findings. Finally, in Section \ref{sec:uncorrelated}, we use a simple model to study how \emph{uncorrelated} distortions---defined as distortions that are not correlated with firm TFP---affect aggregate output and pollution.
+
+%In this section we provide formal proofs to the Results \ref{prop:friction_appen} and \ref{prop:pollution_distortion_appen} in Section \rom{2}.D. The two results are proved respectively in Sections \ref{sec:appen_proof_tech} and \ref{sec:appen_proof_pollution}. We also include some of the intermediate results as well. Specifically, in Section \ref{sec:appen_proof_tech}, Lemma \ref{lemma:nofrictionpi_appen} and Corollary \ref{lemma:frictionpi_appen} highlight the key trade-off firms face when deciding which type of treatment technology to install in economies without and with distortions. Lemma \ref{prop:threshold_appen} shows the standard results of the \citet{Lucas:1978b} model where households choose their occupation according to their comparative advantage. In Section \ref{sec:appen_proof_pollution}, we include additionally the condition under which removing the size-dependency of the distortions reduces average pollution intensity. In Section \ref{sec:appen_proof_melitz}, we show the equivalence of our model setup to one that features monopolistic competition. Many researchers working with heterogeneous firms model is more familiar with the \citet{Melitz:2003} setup as opposed to the \citet{Lucas:1978b} setting, especially in the trade and environment community. We demonstrate in this section that the difference between the two settings are immaterial.
+
+\subsection{Correlated Distortions and Technology Adoption}
+\label{sec:appen_proof_tech}
+
+In this section, we prove Proposition 1 of the main text. To simplify notation, we set $\phi_0 =$ 1 in this section.
+
+\noindent PROOF OF LEMMA \ref{lemma:nofrictionpi_appen}:
+\begin{lemma}
+\label{lemma:nofrictionpi_appen}
+In an economy with no correlated distortions, $\pi_0(z)$ and $\pi_1(z)$ are both increasing and linear with respect to $z$. In addition, the slope of $\pi_1(z)$ is steeper than that of $\pi_0(z)$:
+\begin{equation}
+    \frac{\partial \pi_0 (z)}{\partial z} = (1 - \xi)\frac{\partial \pi_1 (z)}{\partial z}, \qquad \forall z \in Z.
+\label{eq:lemma1ap}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Once the fixed cost $k_E$ is paid, it no longer affects a firm's decision. The factor demand decisions for the two types of firms are therefore the same. The first order conditions for capital and labor are respectively
+\begin{align}
+    \label{eq:fock}
+    & \frac{\partial \pi_i(z)}{\partial k}: \qquad \alpha \gamma z^{1-\gamma} k^{\alpha \gamma -1} l^{(1-\alpha)\gamma} = R, \\
+    \label{eq:focn}
+    & \frac{\partial \pi_i(z)}{\partial l}: \qquad (1-\alpha) \gamma z^{1-\gamma} k^{\alpha \gamma} l^{(1-\alpha)\gamma-1} = W, \qquad i = 0,1.
+\end{align}
+Dividing (\ref{eq:fock}) with (\ref{eq:focn}) yields constant capital to labor ratio $h$
+\begin{equation*}
+    h = \frac{k}{l} = \frac{\alpha W}{(1-\alpha)R},
+\end{equation*}
+which says more capital is demanded when technology is capital intensive (higher $\alpha$) or when capital rental price $R$ low. Notice that the system of equations (\ref{eq:fock}) with (\ref{eq:focn}) is log-linear and thus has closed-form solution. With some algebra, the solutions are characterized by
+\begin{align}
+    \label{eq:n}
+    & l(z) = \Phi_1 R^{\frac{\alpha \gamma}{\gamma -1}} W^{\frac{1-\alpha \gamma}{\gamma-1}} \cdot z, \\
+    \label{eq:k}
+    & k(z) = \Phi_2 R^{\frac{1+\gamma(\alpha -1)}{\gamma -1}} W^{\frac{\gamma(1-\alpha)}{\gamma-1}} \cdot z,
+\end{align}
+where
+\begin{equation*}
+    \qquad \Phi_1 = \left[ \frac{(1-\alpha)^{\alpha \gamma}}{(1-\alpha)\gamma \alpha^{\alpha \gamma}}\right]^{\frac{1}{\gamma -1}} \text{ and } \Phi_2 = \frac{\alpha}{1-\alpha}\Phi_1.
+\end{equation*}
+Substitute the optimal solutions (\ref{eq:n}) and (\ref{eq:k}) back to the definition of profits functions $\pi_1(z)$ and $\pi_0(z)$, we have
+\begin{align*}
+    & \pi_0(z) = (1-\xi)\left(\Omega - \frac{1}{1-\alpha}\Phi_1 \right) \kappa z, \\
+    & \pi_1(z) = \left(\Omega - \frac{1}{1-\alpha}\Phi_1 \right) \kappa z - R k_E,
+\end{align*}
+where
+\begin{equation*}
+    \Omega = \left(\frac{\alpha}{1-\alpha}\right)^{\alpha \gamma} \Phi_1^{\gamma} \text{ and } \kappa = W^{\frac{\gamma(1-\alpha)}{\gamma-1}} R^{\frac{\alpha\gamma}{\gamma-1}}.
+\end{equation*}
+It can be seen that both functions are increasing and linear in $z$, and hence Equation (\ref{eq:lemma1ap}) holds.
+\end{proof}
+
+\noindent PROOF OF COROLLARY \ref{lemma:frictionpi_appen}:
+\begin{corollary}
+\label{lemma:frictionpi_appen}
+Suppose that the correlated distortions are specified as $\max\left\{ 0, 1 - z^{\phi_1} \right\}$ with $1 - \gamma + \phi_1 > 0$, then $\pi_0(z)$ and $\pi_1(z)$ are both increasing and concave with respect to $z$. In addition, the slope of $\pi_1(z)$ is steeper than that of $\pi_0(z)$:
+\begin{equation*}
+    \frac{\partial \pi_0 (z)}{\partial z} = (1 - \xi)\frac{\partial \pi_1 (z)}{\partial z}, \qquad \forall z \in Z.
+\end{equation*}
+\end{corollary}
+\begin{proof}
+The proof is straightforward given Lemma \ref{lemma:nofrictionpi_appen}. Substituting in the tax function, $\pi_0(z)$ and $\pi_1(z)$ now becomes
+\begin{align*}
+    & \pi_0(z) = (1-\xi)\left(\Omega - \frac{1}{1-\alpha}\Phi_1 \right) \kappa z^{\frac{1-\gamma+\phi_1}{1-\gamma}}, \\
+    & \pi_1(z) = \left(\Omega - \frac{1}{1-\alpha}\Phi_1 \right) \kappa z^{\frac{1-\gamma+\phi_1}{1-\gamma}} - R k_E,
+\end{align*}
+where $\Omega, \Phi_1$ and $\kappa$ are defined as in Lemma \ref{lemma:nofrictionpi_appen}.
+
+The assumption $1-\gamma+\phi_1 > 0$ guarantees the monotonicity of the profits functions. In the terminology of \citet{Hopenhayn:2014}, the assumption means that there is no rank reversal. Concavity is easily verified by taking the second order derivatives.
+\end{proof}
+
+\noindent PROOF OF LEMMA \ref{prop:threshold_appen}:
+\begin{lemma}
+\label{prop:threshold_appen}
+There exists a unique threshold $\hat{z}$ such that all household members with $z \leq \hat{z}$ choose to be workers and those with $z \geq \hat{z}$ become entrepreneurs. Further, $\hat{z}$ is pinned down by $W = \pi(\hat{z})$
+\end{lemma}
+\begin{proof}
+Since the overall profit function $\pi(z)$ is the upper envelope of $\pi_0(z)$ and $\pi_1(z)$, from Lemma \ref{lemma:nofrictionpi_appen} (and Corollary \ref{lemma:frictionpi_appen}) we know that $\pi(z)$ is monotonic increasing. It is easy to verify that $\pi(0) = $ 0. Therefore, as long as $0<W<\pi(\overline{z})$, we can find a unique $\hat{z}$ such that $\pi(\hat{z})=W$, where uniqueness follows from the monotonicity. The condition $0<W<\pi(\overline{z})$ is guaranteed in the general equilibrium version of our model by Inada condition on the production function.
+\end{proof}
+
+\noindent PROOF OF PROPOSITION \ref{prop:friction}:
+\begin{proposition}
+\label{prop:friction}
+When $1-\gamma+\phi_1>0$, a firm chooses to install clean technology only when its productivity is higher than a threshold. Moreover, the threshold when the firm faces distortions $\tilde{z}_f$ is higher than that when the firm is not subject to any distortions $\tilde{z}_n$.
+\end{proposition}
+
+%\begin{result}
+%\label{prop:friction_appen}
+%Given $k_E, W, \tau_z$ and $R$, there exist unique thresholds $\tilde{z}_n$ and $\tilde{z}_f$ such that:
+%\begin{enumerate}[(i)]
+%    \item
+%    In the economy with no product market frictions, entrepreneurs with $z \leq \tilde{z}_n$ produce using dirty technology while those with $z > \tilde{z}_n$ produce using clean technology.
+%    \item
+%    In the economy with product market frictions, entrepreneurs with $z \leq \tilde{z}_f$ produce using dirty technology while those with $z > \tilde{z}_f$ produce using clean technology.
+%    \item
+%    $\tilde{z}_n < \tilde{z}_f$, that is, product market frictions impede the technology upgrade.
+%\end{enumerate}
+%\end{result}
+\begin{proof}
+Uniqueness follows from
+\begin{equation*}
+    \frac{\partial \pi_0 (z)}{\partial z} = (1 - \xi)\frac{\partial \pi_1 (z)}{\partial z}, \qquad \forall z \in Z,
+\end{equation*}
+and monotonicity under both the cases with and without frictions.
+
+We can solve for the analytical expression for $\tilde{z}_n$:
+\begin{equation*}
+    \tilde{z}_n = \frac{R k_E}{\xi \left( \Omega \kappa^{\gamma} - \frac{1}{1-\alpha} \kappa \right)}.
+%\label{eq:zn}
+\end{equation*}
+%where $z_n$ is simply the ``distance'' ($R k_E$) over ``speed'' ($\phi \left[ \Omega \kappa^{\gamma} - \frac{1}{1-\alpha} \kappa \right]$). The ``distance'' in both cases are the same, so eventually whether $z_f$ lies left or right to $z_n$ depends on the ``speed'' of convergence.
+
+Using expressions of the profits functions with correlated distortions and recall that $\phi_1 < 0$, we can show that
+\begin{equation*}
+%\label{eq:zf}
+    \tilde{z}_n = \frac{R k_E}{\xi \left( \Omega\kappa^{\gamma} - \frac{1}{1-\alpha}\kappa \right)} < \left[\frac{R k_E}{\xi \left( \Omega\kappa^{\gamma} - \frac{1}{1-\alpha}\kappa \right)}\right]^{\frac{1-\gamma}{1-\gamma+\phi_1}} = \tilde{z}_f,
+\end{equation*}
+which proves the proposition.
+
+One caveat is that the second inequality holds only if the number in the parentheses is greater than 1. We verify this in our quantitative analysis but restrain ourselves from discussing extreme cases where the condition is not hold.
+\end{proof}
+%One caveat with Proposition \ref{prop:friction} is that correlated distortions also affect the equilibrium wage $W$, which may partially offset the direct impact of distortions on technology adoption. However, in our quantitative analysis, this general equilibrium response is not large enough to invalidate the conclusion of Proposition \ref{prop:friction}.
+
+\subsection{Correlated Distortions and Aggregate Pollution}
+\label{sec:appen_proof_pollution}
+
+In this section,  we present a simple one-sector model with a fixed number of firms and \emph{exogenous} firm-level pollution intensity, which is based on \citet{Lucas:1978b}. We then derive the conditions under which removing the progressiveness of the distortions would reduce aggregate pollution, which are summarized in Proposition 2 of the main text. We further show that similar results hold for average pollution intensity in Corollary \ref{prop:intensity_distortion_appen}. We start with a formal description of the model setting.
+
+%In this section, we provide details pertaining to how the simple model is solved and subsequently prove Result \ref{prop:pollution_distortion_appen}. We start with a formal description of the model setting.
+
+\textit{The Model.---}The model contains only the polluting sector. There is a representative household with a continuum of members. A measure one of the members are managers, while a measure $N$ are workers. The occupation of household members are fixed once born. Each manager is endowed with $z$ units of managerial talent, which is drawn from a log-normal distribution $G(z)$ with logarithmic mean and standard deviation $(\mu, \sigma)$. Workers supply one unit of labor inelastically in exchange for wage income, and managers run a neoclassical firms and earn profits. In the simplified economy, labor is the only production factor. We set the final good as the numeraire, and use $W$ to represent wage rate.
+
+The production function is given by
+\begin{equation*}
+    y = F(z,l) = z^{1-\gamma}l^{\gamma},
+\end{equation*}
+where as usual, $0<\gamma<1$ is the span-of-control parameter that supports a non-degenerate distribution of firms in the equilibrium.
+
+The production process generates pollutants $e$ as by-products. Here we abstract from the treatment technology choice decision. Firm-level emissions now depend only on production scale $y$:
+\begin{equation*}
+    e(y) = \psi_0 y^{1+\psi_1},
+\end{equation*}
+where $-1<\psi_1<1$ captures the negative correlation between output level and emission intensity as documented in Section \rom{1}.B of the main text.
+
+Firm-level distortions take the same form as in the main text:
+\begin{equation*}
+    \tau_z = 1- \phi_0 z^{\phi_1},
+\end{equation*}
+where $\phi_1 < 0$ reflects the progressiveness of the distortions.
+
+\textit{Proofs.---}With the above setup, we prove the following results.
+
+\noindent PROOF OF PROPOSITION 2:
+\begin{proposition}
+\label{prop:pollution_distortion_appen}
+In the simple model, there exists a threshold
+\begin{equation*}
+    \hat{\phi}_1 = \frac{\psi_1(1-\gamma)}{1-\gamma(1+\psi_1)},
+\end{equation*}
+such that $E$ is increasing in $\phi_1$ when $\phi_1 < \hat{\phi}_1$, and decreasing in $\phi_1$ when $\phi_1 \geq \hat{\phi}_1$.
+\end{proposition}
+
+\begin{proof}
+Our goal here is to find a relationship between $E$ and $\phi_1$. With no capital, the maximization problem of the firm is
+\begin{equation*}
+    \pi(z) = \max_{l} \left\{(1-\tau_z)z^{1-\gamma}l^{\gamma} - W l \right\}.
+\end{equation*}
+The first order condition is
+\begin{equation}
+\label{eq:lz_simple}
+    l(z) = \left( \frac{\gamma \phi_0 z^{1-\gamma+\phi_1}}{W} \right)^{\frac{1}{1-\gamma}}.
+\end{equation}
+The optimal labor demand leads immediately to output
+\begin{equation}
+\label{eq:yz_simple}
+    y(z) = \left(\frac{\gamma \phi_0}{W} \right)^{\frac{\gamma}{1-\gamma}} z^{\frac{1-\gamma+\gamma\phi_1}{1-\gamma}}.
+\end{equation}
+We have assumed that
+\begin{equation*}
+%\label{eq:ey_simple}
+    e(y) = \psi_0 y^{1+\psi_1}.
+\end{equation*}
+Combining this equation with Equation (\ref{eq:yz_simple}), we get the pollution of firm-$z$
+\begin{equation}
+\label{eq:ez_simple}
+    e(z) = \psi_0 \left(\frac{\gamma \phi_0}{W} \right)^{\frac{\gamma(1+\psi_1)}{1-\gamma}}z^{\left(1+\frac{\gamma\phi_1}{1-\gamma} \right)(1+\psi_1)}.
+\end{equation}
+With Equation (\ref{eq:ez_simple}), all that remains is to compute the integral
+\begin{align}
+\label{eq:agge_simple}
+    E &= \int e(z)dG(z) \nonumber \\
+      &= \psi_0 \left(\frac{\gamma \phi_0}{W} \right)^{\frac{\gamma(1+\psi_1)}{1-\gamma}}\int z^{\left(1+\frac{\gamma\phi_1}{1-\gamma} \right)(1+\psi_1)} dG(z).
+\end{align}
+In Equation (\ref{eq:agge_simple}), we need to solve for closed-form expression for $W$ and the integral.
+
+Recall that if $z \sim \text{Lognormal}(\mu,\sigma^2)$, $z^a \sim \text{Lognormal}(a\mu,a^2\sigma^2)$ for $a\neq 0$. Hence
+\begin{equation}
+\label{eq:agge_inte}
+    \int z^{\left(1+\frac{\gamma\phi_1}{1-\gamma} \right)(1+\psi_1)} dG(z) = \exp\left\{\left(1+\frac{\gamma\phi_1}{1-\gamma} \right)(1+\psi_1)\mu + \frac{1}{2}\left(1+\frac{\gamma\phi_1}{1-\gamma}\right)^2(1+\psi_1)^2\sigma^2) \right\}.
+\end{equation}
+We use the labor market clearing condition
+\begin{equation*}
+    \int l(z)dG(z) = N,
+\end{equation*}
+to solve for wage $W$. In particular, by substituting Equation (\ref{eq:lz_simple}) in the labor market clearing condition, and using the property of log-normal distribution, we get
+\begin{equation}
+\label{eq:labormarket_simple}
+    N = \left(\frac{\gamma\phi_0}{W} \right)^{\frac{1}{1-\gamma}}\exp\left\{\left(1+\frac{\phi_1}{1-\gamma}\right)\mu + \frac{1}{2}\left(1+\frac{\phi_1}{1-\gamma} \right)^2\sigma^2  \right\}.
+\end{equation}
+
+Substitute Equations (\ref{eq:agge_inte}) and (\ref{eq:labormarket_simple}) back to Equation (\ref{eq:agge_simple}), after some quite involved algebra, aggregate pollution can be written as
+\begin{equation}
+\label{eq:agge_phi1}
+    E = \Omega \exp\left\{\frac{(1+\psi_1)\gamma}{1-\gamma}\frac{\sigma^2}{2}\left[2\psi_1\phi_1 + \frac{(1+\psi_1)\gamma-1}{1-\gamma}\phi_1^2 \right] \right\},
+\end{equation}
+where
+\begin{equation*}
+    \Omega = \psi_0 N^{\gamma(1+\psi_1)}\exp\left\{(1+\psi_1)\left[(1-\gamma+\psi_1)\frac{1}{2}\sigma^2 + (1-\gamma)\mu \right] \right\},
+\end{equation*}
+is a constant independent of $\phi_1$. Notice that inside the bracket in Equation (\ref{eq:agge_phi1}) is a parabola opening to the bottom. Importantly, the axis of the parabola is
+\begin{equation}
+\label{eq:phi1hat}
+    \phi_1 = \frac{\psi_1(1-\gamma)}{1-\gamma(1+\psi_1)} \triangleq \hat{\phi}_1.
+\end{equation}
+Proposition \ref{prop:pollution_distortion_appen} thus follows immediately.
+\end{proof}
+
+Notice that by Equation (\ref{eq:yz_simple}),
+\begin{equation*}
+    Y = \int y(z)dG(z) = \int \left(\frac{\gamma \phi_0}{W} \right)^{\frac{\gamma}{1-\gamma}} z^{\frac{1-\gamma+\gamma\phi_1}{1-\gamma}} dG(z).
+\end{equation*}
+Using again the labor market clearing condition (\ref{eq:labormarket_simple}) and the property of log-normal distribution, we have
+\begin{equation}
+\label{eq:aggy_simple}
+    Y = N^{\gamma} \exp\left\{(1-\gamma)\left(\mu+\frac{\sigma^2}{2} \right) \right\}\exp\left\{-\frac{\gamma}{1-\gamma}\frac{\sigma^2}{2}\phi_1^2 \right\}.
+\end{equation}
+We see from Equation (\ref{eq:aggy_simple}) that $Y$ is always decreasing in $\phi_1$. This echoes the finding in the literature that correlated distortions lead to losses in output by misallocation.
+
+\noindent PROOF OF COROLLARY \ref{prop:intensity_distortion_appen}:
+\begin{corollary}
+\label{prop:intensity_distortion_appen}
+In the simple model, the relationship between the average pollution intensity $E/Y$ and the progressiveness of the distortions $\phi_1$ is such that
+\begin{enumerate}[(i)]
+    \item
+    when $\psi_1 < (1-2\gamma)/\gamma$, the average pollution intensity is always increasing in $\phi_1$;
+    \item
+    when $\psi_1 \geq (1-2\gamma)/\gamma$, there exists a threshold
+    \begin{equation*}
+        \overline{\phi}_1 = \frac{(1+\psi_1)(1-\gamma)}{1-2\gamma+\gamma\psi_1},
+    \end{equation*}
+    such that when $\phi_1 < \overline{\phi}_1$, $E/Y$ is increasing in $\phi_1$; and when $\phi_1 \geq \overline{\phi}_1$, $E/Y$ is decreasing in $\phi_1$;
+    \item
+    $\overline{\phi}_1$ is increasing in both $\psi_1$ and $\gamma$;
+    \item
+    $\overline{\phi}_1 < \hat{\phi}_1$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+The proof is almost the same as that of Proposition \ref{prop:pollution_distortion_appen}. By Equations (\ref{eq:agge_phi1}) and (\ref{eq:aggy_simple}), and again some pretty involved algebra, we can write the average pollution intensity as
+\begin{equation}
+\label{eq:aggi_phi1}
+    \frac{E}{Y} = \Gamma\exp\left\{\frac{\gamma}{1-\gamma}\frac{\sigma^2}{2}\left[2\psi_1(1+\psi_1)\phi_1 + \frac{\psi_1(2\gamma-1+\psi_1\gamma)}{1-\gamma}\phi_1^2 \right] \right\},
+\end{equation}
+where like before, $\Gamma$ is a constant independent of $\phi_1$.
+
+Notice that once again, inside the bracket in Equation (\ref{eq:aggi_phi1}) is a parabola. When $\psi_1 < (1-2\gamma)/\gamma$, its opening is to the top, and hence the intensity is always increasing in distortions $\phi_1$. On the other hand, when $\psi_1 \geq (1-2\gamma)/\gamma$, the parabola is opening to the bottom with the axis being
+\begin{equation}
+\label{eq:phi1bar}
+    \phi_1 = \frac{(1+\psi_1)(1-\gamma)}{1-2\gamma+\gamma\psi_1} \triangleq \overline{\phi}_1,
+\end{equation}
+which gives us items (ii) and (iii) of Corollary \ref{prop:intensity_distortion_appen} immediately. Straight forward comparison of Equations (\ref{eq:phi1hat}) and (\ref{eq:phi1bar}) yield item (iv).
+\end{proof}
+
+\textit{Remark.---}Notice that, if we assume alternatively that firm-level pollution emission is a function of its productivity $z$:
+\begin{equation*}
+    \frac{e}{y} = \psi_0 z^{\psi_1},
+\end{equation*}
+instead of as that in Equation (\ref{eq:ez_simple}), then Equations (\ref{eq:agge_phi1}) and (\ref{eq:aggi_phi1}) become
+\begin{equation*}
+    E = \Omega \exp\left\{\frac{\gamma}{1-\gamma}\frac{\sigma^2}{2}\left(2\psi_1 \phi_1 - \phi_1^2 \right) \right\},
+\end{equation*}
+and
+\begin{equation*}
+    \frac{E}{Y} = \Gamma\exp\left\{\frac{\gamma \psi_1 \sigma^2}{1-\gamma}\phi_1 \right\},
+\end{equation*}
+respectively.
+
+The two equations imply that first, the average pollution intensity is always increasing in distortions; and second, aggregate pollution is increasing in distortions, as long as the elasticity of distortions to productivity $|\phi_1|$ is larger than that of pollution $|\psi_1|$. Intuitively, this simply says that when output is more responsive to firm size, it dominates the effect of firm-level pollution intensity. Put differently, the scale effect dominates the technique effect.
+
+\subsection{Monopolistic Competition}
+\label{sec:appen_proof_melitz}
+
+In this section, we show that our results carry through to the setting of monopolistic competition, or a closed-economy version of \citet{Melitz:2003}. The crucial elements of our analysis are the following. First, in the equilibrium, there needs to be a non-degenerated distribution of firms with different levels of productivity. Second, the model should feature resource allocation along the extensive margin and intensive margin, where we refer to the selection of firms into production as the extensive margin, and the distribution of factors among active firms as the intensive margin. Mathematically, what we really need is decreasing returns to scale in profits which prevents the most productive firm from taking over all the resources in the economy and profits be a function in productivity which creates selection. The curvature could come from decreasing returns to scale in production as in \citet{Lucas:1978b}, or from the demand and market structure as in \citet{Melitz:2003}. We need curvature from one source or the other, but \textit{not} necessarily from both.\footnote{In fact, \citet{Hopenhayn:1992} has directly assumed that the profit function is increasing in productivity [Assumption A.2.(b)] without specifying the underlying mechanism, and \citet{Bartelsmanetal:2013} have assumed diminishing returns in production and utility coexist (page 319).} To ease the exposition, we first show the equivalence using only the backbone elements with no distortions or emissions. We then show that a similar version of Proposition \ref{prop:pollution_distortion_appen} holds under the monopolistic competition structure as well.
+
+%In this section, we show that our results carry through to the setting of monopolistic competition. For the purpose of our analysis, the crucial elements are the following. First, in the equilibrium, there needs to be a non-degenerated distribution of firms with different level of productivity. Second, the model should feature resource allocation along the extensive margin and intensive margin, where as in the main text, we refer to the selection of firms into production as the extensive margin, and the distribution of production among active firms as the intensive margin. From a mathematical point of view, what we really need are decreasing returns to scale in profits which prevents the most productive firms from taking up all the market, and profits be a function in productivity which creates selection. Whether they are caused by decreasing returns to scale in production as in the \citet{Lucas:1978b} case or decreasing marginal utility in preference as in the \citet{Melitz:2003} case is irrelevant, as long as the corresponding parameters are disciplined with the same data.\footnote{In fact, \citet{Hopenhayn:1992} has directly assumed that the profit function is increasing in productivity [Assumption A.2.(b)] without specifying the underlying mechanisms, and \citet{Bartelsmanetal:2013} have assumed diminishing returns in production and utility coexist (page 319).} To ease the exposition, we first the equivalence using only the backbone elements with no distortions and emissions. We then show that a similar version of Result \ref{prop:pollution_distortion_appen} holds under the monopolistic competition structure as well.
+
+\textit{Diminishing Returns to Scale and to Utility.---}The model differs from the \citet{Lucas:1978b} span-of-control model in three aspects: the production function is linear, the utility function is a CES aggregation of a continuum of varieties, and the market structure is monopolistic competition. Specifically, there is still a representative household with a continuum of members. The representative household derives utility from consuming a continuum variety of goods $\omega$ aggregated according to a CES function:
+\begin{equation*}
+    U = \left[\int_{\omega \in \Omega} q(\omega)^{\frac{\rho-1}{\rho}}d\omega \right]^{\frac{\rho}{\rho-1}},
+\end{equation*}
+where $\Omega$ is the set of available varieties, $q(\omega)$ is the quantity consumed for each variety $\omega$, and $\rho > 1$ is the elasticity of substitution.
+
+Each household member is once again endowed with $z$ units of managerial talent, where $z \sim G(z)$. Household members choose between running a firm or working as a worker. Labor is the only production factor, which the firm hires at wage $W$ to produce a unique variety. Each variety is produced by only one firm. The production function of the firm is given as
+\begin{equation}
+\label{eq:melitz_production}
+    y = F(z,l) = zl.
+\end{equation}
+Because firms now have market power, they can set the price of good $p(\omega)$ as well. Since $z$ and $\omega$ can both uniquely identify a firm in our setting, from now on, we will use $z$ to refer to different varieties as well. Therefore, price is now written as $p(z)$, and $y = q(z) = zl$. Likewise, the set $\Omega$ is the same set of active firms, which anticipating the results later, is interval $[\hat{z}, \overline{z}]$ where as before $\hat{z}$ is the threshold of selection into production.
+
+The profit maximization problem of the firm now becomes
+\begin{equation}
+\label{eq:melitz_firm}
+    \max_{\{p(z), q(z)\}} \left\{p(z)q(z) - Wl \right\}.
+\end{equation}
+To solve (\ref{eq:melitz_firm}), we need to solve for the demand function for each variety $z$ by the household. Standard results from \citet{DixitStiglitz:1977} lead to
+\begin{equation*}
+%\label{eq:qwithI}
+    q(z) =Q \left[\frac{p(z)}{P} \right]^{-\rho},
+\end{equation*}
+where
+\begin{equation*}
+   P = \left[\int_{\hat{z}}^{\overline{z}} p(z)^{1-\rho}dz \right]^{\frac{1}{1-\rho}},
+\end{equation*}
+and
+\begin{equation*}
+   Q = \left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\frac{\rho}{\rho-1}},
+\end{equation*}
+are the price and quantity of the composite good, respectively.
+%\begin{lemma}
+%\label{lemma:dixit}
+%The optimization problem of the household is equivalent to the optimal consumption bundle problem with total expenditure $P \cdot Q$, where
+%\begin{equation*}
+%    P = \left[\int_{\hat{z}}^{\overline{z}} p(z)^{1-\rho}dz \right]^{\frac{1}{1-\rho}},
+%\end{equation*}
+%and
+%\begin{equation*}
+%    Q = \left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\frac{\rho}{\rho-1}},
+%\end{equation*}
+%are the price and quantity of the composite good.
+%\end{lemma}
+%\begin{proof}
+%Our proof follows the same spirit as \citet{DixitStiglitz:1977}. In particular, if we write the household optimization problem as
+%\begin{align*}
+%    & \max_{q(z)}\left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\frac{\rho}{\rho-1}} \\
+%    & s.t. \\
+%    & \qquad \int_{\hat{z}}^{\overline{z}} p(z)q(z)dz \leq I,
+%\end{align*}
+%then it suffices to show that at the optimum, $I = P\cdot Q$.
+
+%The Lagrangian of the problem is
+%\begin{equation*}
+%    \mathcal{L} = \left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\frac{\rho}{\rho-1}} + \lambda \left[I - \int_{\hat{z}}^{\overline{z}} p(z)q(z)dz \right],
+%\end{equation*}
+%where $\lambda$ the multiplier. Assuming that the dominated convergence theorem holds, the derivative of $\mathcal{L}$ with respect to $q(z)$ is
+%\begin{equation}
+%\label{eq:lagrangian_foc}
+%    \frac{\partial \mathcal{L}}{\partial q(z)} = \frac{\rho}{\rho -1}\left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}} \right]^{\frac{1}{\rho-1}}\frac{\rho-1}{\rho}q(z)^{-\frac{1}{\rho}} - \lambda p(z) = 0.
+%\end{equation}
+%Integrating Equation (\ref{eq:lagrangian_foc}) with respect to $z$, and substituting in household's budget constraint with equality, we have
+%\begin{equation*}
+%    Q = \left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\frac{\rho}{\rho-1}} = \lambda I,
+%\end{equation*}
+%meaning that $\lambda = Q/I$. Substitute $\lambda$ back to Equation (\ref{eq:lagrangian_foc}), we get
+%\begin{equation}
+%\label{eq:qwithI}
+%    q(z) = \left[\frac{p(z)}{I} \right]^{-\rho} \left[\int_{\hat{z}}^{\overline{z}} q(z)^{\frac{\rho-1}{\rho}}dz \right]^{\-\rho},
+%\end{equation}
+%which together with the definition of $P$, leads to $I = P\cdot Q$.
+%\end{proof}
+If we set the composite good to be the numeraire, i.e., $P=1$, then
+%\begin{equation*}
+%    P = \left[\int_{\hat{z}}^{\overline{z}} p(z)^{1-\rho}dz \right]^{\frac{1}{1-\rho}} = 1.
+%\end{equation*}
+% Equation (\ref{eq:qwithI}) immediately leads to the demand function of the household
+\begin{equation}
+\label{eq:melitz_demand}
+    q(z) = Q[p(z)]^{-\rho}.
+\end{equation}
+
+Notice that the production function (\ref{eq:melitz_production}) means that $l = q(z)/z$. With Equation (\ref{eq:melitz_demand}), firm's problem (\ref{eq:melitz_firm}) is equivalent to
+\begin{equation*}
+    \max_{p(z)} Q \left[p(z)^{1-\rho} - W\frac{p(z)^{-\rho}}{z} \right],
+\end{equation*}
+where the first order condition directly leads to optimal labor demand
+\begin{equation}
+\label{eq:melitz_labor}
+    l(z) = Q\left(\frac{W\rho}{\rho-1} \right)^{-\rho}z^{\rho-1},
+\end{equation}
+and profit
+\begin{equation}
+\label{eq:melitz_profit}
+    \pi(z) = \frac{Q}{\rho}\left(\frac{\rho-1}{\rho} \right)^{\rho-1}z^{\rho-1}.
+\end{equation}
+We see that both (\ref{eq:melitz_labor}) and (\ref{eq:melitz_profit}) are increasing in $z$. This means that with a non-degenerate distribution of $z$, $l$ and $\pi$ are also non-degenerate. Further, Equation (\ref{eq:melitz_labor}) implies that if $l$ is log-normally distributed, $z$ will also be log-normally distributed, leaving us with a similar calibration strategy for $G(z)$ as in the main text. In addition, because (\ref{eq:melitz_profit}) implies that $\pi(0) = 0$, the selection threshold $\hat{z}$ is also determined by
+\begin{equation}
+\label{eq:melitz_selection}
+    \pi(\hat{z}) = W.
+\end{equation}
+Recall that in the \citet{Lucas:1978b} model, the counterparts of (\ref{eq:melitz_labor}) and (\ref{eq:melitz_profit}) are respectively
+\begin{equation*}
+    l(z) = \left(\frac{\gamma}{W} \right)^{\frac{1}{1-\gamma}}z,
+\end{equation*}
+and
+\begin{equation*}
+    \pi(z) = \left[\left(\frac{\gamma}{W}\right)^{\frac{\gamma}{1-\gamma}} - W\left(\frac{\gamma}{W} \right)^{\frac{1}{1-\gamma}} \right]z,
+\end{equation*}
+and Equation (\ref{eq:melitz_selection}) stays the same, it can be seen that the two models are equivalent, with the elasticity of substitution $\rho$ in the monopolistic setting plays the same role as the span-of-control parameter $\gamma$. In fact, in the \citet{Lucas:1978b} model, one can think of firms as earning rents over the managerial talent $z$.
+
+\textit{Monopolistic Competition and Aggregate Pollution.---}With the above notation, we now bring back the distortions
+\begin{equation*}
+    \tau_z = 1-\phi_0 z^{\phi_1},
+\end{equation*}
+and further assume that firm level emissions are given by
+\begin{equation*}
+    e(z) = \psi_0 [p(z)q(z)]^{1+\psi_1}.
+\end{equation*}
+We shut down the selection margin $\hat{z}$ as in Section \ref{sec:appen_proof_pollution} by assuming that a measure one of the household members are born as managers and a measure $N$ of them are born as workers. Following the same steps in the proofs of Proposition \ref{prop:pollution_distortion_appen}, we can show that the aggregate pollution in the monopolistic competition case can be shown as
+\begin{equation*}
+    E = \Gamma_1 \exp\left\{ -\frac{\sigma^2}{2}[2\rho - \psi_1(\rho-1)^2]\phi_1^2 + \left[\mu - 2[\rho - \psi_1 (\rho-1)^2] \right] \right\},
+\end{equation*}
+where $\Gamma_1$ is a constant. The expression indicates that there again exists a threshold
+\begin{equation*}
+    \hat{\phi}_1 = -1 + \frac{\rho-\mu/\sigma^2}{2\rho - \psi_1(\rho-1)^2},
+\end{equation*}
+such that $E$ is decreasing in $\phi_1$ when $\phi_1 > \hat{\phi}_1$, and increasing in $\phi_1$ when $\phi_1 < \hat{\phi}_1$.
+
+Similarly, the aggregate output in the monopolistic competition case is
+\begin{equation*}
+    Q = N \exp \left\{\mu+\frac{\sigma^2}{2}(\rho-1)-\frac{\sigma^2}{2}\rho\phi_1^2 \right\},
+\end{equation*}
+which is decreasing in the progressiveness of distortions $-\phi_1$. The impact of distortions on aggregate output in this case is equivalent to that in the Lucas span-of-control case of Section \ref{sec:appen_proof_pollution} [Equation (\ref{eq:aggy_simple})].%, as long as we create a one-to-one mapping between the elasticity of substitution among varieties $\rho$ in \citet{Melitz:2003} and the span-of-control parameter $\gamma$ in \citet{Lucas:1978b}.
+
+\subsection{Uncorrelated Distortions}
+\label{sec:uncorrelated}
+
+In the main text, we focus on correlated distortions, which increase in firm TFP. However, as can be seen from Figure \ref{fig:phiklkappa},  there are also substantial variations in average products across firms with the same TFP level.\footnote{We thank a referee for pointing this out.} In the language of \citet{RestucciaRogerson:2008}, these variations suggest the existence of \emph{uncorrelated} distortions, which are uncorrelated with firm TFP. In this section, we use the same model in Section \ref{sec:appen_proof_pollution}, except that the firm-level distortions are uncorrelated with firms' productivity $z$, to study the impact of uncorrelated distortions on aggregate output and pollution. We find that unlike the case of correlated distortions, uncorrelated distortions lower both aggregate output and aggregate pollution.
+
+The uncorrelated distortions are defined as an output tax whose rate $\tau$ is randomly drawn and independent of firm productivity $z$. Specifically, $z$ is drawn from a log-normal distribution $G(z)$ with log mean and standard deviation $(\mu_z, \sigma_z)$, and $1-\tau$ is independently drawn from another log-normal distribution $H(\tau)$ with log mean and standard deviation $(\mu_{\tau}, \sigma_{\tau})$.
+
+The firm's profit maximization problem can be written as
+\begin{equation*}
+    \pi(z,\tau) = \max_{l} \left\{ (1-\tau) z^{1-\gamma} l^{\gamma} - Wl  \right\}.
+\end{equation*}
+First-order conditions yield
+\begin{align}
+    l(z,\tau) &= \left[\frac{\gamma(1-\tau)}{W}\right]^{\frac{1}{1-\gamma}}z, \nonumber \\
+    \label{eq:output_un}
+    y(z,\tau) &= \left[\frac{\gamma(1-\tau)}{W}\right]^{\frac{\gamma}{1-\gamma}}z, \\
+    e(z,\tau) &= \psi_0 \left[\frac{\gamma(1-\tau)}{W}\right]^{\frac{\gamma(1+\psi_1)}{1-\gamma}}z^{1+\psi_1}. \nonumber
+\end{align}
+The labor market clearing condition
+\begin{equation*}
+    \iint l(z,\tau)dG(z)dH(\tau) = N,
+\end{equation*}
+leads to
+\begin{equation}
+\label{eq:labor_market_un}
+    N = \left(\frac{\gamma}{W}\right)^{\frac{1}{1-\gamma}} \exp\left\{\frac{\mu_\tau}{1-\gamma}+\frac{\sigma_\tau^2}{2(1-\gamma)^2}\right\} \exp\left\{\mu_z+\frac{\sigma_z^2}{2}\right\}.
+\end{equation}
+
+Combining Equations (\ref{eq:output_un}) and (\ref{eq:labor_market_un}), we can compute the aggregate output for this economy
+\begin{align*}
+    Y   &= \iint y(z,\tau)dG(z)dH(\tau) \\
+        &= N^{\gamma} \exp\left\{(1-\gamma)\left(\mu_z+\frac{\sigma_z^2}{2}\right)\right\} \exp\left\{-\frac{\gamma \sigma_\tau^2}{2(1-\gamma)}\right\}.
+\end{align*}
+Consistent with the results in \citet{HsiehKlenow:2009}, aggregate output $Y$ is decreasing in the dispersion of firm-level distortions $\sigma_\tau^2$.
+
+Similarly, the aggregate emissions can be written as
+\begin{equation*}
+    E = \Omega(\psi_0, \psi_1, \mu_z, \sigma_z, \mu_{\tau}, N) \exp\left\{\frac{[\gamma (1+\psi_1)]^2-\gamma (1+\psi_1)}{2(1-\gamma)^2}\sigma_\tau^2\right\},
+\end{equation*}
+where $\Omega(\psi_0,\psi_1,\mu_z,\sigma_z,\mu_{\tau},N)$ is a constant independent of the dispersion of distortions. Since $\gamma<1$ and $\psi_1<0$, $E$ is also decreasing in the dispersion of firm-level distortions $\sigma_\tau^2$.
+
+
+\section{Additional Discussions on the Environmental Economics Literature}
+%\section{Additional Summary of the Environmental Economics Literature}
+
+In this section, we explain in greater details the differences between our paper and the literature on how international trade affects the environment through the reallocation across heterogeneous firms. Specifically, our paper differs from this literature in following ways. First, we bring our general equilibrium model to firm-level data directly, and provide a quantitative assessment of counterfactual policies using an internally-consistent model disciplined by firm-level data. Second, using the firm-level data on treatment technologies, we provide an explanation for the negative correlation between firm size and pollution intensity. Our model also has different implications for the impact of environmental regulations, due to the different nature of the distortions in our paper and the trade costs emphasized by the literature.
+%In this section, we further explain the difference between our paper and most empirical trade studies summarized in \citet{Cherniwchanetal:2017}. In the main text, we mentioned that our paper differs from this literature in three broad ways. First is that our model has different implications on resource allocation along the intensive margin under the policy-relevant scenario of changing environmental regulation while keeping distortions fixed. Second, the fact we can observe emissions and treatment equipment directly in the data allows us to identify how distortions and firm size affect pollution through a specific channel, that is the upgrade of treatment technology induced by increasing revenues. Third, the quantitative nature of our model allows us to study the aggregate impact of policies. In this section, we try to explain these difference in greater details.
+
+\textit{Quantitative General Equilibrium.---}Most studies in this literature focus on reduced-form analysis, in which the model is used to motivate the empirical analysis indirectly. See for example, \citet{Martin:2013}, \citet{Cherniwchan:2017}, \citet{Forslidetal:2015}, and \citet{BarrowsOllivier:2016}, among others. Some studies, such as \citet{Andersen:2016}, \citet{Holladay:2016} and \citet{Forslidetal:2015} derive qualitative predictions under strong parametric assumptions, but do not bring their models to the data directly. Instead, we provide a quantitative assessment of counterfactual policies using an internally-consistent model disciplined by firm-level data. Our quantitative analysis explicitly takes into account the general equilibrium effects of alternative policies, and it provides novel policy implications that are absent from either reduced-form or partial equilibrium analysis.  The quantitative nature makes our analysis suitable for evaluating alternative policies. First, it allows us to quantify  the trade-off between the technique and scale effects, that is, whether a reduction in pollution intensity couples with an increase in output would lead to an increase in aggregate pollution. This is important for our paper because the removal of distortions necessarily leads to increase in output and decrease in pollution intensity. Second, while the reduced-form analysis is able to identify how individual firm responds to changes in economic environment [for instance \citet{Cherniwchan:2017}], the aggregation of these responses would result in general equilibrium feedback that is more appropriately studied using a quantitative general equilibrium framework.
+
+\textit{Technology Adoption.---}A unique feature of our data is that we observe both the emissions and treatment technologies at the firm level. Using the data on treatment technologies, we provide an explanation for the negative correlation between firm size and pollution intensity. It allows us to not only investigate the overall effects of distortions, but also quantify an important channel through which the distortions affect emissions, namely, the adoption of clean technology. This differentiates our paper from empirical work such as \citet{Andersen:2016} and \citet{Holladay:2016}. Specifically, \citet{Andersen:2016} studies the effects of credit constraints on pollution using regional data, which provides only indirect evidence on the firm behavior. While \citet{Holladay:2016} shows that on average exporters tend to be cleaner, but does not provide an explanation for this fact. %It also differentiates our work from \citet{ShapiroWalker:2015}, where environmental regulation works as a residual (and hence can include a wide range of factors) to match the model with the data.
+One exception is \citet{BarrowsOllivier:2016}, which uses product-level data to study how trade liberalization affects pollution through the shift in the product-mix of exporting firms. Our paper differs from theirs by our focus on a completely different channel.
+
+\textit{Implications for Environmental Regulations.---}The implication of our model for environmental regulations distinguishes us from studies that emphasize the role of trade costs, most of which build their models on the \citet{Melitz:2003} model. A major difference between the distortions in our model and the trade costs in an open-economy Melitz model is that exporting is an endogenous choice of firms which brings extra revenues.\footnote{In Section \ref{sec:appen_proof_melitz}, we establish the qualitative equivalence between the effects of distortions on aggregate output and pollution in \citet{Lucas:1978b}, and those in the \emph{closed-economy} version of \citet{Melitz:2003}.}A productive firm can choose not to pay the trade costs if it decides to stay domestic, while the distortions in our model are imperative and are purely deadweight losses. In addition, they interact with environmental regulations in different ways. In our model, environmental regulations would worsen resource allocation along the intensive margin, but this is not necessarily the case with trade costs, because the productive exporting firms can use foreign markets as a cushion to buffer the burdens from environmental regulations after paying the trade costs. We believe that such differences are policy-relevant, because in many cases environmental authorities have to make policy decisions in the presence of distortions.
+
+%\textit{Intensive Margin.---}Most studies in this literature build their models based on the \citet{Melitz:2003} model. As is shown by \citet{HsiehKlenow:2009}, whether technically a non-degenerate distribution of firms are generated using a \citet{Melitz:2003} or \citet{Lucas:1978b} framework is irrelevant. Hence, our choice of \citet{Lucas:1978b} model following the macro literature does not lead to the difference in model implications. Rather, it is because trade costs in the \citet{Melitz:2003} model is associated with additional revenues from selling in foreign markets, but the distortions in our model are pure deadweight loss. It is this difference in the nature of distortions that leads to different implications. Put differently, the key here is whether firms have a choice over taking these costs or not. We think such difference in policy-relevant, because in many cases, environmental authorities do not have policy instruments to reduce economic distortions, and it is important to be able to evaluate the potential impacts of regulatory policies in these scenarios.
+
+%\textit{A Specific Channel.---}A unique feature of our data is that we observe both the emissions and treatment technology, this allows us to quantify the environmental consequences of reducing distortions through a specific channel, that is the upgrade of treatment technology induced by increasing revenues. This differentiates our work from empirical work like \citet{Holladay:2016} and \citet{Andersen:2016}. Specifically, \citet{Holladay:2016} shows that on average, exporters tend to be cleaner, but does not focus on quantifying a particular mechanism; while \citet{Andersen:2016} studies the effect of credit constraints using data at the regional level, which can only provide suggestive evidence on the behavior of firms indirectly. It also differentiates our work from \citet{ShapiroWalker:2015}, where environmental regulation works as a residual (and hence can include a wide range of factors) to match the model with the data.
+
+%This feature of our paper shares a similar spirit with \citet{Bustos:2011} and \citet{BarrowsOllivier:2016}. In particular, \citet{Bustos:2011} has data on firms' investment on technology, allowing her to empirically identify how trade liberalization improves firm-level productivity through technology upgrading. \citet{BarrowsOllivier:2016} exploit information on product-level data to estimate how trade liberalization affects pollution through shifting of the product-mix of exporting firms. Our paper differs from \citet{BarrowsOllivier:2016} in that we are emphasizing on a completely different channel. In addition, carbon emissions in  \citet{BarrowsOllivier:2016} are imputed from intermediate inputs, while pollutants emissions in our data are measured by field staffs.
+
+%\textit{General Equilibrium Implication.---}The general equilibrium, quantitative nature of our paper differs from the literature in two important dimensions. First, it allows us to investigate whether a reduction in pollution intensity couples with a greater increase in output would lead to an increase in aggregate pollution. It is important for us because one of our counterfactual experiment evaluates the impacts from the removal of distortions, which necessarily leads to increase in output. Previous studies usually rely on strong parametric assumptions to derive qualitative predictions, see for instance \citet{Forslidetal:2015}, \citet{Holladay:2016}, and \citet{Andersen:2016}. However, because these models are not taken directly to the data, whether their parametric assumptions actually hold is left unanswered. Instead, in our paper, we take the model to the data directly. Second, although the diff-in-diff type of empirical estimation is able to identify how individual firm responds to changes in economic environment [\citet{Cherniwchan:2017}], the aggregation of these estimated behavior of firms almost certainly would result in general equilibrium feedback that is more appropriately studied using a quantitative general equilibrium model as in our paper.
+
+\section{Computational Algorithm for the Main Model}
+\label{sec:compu_main}
+
+This section contains the computational algorithm we use to solve the version of the model in the main text, namely the two-sector model where products from the polluting and non-polluting sectors are perfect substitutes. The model is fairly standard to solve. In the stationary equilibrium, the Euler equation of the household implies that the net interest rate is
+\begin{equation}
+\label{eq:ss_r}
+    R = \frac{1}{\beta} - 1 + \delta.
+\end{equation}
+As a result, once we find the equilibrium wage $W$, it is straightforward to compute the other allocations in the equilibrium. Specifically, the pseudo-code goes as follows.
+\begin{enumerate}
+    \item
+    Calculate the equilibrium interest rate by Equation (\ref{eq:ss_r}).
+    \item
+    Find the equilibrium wage $W$. This includes the following steps.
+    \begin{enumerate}[(a)]
+        \item
+        Make an initial guess of $W$.
+
+        \item
+        Given $R$ and $W$, for each firm-$z$ in both the polluting and non-polluting sectors, we can solve for their profit functions $\pi^d(z)$ and $\pi^c(z)$. Specifically, the first order conditions of firms in the non-polluting sector are given by
+        \begin{align*}
+            & (k): \qquad \alpha \gamma (1-\tau_z)z^{1-\gamma} k^{\alpha \gamma-1} l^{(1-\alpha)\gamma} = R, \\
+            & (l): \qquad (1-\alpha)\gamma(1-\tau_z)z^{1-\gamma}k^{\alpha \gamma} l^{(1-\alpha)\gamma-1} = W.
+        \end{align*}
+        With the optimal factor demand $k(z)$ and $l(z)$, the profit function of firms in the non-polluting sector is given by
+        \begin{equation*}
+            \pi^c(z) = (1-\tau_z) z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - Rk(z).
+        \end{equation*}
+        \item
+        Notice that the first order conditions of firms in the polluting sector are similar, hence we can at the same time solve the potential profits of polluting firms using dirty and clean technologies $\pi^d_0(z)$ and $\pi^d_1(z)$:
+        \begin{align*}
+            \pi^d_0(z) &= (1-\xi)\{(1-\tau_z) z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - Rk(z)\}, \\
+            \pi^d_1(z) &= (1-\tau_z) z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - R[k(z)+k_E].
+        \end{align*}
+
+        \item
+        Now $\pi^d_0(z),\pi^d_1(z)$ and $\pi^c(z)$ can be used to pin down the thresholds for occupational choices $\{\hat{z}_c,\hat{z}_d\}$ and technology adoption $\tilde{z}_d$. In particular,
+        \begin{equation*}
+            \pi^d(z) = \max\{\pi^d_0(z),\pi^d_1(z)\},
+        \end{equation*}
+        and $\hat{z}^j$s are such that
+        \begin{equation*}
+            W = \pi^j(\hat{z}_j), \qquad j = c,d.
+        \end{equation*}
+        When $\pi^d_0(z)$ and $\pi^d_1(z)$ satisfy single-crossing condition,
+        \begin{equation*}
+            \tilde{z}_d = \min_z \{z \in [\hat{z}_d,\overline{z}] | \pi^d_0(z) < \pi^d_1(z) \}.
+        \end{equation*}
+        Notice that now for the polluting sector, $\hat{z}_d$ and $\tilde{z}_d$ define two groups of firms: those that use dirty technology $z \in [\hat{z}_d, \tilde{z}_d]$, and those that use clean technology $z \in [\tilde{z}_d,\overline{z}]$.
+
+        \item
+        If the labor market clearing condition
+        \begin{equation*}
+            \mu G(\hat{z}_d) + (1-\mu) G(\hat{z}_c) = \mu \int_{\hat{z}_d}^{\overline{z}} l^d(z)dG(z) + (1-\mu)\int_{\hat{z}_c}^{\overline{z}} l^c(z)dG(z),
+        \end{equation*}
+        does not hold, return to Step 2.(a) and update the guess for $W$.
+    \end{enumerate}
+
+    \item
+    With the equilibrium prices $W$ and $R$, all the allocations of the economy can be computed following Definition 1 in the main text.
+\end{enumerate}
+
+By Walras' Law, if the household budget constraint, capital, and labor market clearing conditions all hold, resource constraint is automatically satisfied. We now verify that this is the case. To simplify notation, first let us define
+\begin{equation*}
+    \overline{\pi}(z) = (1-\tau_z)z^{1-\gamma}(k^{\alpha}l^{1-\gamma})^{\gamma} - Wl - Rk,
+\end{equation*}
+and
+\begin{equation*}
+    y(z) = z^{1-\gamma}(k^{\alpha}l^{1-\alpha})^{\gamma},
+\end{equation*}
+where the optimal factor demands are implicitly substituted in. Government tax revenue $T$ comes from two sources here: from taxing firms using dirty technology
+%where we have assumed that the optimal factor demands are implicitly substituted in. Government tax revenue $T$ comes from two sources here: from taxing firms using dirty technology
+\begin{equation*}
+    \mu \xi \int_{\hat{z}_d}^{\tilde{z}_d} \overline{\pi}(z)dG(z),
+\end{equation*}
+and from output taxes $\tau_z$
+\begin{equation*}
+    \mu \int_{\hat{z}_d}^{\overline{z}} \tau_z y(z)dG(z) + (1-\mu)\int_{\hat{z}_c}^{\overline{z}}\tau_z y(z)dG(z).
+\end{equation*}
+Recall that we have assumed that all taxes are rebated to the household as lump-sum transfers. Hence with these notations, household income $I$ is given by
+\begin{align}
+\label{eq:hh_income}
+    I &= R K + W [\mu G(\hat{z}_d)+(1-\mu)G(\hat{z}_c)] + T \nonumber \\
+      & \qquad + \mu\left[\int_{\hat{z}_d}^{\tilde{z}_d} \pi^d_0(z) dG(z) + \int_{\tilde{z}_d}^{\overline{z}} \pi^d_1(z)dG(z)\right] + (1-\mu)\int_{\hat{z}_c}^{\overline{z}}\pi^c(z)dG(z) \nonumber \\
+      &= R K + W [\mu G(\hat{z}_d)+(1-\mu)G(\hat{z}_c)] + T + (1-\mu)\int_{\hat{z}_c}^{\overline{z}}\overline{\pi}(z)dG(z) \nonumber \\
+      & \qquad + \mu\left[(1-\xi)\int_{\hat{z}_d}^{\tilde{z}_d} \overline{\pi}(z) dG(z) + \int_{\tilde{z}_d}^{\overline{z}} \overline{\pi}(z)dG(z) - R k_E [G(\overline{z}) - G(\tilde{z})]\right] \nonumber \\
+      &= R K + W [\mu G(\hat{z}_d)+(1-\mu)G(\hat{z}_c)] + (1-\mu)\int_{\hat{z}_c}^{\overline{z}}[\overline{\pi}(z)+\tau_z y(z)]dG(z) \\
+      & \qquad + \mu\left[\int_{\hat{z}_d}^{\overline{z}} (\overline{\pi}(z)+\tau_z y(z)) dG(z) - R k_E [G(\overline{z}) - G(\tilde{z})]\right]. \nonumber
+\end{align}
+Because
+\begin{equation*}
+    K = \mu \left[\int_{\hat{z}_d}^{\overline{z}} k^d(z)dG(z) + k_E [G(\overline{z})-G(\tilde{z}_d)]\right] + (1-\mu)\int_{\hat{z}_c}^{\overline{z}} k^c(z)dG(z),
+\end{equation*}
+and
+\begin{equation*}
+    \overline{\pi}(z) = (1-\tau_z)y(z) - Wl(z) - R k(z),
+\end{equation*}
+substitute these two equations and the labor market clearing condition into Equation (\ref{eq:hh_income}), we get
+\begin{equation*}
+    I = \mu \int_{\hat{z}_d}^{\overline{z}}y(z)dG(z) + (1-\mu) \int_{\hat{z}_c}^{\overline{z}}y(z)dG(z).
+\end{equation*}
+Household budget constraint then leads directly to
+\begin{equation}
+\label{eq:consumption}
+    C + \delta K = Y.
+\end{equation}
+Equation (\ref{eq:consumption}) is used to construct the aggregate consumption.
+
+\section{A Two-Sector Model with CES Aggregation}
+
+In the main text, we have assumed that the goods produced by polluting and non-polluting sectors are perfect substitutes. Admittedly an extreme assumption, it is not critical to our quantitative results in the main text, because the counterfactual experiments there cause little reallocation across sectors. However, if we want to evaluate the effects of removing distortions from one sector only, this assumption is problematic because it would imply a reallocation across sectors that is too large. To address this issue, we build a two-sector model in which the final goods are produced by a representative producer, who combines the intermediate goods from the polluting and non-polluting sectors using a constant elasticity of substitution (CES) production function. We use the model to evaluate the effects of removing distortions from both sectors, and those of removing distortions from the polluting sector {only}. In this section, we first describe the model, and then explain the computational algorithm. In the end, we calibrate the model and report the quantitative results from the counterfactual experiments.
+
+%In the main text, we have assumed that the goods produced by polluting and non-polluting sectors are perfect substitutes. This is clearly an extreme case. While it does not affect any of our results if the distortions to the two sectors are the same. It does make the resource allocation across sectors overly responsive to the relative difference in the level of distortions. To address this issue, we make one change to the model in the main text by introducing a representative neoclassical final good producer. In this section, we first describe the model with the newly introduced final good producer. We then explain the computational algorithm. In the last section, we calibrate the model and report the quantitative results.
+
+\subsection{The Model}
+
+We assume that there is a single final good Y produced by a representative firm in a perfectly competitive final good market. The final good producer manufactures $Y$ by combining the intermediate goods from the polluting sector $Y_d$ and non-polluting sector $Y_c$ respectively. The production function features \textit{constant elasticity of substitution (CES)} between the two goods:
+\begin{equation*}
+    Y = \left[\varphi (Y_d)^{\frac{\rho-1}{\rho}} + (1-\varphi)(Y_c)^{\frac{\rho-1}{\rho}} \right]^{\frac{\rho}{\rho-1}},
+\end{equation*}
+where $\rho$ is the elasticity of substitution, $\varphi$ is the average share of polluting goods in production. We assume that the final good $Y$ is the numeraire, and the relative prices of polluting and non-polluting goods are $p_d$ and $p_c$, respectively.\footnote{Notice that this setup is mathematically equivalent to the monopolistic competition setup in Section \ref{sec:appen_proof_melitz}.} The optimization problem of the final good producer is thus
+\begin{equation*}
+    \max_{Y_d,Y_c} \left\{ \left[\varphi (Y_d)^{\frac{\rho-1}{\rho}} + (1-\varphi)(Y_c)^{\frac{\rho-1}{\rho}} \right]^{\frac{\rho}{\rho-1}} - p_d Y_d - p_c Y_c \right\}.
+\end{equation*}
+The first order conditions yield
+\begin{equation*}
+    \frac{Y_d}{Y_c} = \left(\frac{\varphi}{1-\varphi} \cdot \frac{p_c}{p_d} \right)^{\rho}.
+\end{equation*}
+Since we pick the final good $Y$ as the numeraire, the aggregate price index is
+%Using Lemma \ref{lemma:dixit}, the aggregate price index is
+\begin{equation}
+\label{eq:cesprice}
+    \left[ \varphi^{\rho}(p_d)^{1-\rho} + (1-\varphi)^{\rho}(p_c)^{1-\rho} \right]^{\frac{1}{1-\rho}} = 1,
+\end{equation}
+which implicitly defines a mapping between $p_d$ and $p_c$.
+
+Because now there are relative prices, the optimization problems for firms in the two intermediate goods sectors need to be modified accordingly. In particular, the profit maximization problem for firms in the non-polluting sector is
+\begin{equation*}
+    \pi^c(z) = \max_{k,l} \left\{ (1-\tau_z)p_c z^{1-\gamma}(k^{\alpha}l^{1-\alpha})^{\gamma} - Wl - Rk \right\},
+\end{equation*}
+while those for firms in the polluting sector using clean and dirty technologies are given respectively as
+\begin{equation*}
+    \pi^d_1(z) = \max_{k,l} \left\{ (1-\tau_z) p_d z^{1-\gamma} (k^{\alpha} l^{1-\alpha})^{\gamma} - Wl - R (k+k_E) \right\},
+\end{equation*}
+and
+\begin{equation*}
+    \pi^d_0(z) = \max_{k,l} \left\{ \left( 1 - \xi \right)
+        \left[ (1-\tau_z) p_d z^{1-\gamma} (k^{\alpha} l^{1-\alpha})^{\gamma} - Wl - Rk \right] \right\}.
+\end{equation*}
+As before, the profit function of firms in the polluting sector is the envelope of $\pi^d_0(z)$ and $\pi^d_1(z)$:
+\begin{equation*}
+    \pi^d(z) = \max\left\{\pi^d_0(z), \pi^d_1(z)\right\}.
+\end{equation*}
+The rest elements of the model are identical to those in the main text.
+%The rest elements of the model are exactly the same as those in the main text.
+
+The stationary equilibrium with CES aggregation is defined as follows.
+\begin{definition}
+\label{def:ces}
+A stationary equilibrium of this economy consists of prices $\{W, R, p_d, p_c\}$, allocations $\{C, K, Y_d, Y_c, Y\}$, firm's policy functions $\{k^j(z),l^j(z),y^j(z),\pi^j(z)\}$, $j = c, d$, thresholds for household members' occupational choices $\{\hat{z}_c, \hat{z}_d\}$ and polluting firms' technology adoption $\tilde{z}_d$, as well as aggregate pollution $E$, such that:
+\begin{enumerate}[(i)]
+    \item
+    Given prices $\{W, R, p_d, p_c\}$, $\{C, K, \hat{z}_c, \hat{z}_d\}$ solve the household's optimization problem;
+    \item
+    Given prices $\{p_d, p_c\}$, $\{Y_d, Y_c\}$ solve the final good producer's optimization problem;
+    \item
+    Given prices $\{W, R, p_d, p_c\}$, $\{k^j(z),l^j(z),y^j(z),\pi^j(z)\}$, $j = c, d,$ and $\tilde{z}_d$ solve the intermediate goods producers' optimization problems;
+    \item
+    Prices $\{W, R, p_d, p_c \}$ clear all markets:
+    \begin{itemize}
+        \item
+        Labor Market:
+        \begin{equation*}
+            \mu G(\hat{z}_d) + (1-\mu) G(\hat{z}_c) = \mu \int_{\hat{z}_d}^{\overline{z}} l^d(z)dG(z) + (1-\mu)\int_{\hat{z}_c}^{\overline{z}} l^c(z)dG(z),
+        \end{equation*}
+        \item
+        Capital Market:
+        \begin{equation*}
+            K = \mu \left[\int_{\hat{z}_d}^{\overline{z}} k^d(z)dG(z) + k_E [G(\overline{z})-G(\tilde{z}_d)]\right] + (1-\mu)\int_{\hat{z}_c}^{\overline{z}} k^c(z)dG(z),
+        \end{equation*}
+        \item
+        Intermediate goods produced by polluting and non-polluting sectors:
+        \begin{equation*}
+            Y_d = \mu \int_{\hat{z}_d}^{\overline{z}} y^d(z)dG(z), \qquad Y_c = (1-\mu)\int_{\hat{z}_c}^{\overline{z}} y^c(z)dG(z),
+        \end{equation*}
+        \item
+        Final Good:
+        \begin{equation*}
+            C + K - (1-\delta)K = Y,
+        \end{equation*}
+        where
+        \begin{equation*}
+            Y = \left[\varphi (Y_d)^{\frac{\rho-1}{\rho}} + (1-\varphi)(Y_c)^{\frac{\rho-1}{\rho}} \right]^{\frac{\rho}{\rho-1}},
+        \end{equation*}
+    \end{itemize}
+    \item
+    Aggregate Pollution:
+    \begin{equation*}
+        E = \mu\left[\int_{\hat{z}_d}^{\tilde{z}^d} e\left(0,y^d(z)\right)dG(z) + \int_{\tilde{z}_d}^{\overline{z}} e\left(1,y^d(z)\right) dG(z)\right].
+    \end{equation*}
+\end{enumerate}
+\end{definition}
+
+\subsection{Computational Algorithm}
+
+The stationary equilibrium can be computed in a similar way as depicted in Appendix \ref{sec:compu_main}. The only difference here is that instead of solving for the equilibrium wage $W$ only, we need to also find the prices for the intermediate goods, $p_c$ and $p_d$. With the equilibrium prices, the allocations in Definition \ref{def:ces} can be calculated accordingly. Recall that Equation (\ref{eq:cesprice}) defines a 1-1 mapping between $p_c$ and $p_d$, hence in practice we need to solve for $W$ and $p_d$. The pseudo-code is as follows.
+
+%The stationary equilibrium can be solved in more or less the same way as depicted in Appendix \ref{sec:compu_main}. The only difference here is that instead of solving for only one price $W$, we need to find in addition the intermediate goods prices $p_c$ and $p_d$. With the equilibrium prices, the allocations in Definition \ref{def:ces} can be calculated easily. Recall that Equation (\ref{eq:cesprice}) defines a 1-1 mapping between $p_c$ and $p_d$, hence in practice we choose to solve for $W$ and $p_d$. The pseudo-code is given as follows.
+\begin{enumerate}
+    \item
+    Calculate the equilibrium interest rate again by Equation (\ref{eq:ss_r}).
+    \item
+    Solve for the wage $W$ and the price of the polluting sector intermediate good $p_d$ in the equilibrium. This includes the following steps.
+    \begin{enumerate}[(a)]
+        \item
+        Make initial guesses for $W$ and $p_d$, using Equation (\ref{eq:cesprice}) to back out $p_c$:
+        \begin{equation*}
+            p_c = \left[ \frac{1-\varphi^{\rho}(p_d)^{1-\rho}}{(1-\varphi)^{\rho}} \right]^{\frac{1}{1-\rho}}.
+        \end{equation*}
+        \item
+        Given $R, W, p_d$ and $p_c$, for each firm-$z$ in both the polluting and non-polluting sectors, we can solve for the profit functions $\pi^c(z)$ and $\pi^d(z)$. Specifically, the first order conditions of firms in the non-polluting sector are given by:
+        \begin{align*}
+            & (k): \qquad \alpha \gamma (1-\tau_z)p_c z^{1-\gamma} k^{\alpha \gamma-1} l^{(1-\alpha)\gamma} = R, \\
+            & (l): \qquad (1-\alpha)\gamma(1-\tau_z) p_c z^{1-\gamma}k^{\alpha \gamma} l^{(1-\alpha)\gamma-1} = W.
+        \end{align*}
+        With the optimal factor demand $k(z)$ and $l(z)$, the profit function of firms in the non-polluting sector is given by
+        \begin{equation*}
+            \pi^c(z) = (1-\tau_z)p_c z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - Rk(z).
+        \end{equation*}
+        \item
+        Notice that the first order conditions of firms in the polluting sector are similar, hence we can at the same time solve the potential profits of polluting firms using dirty and clean technologies $\pi^d_0(z)$ and $\pi^d_1(z)$:
+        \begin{align*}
+            \pi^d_0(z) &= (1-\xi)\{(1-\tau_z) p_d z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - Rk(z)\}, \\
+            \pi^d_1(z) &= (1-\tau_z)p_d z^{1-\gamma}[k(z)^{\alpha}l(z)^{1-\alpha}]^{\gamma} - Wl(z) - R[k(z)+k_E].
+        \end{align*}
+
+        \item
+        Now $\pi^d_0(z),\pi^d_1(z)$ and $\pi^c(z)$ can be used to pin down the thresholds for occupational choices $\{\hat{z}_c,\hat{z}_d\}$ and technology adoption $\tilde{z}_d$. In particular,
+        \begin{equation*}
+            \pi^d(z) = \max\{\pi^d_0(z),\pi^d_1(z)\},
+        \end{equation*}
+        and $\hat{z}^j$s are such that
+        \begin{equation*}
+            W = \pi^j(\hat{z}_j), \qquad j = c,d.
+        \end{equation*}
+        When $\pi^d_0(z)$ and $\pi^d_1(z)$ satisfy single-crossing condition,
+        \begin{equation*}
+            \tilde{z}_d = \min_z \{z \in [\hat{z}_d,\overline{z}] | \pi^d_0(z) < \pi^d_1(z) \}.
+        \end{equation*}
+        Notice that now for the polluting sector, $\hat{z}_d$ and $\tilde{z}_d$ define two groups of firms: those that use dirty technology $z \in [\hat{z}_d, \tilde{z}_d]$, and those that use clean technology $z \in [\tilde{z}_d,\overline{z}]$.
+
+        \item
+        If the labor market clearing condition
+        \begin{equation*}
+            \mu G(\hat{z}_d) + (1-\mu) G(\hat{z}_c) = \mu \int_{\hat{z}_d}^{\overline{z}} l^d(z)dG(z) + (1-\mu)\int_{\hat{z}_c}^{\overline{z}} l^c(z)dG(z),
+        \end{equation*}
+        and the first order condition of the final good producer
+        \begin{equation*}
+            \frac{\mu}{1-\mu}\cdot \frac{\int_{\hat{z}_d}^{\overline{z}} y^d(z)dG(z)}{\int_{\hat{z}_c}^{\overline{z}} y^c(z)dG(z)} = \left(\frac{\varphi}{1-\varphi} \cdot \frac{p_c}{p_d} \right)^{\rho},
+        \end{equation*}
+        do not hold, return to Step 2.(a) and update the guesses for $W$ and $p_d$.
+    \end{enumerate}
+
+    \item
+    With the equilibrium prices $W, R, p_d, p_c$, all allocations of the economy can be computed following Definition \ref{def:ces}.
+\end{enumerate}
+
+The resource constraint can be verified in the same way as in Appendix \ref{sec:compu_main}, and hence is omitted here.
+
+\subsection{Quantitative Results}
+
+We use the model to evaluate the effects of removing distortions from one sector only, and study how cross-sector reallocation affects our results. Specifically, we compare the results from two experiments. In Experiment (i), we repeat Experiment (i) in the main text by setting $\tau_z = 0$ for both sectors. This experiment serves two purposes. First, by comparing the results with those from the main text, we show that the alternative assumption of finite and constant elasticity of substitution between the two sectors would not change our main results materially. Therefore, the assumption that the products from the two sectors are perfect substitutes is innocuous for the main results of this paper. Second, it provides a benchmark for us to compare the effects of symmetric versus asymmetric changes in distortions. In Experiment (ii), we remove the distortions from the polluting sector {only}, and evaluate the effects of cross-sector reallocation on our results.
+
+%We use the model to evaluate the effects of asymmetric changes in sectoral distortions to see how cross-sector resource allocation affects our results. Specifically, we compare the results from two experiments. In experiment (i), we repeat the same exercise in the main text by setting $\tau_z = 0$ for both sectors. This experiment serves two purposes. First, by comparing the results with those in the main text, we verify that assuming alternatively that the two goods have constant elasticity of substitution would not affect our results quantitatively. As a result, the simplification of assuming the two goods are perfect substitutes are innocuous. Second, it provides a benchmark for us to compare the impacts from symmetric versus asymmetric removal of distortions.
+
+The quantitative exercises in this section are for illustration purpose mainly. Therefore, we only carry out a simple calibration of the model. We keep most of the parameters intact as in Section \rom{3} of the main text. There are two new parameters that we need to pin down, namely the elasticity of substitution $\rho$ and the share of the products of the polluting sector in the production of the final good $\varphi$. Empirical estimates of $\rho$ range from 3 to 10 for narrowly defined industries [\citet{BrodaWeinstein:2006} and \citet{HendelNevo:2006}]. \citet{HsiehKlenow:2009} use $\rho=3$ for 4-digit industries. Because we divide the whole economy into two broad sectors in our model, we begin with a smaller value of $\rho = 1.5$ and later consider $\rho = 3$ to gauge how the change in $\rho$ affects our results.\footnote{Intuitively, the elasticity of substitution is larger across more narrowly defined industries, since it is easier to substitute apples with oranges than with smartphones.} Given $\rho$, we choose $\varphi$ such that the revenues from the polluting sector $p_d Y_d$ is 20\% of those from both sectors, $p_d Y_d + p_c Y_c$. In addition, due to the presence of relative price, we adjust the adoption cost of clean technology so that the share of firms using clean technology is again 57\%.
+
+
+%The main objective of the quantitative exercises in this section is for illustration purpose only. Therefore we only do a simple calibration of the model. We keep most of the parameters intact as calibrated in the main text. There are two new parameters we need to calibrate, the elasticity of substitution $\rho$ and the average share of intermediate goods produced by the polluting sector in the production of the final good. Empirical estimates of $\rho$ typically ranges from three to ten [\citet{BrodaWeinstein:2006} and \citet{HendelNevo:2006}]. \citet{HsiehKlenow:2009} use an elasticity of three at the four digit level. Because our polluting/non-polluting division is much coarser, we begin with a smaller value of $\rho = 1.5$ and later consider $\rho = 3$ to gauge how $\rho$ affects our results.\footnote{The intuition is that it is much easier to substitute apples with oranges than with smartphones.} Given $\rho$, we calibrate $\varphi$ such that the value of output by the polluting sector $p_d \cdot Y_d$ is 20\% of the total value of intermediate goods $p_d Y_d + p_c Y_c$. Finally, due to the presence of relative price, we adjust the cost of clean technology such that the clean share in the benchmark equilibrium is again around 57\%.
+
+\begin{table}[t]
+\footnotesize
+\centering
+\begin{threeparttable}
+\caption{The Effects of Removing Distortions from Polluting Sector Only v.s. From Both Sectors}
+%\begin{tabular}{lccccccc}%{p{85pt}>{\centering\arraybackslash}p{50pt}>{\centering\arraybackslash}p{50pt}>{\centering\arraybackslash}p{40pt}}%>{\centering\arraybackslash}p{35pt}}%{lccc}
+\begin{tabular}{p{90pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt}>{\centering\arraybackslash}p{40pt} >{\centering\arraybackslash}p{5pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{40pt}}
+    \hline \hline
+                         & \multicolumn{3}{c}{Polluting}    & & \multicolumn{3}{c}{Non-polluting} \\
+    \cmidrule{2-4} \cmidrule{6-8}
+    Statistics                 & Benchmark & (i)      & (ii)      & & Benchmark     & (i)    & (ii) \\
+    \midrule
+    \textbf{CES $=$ 1.5} \\
+    \ \ \ Physical Output      & 100.00    & 129.64   & 134.63    & & 100.00        & 129.90 &  98.03 \\
+    \ \ \ Price                & 100.00    & 99.97    & 85.00     & & 100.00        & 100.00 & 102.34 \\
+    \ \ \ Revenue              & 100.00    & 129.60   & 114.42    & & 100.00        & 129.90 & 100.32 \\
+    \midrule
+    \ \ \ \# of Firms          & 100.00    & 42.63    & 46.44     & & 100.00        & 41.88  &  95.38 \\
+    \ \ \ Mean Size            & 64.31     & 152.21   & 176.17    & & 51.16         & 123.50 &  49.38 \\
+    \midrule
+    \ \ \ Pollution            & 100       & 74.69    & 80.05     \\
+    \ \ \ Intensity            & 100       & 57.81    & 59.47     \\
+    \ \ \ Clean Share          & 56.18     & 83.80    & 73.10     \\
+    \midrule
+    \textbf{CES $=$ 3.0} \\
+    \ \ \ Physical Output      & 100.00    & 129.83   & 160.51    & & 100.00        & 129.89 & 89.45  \\
+    \ \ \ Price                & 100.00    & 100.02   & 87.38     & & 100.00        & 100.00 & 100.46 \\
+    \ \ \ Revenue              & 100.00    & 129.85   & 140.25    & & 100.00        & 129.88 & 89.86  \\
+    \midrule
+    \ \ \ \# of Firms          & 100.00    & 41.50    & 48.19     & & 100.00        & 42.30  & 89.24  \\
+    \ \ \ Mean Size            & 68.36     & 166.29   & 214.24    & & 50.16         & 119.84 & 46.09  \\
+    \midrule
+    \ \ \ Pollution            & 100       & 74.69    & 89.61     \\
+    \ \ \ Intensity            & 100       & 57.53    & 55.81     \\
+    \ \ \ Clean Share          & 56.48     & 84.04    & 74.37     \\
+    \bottomrule
+\end{tabular}
+\begin{tablenotes}
+     \footnotesize{
+     \item[$\dagger$]
+     Note: All of the values are percentages except for mean size, which is the numbers of workers.}
+\end{tablenotes}
+\label{tab:aggregates_appen}
+\end{threeparttable}
+\end{table}
+
+Table \ref{tab:aggregates_appen} presents the results. In the upper panels, we report the results for $\rho =$ 1.5 and in the lower panels $\rho =$ 3. For experiment (i), it is reassuring to see that for both levels of elasticity of substitution, the results are quantitatively similar to the perfect substitutes case in the main text. Following the elimination of $\tau_z$ from both sectors, aggregate output in both sectors increases by about 30\%. Again, there is little reallocation across sectors, and the changes in the prices of the products in both sectors are negligible. The average pollution intensity decreases by about 42\%, so again the technique effect dominates, and the aggregate pollution decreases by about 25\%.
+
+For Experiment (ii), we start with the case $\rho =$ 1.5. Following the elimination of $\tau_z$ in the polluting sector, there again are a large increase in output and a large decrease in average pollution in the polluting sector. However, there is also a sizable reallocation of production factors from the non-polluting sector to the polluting sector. Specifically, since the equilibrium wage increases due to the higher labor demand from the polluting sector, firms in the non-polluting sector have to use less labor and capital. This causes a 2\% decrease in the physical output of the non-polluting sector. The physical output of the polluting sector increases by 35\% in this case compared to 30\% in Experiment (i). This composition effect partially offsets the technique effect, and the aggregate pollution decreases by 20\% compared to 25\% in Experiment (i), although the decreases in average pollution intensity are similar in these two cases (41\% versus 42\%).
+
+%Table \ref{tab:aggregates_appen} presents the results. In the upper panels, we report the results for $\rho = 1.5$ and in the lower panels $\rho = 3$. For experiment (i), it is reassuring to see that for both levels of elasticity of substitution, the results are quantitatively similar to the perfect substitutes case in the main text. In experiment (ii), following the elimination of $\tau_z$ in the polluting sector, the cost of producing of these firms decreases, allowing them to charge a lower price for larger sales. Quantitatively, the polluting sector cuts the price by 15\% and as a result, it is able to sell 35\% more output, consequently leading to 15\% increase in revenue. On the other hand, because wage increases by 12\% as a result of higher factor demand from the polluting sector, firms in the non-polluting sector have to charge higher price to survive. This causes a 2\% decrease in the quantity sold. The average firm size increases in both sectors, but for different reasons. In the polluting sector, it is because the elimination of size-dependent distortions benefit the large firms disproportionately. While in the non-polluting sector, it is because tougher selection caused by a rising wage. Furthermore, for the same reason that environmental regulation amplifies the negative impact of size-dependent distortions, the average level of distortions on the non-polluting sector increases as well as a consequence of the expansion of average firm size. Nevertheless, the technique effect still dominates the scale effect, even with cross-sector redistribution due to asymmetric reduction in sectoral distortions.
+
+When $\rho =$ 3,  the cross-sector reallocation of factors would be much larger given a higher elasticity of substitution. The physical output of the polluting sector increases by 60\% instead of 35\% in this case, and while physical output of the non-polluting sector decreases by 11\% instead of 2\%. As a result, although the average pollution intensity decreases by 44\%, the aggregate pollution in this case decreases by only 10\% as opposed to 20\% when $\rho =$ 1.5. If we increase $\rho$ further, it is possible that at some point the the cross-sector reallocation would be so strong that removing the distortions from the polluting sector would increase the aggregate pollution. However, as we mentioned above,  $\rho =$ 3 is likely to be upper bound of the range for empirically plausible elasticity of substitution in our model, given that we divide the whole economy into two broad sectors. Hence, our results suggest that even if we remove the distortions from the polluting sector only, the technique effect would still dominate within the empirically plausible range of $\rho$.%the effects on aggregate pollution are smaller when the elasticity of substitution $\rho$ is larger, but the technique effect would still dominate within the empirically plausible range of $\rho$.
+
+%The results for $\rho = 3$ are qualitatively the same. However, with a higher elasticity of substitution, the cross-sector redistribution is indeed stronger. Total revenue in the polluting sector now increases by 40\% instead of 15\%, and aggregate pollution decreases by only 6\% as opposed to 11\%, despite that the average intensity decreases more. Further increasing $\rho$ is likely to cause a reverse of the relative strength of the scale versus technique effects in favor of increasing aggregate pollution. However, as we argued before, we think that $\rho = 3$ is likely to be at the higher end of the range of empirically plausible elasticity for the two-sector division if not already above. Hence our results suggest that it is plausible to expect that even for asymmetric reduction of distortions, the technique effect still outweighs the scale effect.
+
+Interestingly, if we compare Experiment (ii) with (i)---recall that the only difference between these two is that we also remove distortions from the non-polluting sector in Experiment (i)---we find that removing distortions from the non-polluting sector has positive spillovers to the polluting sector, which increases the adoption rate of clean technology by about 10 percentage points. This is due to the demand effect that pulls up the price of the polluting goods, allowing many medium sized firms to earn enough profits to install clean technology. This result suggests that even the reduction of distortions in the non-polluting sector alone could potentially have positive environmental implications.
+
+%Interestingly, by comparing experiment (i) with (ii), we find that a reduction of distortions in the non-polluting sector has positive spillover to the polluting sector by increasing the clean technology adoption rate. This is due to the income effect that pulls up the price of the polluting goods, allowing many medium sized firms to earn enough profits to install clean technology. This result suggests that even the reduction of distortions in the non-polluting sector could potentially have positive environmental implications.
+
+%\section{Additional Quantitative Exercises}
+%
+%\subsection{Environmental Regulations and Size Distribution}
+%
+%In our benchmark calibration, $k_E$ is about 2.5 times the equilibrium wage of a typical worker. This relatively small value limits the extent to which environmental policy can affect the real economy. In this section, we show that when $k_E$ is increased to 10 times the value used in the benchmark calibration, environmental policy influences the resource allocation markedly. We consider two scenarios. In the first case, we again solve the model with all the parameters remaining at the benchmark calibration level, but increase $k_E$ to 41.5. With no changes in regulation intensity, the adoption rate of the clean technology drops. In the second case, we increase $\xi$ such that the adoption rate in the benchmark case (57\%) is restored. We label these two experiments (iii) and (iv).
+%\begin{table}[t]
+%\footnotesize
+%\centering
+%\begin{threeparttable}
+%\caption{The Effect of Regulations: Higher $k_E$}
+%\begin{tabular}{p{125pt} >{\centering\arraybackslash}p{75pt} >{\centering\arraybackslash}p{75pt} >{\centering\arraybackslash}p{75pt}}
+%    \hline \hline
+%    Statistics                      & Benchmark             & (iii)                 & (iv)    \\
+%    \midrule
+%    Aggregate Output                & 100.00                & 100.00                & 100.41  \\
+%    Capital                         & 100.00                & 100.28                & 101.45  \\
+%    Consumption                     & 100.00                & 99.94                 & 100.21  \\
+%    Output per Worker (Wage)        & 100.00                & 100.00                & 99.63   \\
+%    Output per Firm                 & 100.00                & 100.00                & 187.70  \\
+%    Average Talent                  & 100.00                & 100.00                & 184.14  \\
+%%    TFP                             & 100.00                & 100.00                & 100.81  \\
+%    \midrule
+%    Number of Firms                 & 100.00                & 100.00                & 53.50   \\
+%    Mean Size                       & 59.27                 & 59.27                 & 111.65  \\
+%    Median Size                     & 22.95                 & 22.95                 & 63.24   \\
+%    \midrule
+%    Aggregate Pollution             & 100.00                & 125.64                & 87.56 \\
+%    Average Intensity               & 100.00                & 125.64                & 87.20 \\
+%    Clean Share                     & 57.40                 & 8.89                  & 57.06  \\
+%    Monitoring                      & 20.50                 & 20.50                 & 73.50  \\
+%    \bottomrule
+%\end{tabular}
+%\begin{tablenotes}
+%     \footnotesize{
+%     \item[$\dagger$]
+%     Note: All values reported are in percentage points except mean and median size, which are the absolute numbers of workers.}
+%\end{tablenotes}
+%\label{tab:aggregates_ke}
+%\end{threeparttable}
+%\end{table}
+%
+%Table \ref{tab:aggregates_ke} presents the results of experiments (iii) and (iv). For case (iii), we first note that the size distributions and efficiency of the economy remain virtually the same as in the benchmark case. However, the clean technology adoption rate falls to 9\% since a large number of firms now find it unprofitable to use the clean technology and higher pollution thus follows. Because the benchmark case can be understood as a decrease in the price of the clean technology from case (iii), this result suggests that subsidizing clean technologies can serve as a substitute for stronger regulations.
+%
+%If we increase the regulations to the level such that the original technology adoption rate is restored, as opposed to the results of case (ii) where the size distributions and resource allocation are only mildly affected, the effects of the regulation in experiment (iv) are much larger. Figure \ref{fig:envpolicy} shows the size and employment distributions for case (iv).
+%\begin{figure}[t]
+%    \begin{center}
+%    \includegraphics[width=0.45\textwidth]{D:/PaperDrafts/Pollution/PrelimResults/sizedist_bench_highcost.eps}
+%    \includegraphics[width=0.45\textwidth]{D:/PaperDrafts/Pollution/PrelimResults/eshare_bench_highcost.eps}
+%    \caption{Environmental Policy and Size Distribution}
+%    \label{fig:envpolicy}
+%    \end{center}
+%\end{figure}
+%In contrast to the size and employment distributions in the benchmark case, all the firms in the first group are driven out. This fact is also reflected in column (iv) of Table \ref{tab:aggregates_ke} as increases in average talent and in the mean/median size of the firms. Therefore, environmental policy {improves} the resource allocation on the {extensive} margin by forcing small unproductive firms to exit the market. However, the gains from these improvements are limited because the allocation of resources on the {intensive} margin worsens (see Table \ref{tab:talentdist_ke}).
+%\begin{table}[t]
+%\footnotesize
+%\centering
+%\begin{threeparttable}
+%\caption{Resource Allocation on the Intensive Margin: High $k_E$}
+%\begin{tabular}{p{65pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt} >{\centering\arraybackslash}p{45pt}}
+%    \hline \hline
+%    Economy     & $\text{QU}_1$ & $\text{QU}_2$ & $\text{QU}_3$ & $\text{QU}_4$ & $\text{QU}_5$ \\
+%    \midrule
+%    Benchmark   & 2.69          & 4.19          & 7.29          & 16.55         & 69.28 \\
+%    Case (iv)   & 4.44          & 6.63          & 10.98         & 21.86         & 56.10 \\
+%    Case (i)    & 1.50          & 2.83          & 6.34          & 18.06         & 71.27 \\
+%    Case (ii)   & 2.93          & 4.47          & 7.77          & 17.37         & 67.46 \\
+%    \bottomrule
+%\end{tabular}
+%\begin{tablenotes}
+%     \footnotesize{
+%     \item[$\dagger$]
+%     Note: $\text{QU}_1$ to $\text{QU}_5$ represent the first to fifth quintiles, respectively.}
+%\end{tablenotes}
+%\label{tab:talentdist_ke}
+%\end{threeparttable}
+%\end{table}
+%An efficient allocation on the intensive margin is achieved in the no-size-dependent $\tau_z$ case [case (i)]. Instead of an allocation of production toward larger firms as in the efficient case, here the production of firms in the bottom four quantiles expands significantly at the expense of the production share of the most productive firms. As a result, much of the gains in economic efficiency are offset by the worsening of the resource allocations on the intensive margin. Qualitatively, this result is the same as in case (ii). However, by comparing cases (ii) and (iv), we see that the larger fixed cost $k_E$, the higher is the degree of resource misallocation on the intensive margin . Although the level of industrial pollution lowers, the reduction could be much larger if the allocation on the intensive margin also improves, as in the case of the elimination of $\tau_z$.
+
+\phantomsection
+\addcontentsline{toc}{section}{REFERENCES}
+\bibliography{D:/Dissertation/Literature/Dissertation1}
+\bibliographystyle{aea}
+
+\end{document}

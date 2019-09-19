@@ -73,8 +73,6 @@ apf  = aggy/totfirm;
 %%%
 meanfd = zgrid(indzhatd:end)'*zprob(indzhatd:end)/totfirmd ;
 meanfc = zgrid(indzhatc:end)'*zprob(indzhatc:end)/totfirmc ;
-% meanfc = sum(zgrid(indzhatc:end).*zprob(indzhatc:end),1)/totfirmc ;
-% meanfd = sum(zgrid(indzhatd:end).*zprob(indzhatd:end))/totfirmd ;
 meanf  = mud*meanfd + (1-mud)*meanfc ;
 % --------------- Panel B -------------------
 % Mean Size

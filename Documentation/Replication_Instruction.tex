@@ -146,7 +146,17 @@
 \renewcommand{\lstlistingname}{Source Code}
 
 \title{\vspace{-1cm}\Large{\textsf{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China} \\ \textsf{Replication Instruction}}}
-\author{\normalsize\textsc{Xin Tang} \\ \normalsize\textsc{International Monetary Fund}}
+\author{
+  \normalsize{{Ji Qi}} \\
+  \normalsize{{Chinese Academy of Environmental Science}}
+  \and
+  \normalsize{{Xin Tang}}\footnote{Corresponding Author: zjutangxin@gmail.com} \\
+  \normalsize{{Wuhan University}} \\
+  \normalsize{{International Monetary Fund}}
+  \and
+  \normalsize{{Xican Xi}} \\
+  \normalsize{{Fudan University}}
+}
 \date{\normalsize\today}
 
 \begin{document}
@@ -163,11 +173,11 @@ To replicate all the results in the paper, three softwares are used. Specificall
 We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
 \begin{itemize}
     \item
-    The NGSPS is a confidential dataset housed at the Ministry of Ecology and Environment (MEE henceforth). The dataset is subject to regulation by \textit{The Law of the People's Republic of China on Guarding State Secrets} \begin{CJK}{GBK}{kai}（中华人民共和国保守国家秘密法）\end{CJK} because it contains sensitive information. Please refer to \textit{Regulation on Archiving the National General Survey of Pollution Sources Data (State Environmental Protection Administration [2007] No.187)} {\begin{CJK}{GBK}{kai}（污染源普查档案管理办法[环发[2007]187号]）\end{CJK}}. The data can only be accessed within the MEE as well as institutions under its direct supervision \begin{CJK}{GBK}{kai}（中华人民共和国生态环境部及其直属单位）\end{CJK}. Researchers affiliated with these institutions should submit application for access following the internal procedure of the MEE. This is how we access the data.
-    
-    Individual researchers not affiliated with the MEE and institutions under its direct supervision needs to submit the application through the official portal for Information Access (\begin{CJK}{GBK}{kai} 政府信息公开\end{CJK}) by the MEE at the following url: \url{http://www.mee.gov.cn/weihu/201706/t20170625_416641.shtml}. The url is retrieved on September 15th, 2019 and may vary in the future. All applications are subject to official approval by the General Office of Ministry of Ecology and Environment \begin{CJK}{GBK}{kai}（中华人民共和国生态环境部办公厅）\end{CJK}.
-    
-    For an official introduction to the NGSPS and declassified information at the aggregated level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} \begin{CJK}{GBK}{kai}（《污染源普查数据集》，中国环境科学出版社，2011）\end{CJK}, which is publicly available.
+    The NGSPS is a confidential dataset housed at the Ministry of Ecology and Environment (MEE henceforth). The dataset is subject to regulation by \textit{The Law of the People's Republic of China on Guarding State Secrets} (\begin{CJK}{GBK}{kai}中华人民共和国保守国家秘密法\end{CJK}) because it contains sensitive information. Please refer to \textit{Regulation on Archiving the National General Survey of Pollution Sources Data} (\textit{State Environmental Protection Administration [2007] No.187}, {\begin{CJK}{GBK}{kai}污染源普查档案管理办法[环发[2007]187号]\end{CJK}}). The data can only be accessed within the MEE as well as institutions under its direct supervision (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部及其直属单位\end{CJK}). Researchers affiliated with these institutions should submit application for access following the internal procedure of the MEE. This is how we access the data.
+
+    Individual researchers not affiliated with the MEE and institutions under its direct supervision needs to submit the application through the official portal for Information Access (\begin{CJK}{GBK}{kai} 政府信息公开\end{CJK}) by the MEE at the following url: \url{http://www.mee.gov.cn/weihu/201706/t20170625_416641.shtml}. The url is retrieved on September 15th, 2019 and may vary in the future. All applications are subject to official approval by the General Office of Ministry of Ecology and Environment (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部办公厅\end{CJK}).
+
+    For an official introduction to the NGSPS and declassified information at the aggregated level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}), which is publicly available.
     \item
     The CNEC is also a confidential dataset belonging to National Bureau of Statistics of China. Many universities and institutions have legal copy of the dataset though. Our copy was obtained from Fudan University.
     \item
@@ -250,14 +260,14 @@ In what follows, we will only be using the files converted by \code{R}. A list o
     \item
     \bcode{CNEC\_avgp.RData (CA)}: All samples in the CNEC.
     \item
-    \bcode{DLARGE\_R.RData (DL)}: A subset of \code{CA} which overlaps with the 2004 Annual Surveys of Industrial Firm.    
+    \bcode{DLARGE\_R.RData (DL)}: A subset of \code{CA} which overlaps with the 2004 Annual Surveys of Industrial Firm.
     \item
     \bcode{susb04.csv (US)}: SUSB 2004.
 \end{itemize}
 
 \section{Replicate Results in the Main Text}
 
-We try to organize our source code by sections in the paper as much as we can. This is not always possible though (or creates unnecessary confusion). We do, however, break the code by sections within the file, where tasks that are reasonably connected logically are grouped together. The code is written such that each section is self-contained, so the readers do not have to run from the very beginning if she/he only wants to replicate a certain result. Table \ref{tab:navi_main} summarizes the correspondence between the results in the paper (tables, figures, regression results, in-text numbers, etc.) and the section of code files that computes them, as well as data dependency. To further assist the readers to visually navigate through the code, important sections are always indicated by a 76-character line of \code{=}. This is the longest line in all the source code, and should be those most visually noticeable amongst all.
+We try to organize our source code by sections in the paper as much as we can. This is not always possible though (or creates unnecessary confusion). We do, however, break the code by sections within the file, where tasks that are reasonably connected logically are grouped together. The code is written such that each section is self-contained, so the readers do not have to run from the very beginning if she/he only wants to replicate a certain result.\footnote{That said, the readers should always check to ensure that all the functional packages of \code{R} are loaded.} Table \ref{tab:navi_main} summarizes the correspondence between the results in the paper (tables, figures, regression results, in-text numbers, etc.) and the section of code files that computes them, as well as data dependency. To further assist the readers to visually navigate through the code, important sections are always indicated by a 76-character line of \code{=}. This is the longest line in all the source code, and should be those most visually noticeable amongst all.
 
 We now explain how to replicate the results in the main text step-by-step. The results are presented in the order of appearance in the main text.
 
@@ -429,7 +439,7 @@ We now proceed with replicating the results in the appendices step-by-step. The 
      \item[$\ddag$]
      All the \code{*.mat} files will be produced by \bcode{twosectors\_ces.m}.
      \item[$\diamondsuit$]
-     Notation (!\#) stands for ``un-numbered.''     
+     Notation (!\#) stands for ``un-numbered.''
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -441,7 +451,7 @@ We now proceed with replicating the results in the appendices step-by-step. The 
     Figure B.1 is generated by Section 1 of \bcode{Empirical\_Appendix.R}. The four panels are saved respectively as \bcode{./Empirical/Results/FigureB1\_TopLeft.pdf}, \bcode{FigureB1\_TopRight.pdf}, \\ \bcode{FigureB1\_BotLeft.pdf} and \bcode{FigureB1\_BotRight.pdf}.
     \item
     Section 2 of \bcode{Empirical\_Appendix.R} produces the results in Appendix C.1. The beginning of that section first runs the regression of intensity to size by industry. The regression results are printed to the terminal, which are exactly the results reported in Table C.1. The five panels of Figure C.1 are then exported to \bcode{./Empirical/Results/} with the names \bcode{FigureC1\_TopLeft.pdf}, \\ \bcode{FigureC1\_TopRight.pdf}, \bcode{FigureC1\_MidLeft.pdf}, \bcode{FigureC1\_MidRight.pdf} and \\ \bcode{FigureC1\_BotLeft.pdf}. Notice that the bottom-right panel is simply Figure 1 in the main text. The code then repeats the exercise for the manufacturing sector as a whole. Results to the un-numbered regressions on Pages 7, 9 and 10 (the last one) are then printed to the terminal, with Figure C.2 exported to \bcode{./Empirical/Results/FigureC2.pdf}.
-    
+
     The three un-numbered regressions on the intensity-size relationship by the type of equipment are estimated in Section 2 of \bcode{Empirical\_AEJ.R}.
     \item
     The three panels of Figure D.1 are produced by Section 4 of \bcode{Empirical\_Appendix.R}. The figures are exported as \bcode{./Empirical/Results/FigureD1\_TopLeft.pdf}, \bcode{FigureD1\_TopRight} and \bcode{FigureD1\_Bot.pdf}.
@@ -478,15 +488,15 @@ Right before our final submission, we did a final test run on all the programs. 
     \item
     \bcode{cpsc\_convert.R} $\longleftrightarrow$ \bcode{cpsc\_convert\_log.pdf}
     \item
-    \bcode{cec\_convert.R} $\longleftrightarrow$ \bcode{cec\_convert\_log.pdf}    
+    \bcode{cec\_convert.R} $\longleftrightarrow$ \bcode{cec\_convert\_log.pdf}
     \item
-    \bcode{Empirical\_AEJ.R} $\longleftrightarrow$ \bcode{empirical\_main\_log.pdf}        
+    \bcode{Empirical\_AEJ.R} $\longleftrightarrow$ \bcode{empirical\_main\_log.pdf}
     \item
-    \bcode{Empirical\_Appendix.R} $\longleftrightarrow$ \bcode{empirical\_appendix\_log.pdf}            
+    \bcode{Empirical\_Appendix.R} $\longleftrightarrow$ \bcode{empirical\_appendix\_log.pdf}
     \item
-    \bcode{Descriptive.R} $\longleftrightarrow$ \bcode{descriptive\_log.pdf}        
+    \bcode{Descriptive.R} $\longleftrightarrow$ \bcode{descriptive\_log.pdf}
     \item
-    \bcode{Accounting.R} $\longleftrightarrow$ \bcode{accounting\_log.pdf}            
+    \bcode{Accounting.R} $\longleftrightarrow$ \bcode{accounting\_log.pdf}
 \end{itemize}
 The log files for the quantitative exercises are not automatically generated. We manually copied and pasted the intermediate results sent to the terminal to two text files: \bcode{quantitative\_main.log} for the perfect substitute case in the main text and \bcode{quantitative\_ces.log} for the constant elasticity of substitution case in the appendix. Then we convert the two files to \code{.pdf} format.
 \begin{itemize}
@@ -494,6 +504,6 @@ The log files for the quantitative exercises are not automatically generated. We
     \bcode{quantitative\_main\_log.pdf} $\longleftrightarrow$ \bcode{quantitative\_main.log}
     \item
     \bcode{quantitaitve\_ces\_log.pdf} $\longleftrightarrow$ \bcode{quantitative\_ces.log}
-\end{itemize}    
+\end{itemize}
 
 \end{document}

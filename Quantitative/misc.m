@@ -37,7 +37,7 @@ prodrede = agge_nt_notax/agge_nt_bench;
 totredi = aggi/aggi_nt_bench;
 prodredi = aggi_nt_notax/aggi_nt_bench;
 disp('The Role of Technology')
-1-(1-prodredi)/(1-totredi)
+disp(1-(1-prodredi)/(1-totredi))
 
 % Plot the tax function
 clear all;

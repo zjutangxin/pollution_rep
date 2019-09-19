@@ -27,7 +27,7 @@ clear all;
 % Benchmark Distributions
 load('./Results/benchmark_new.mat');
 % ================== Plot Figure 5 ======================
-% Bench vs No-tax: firm
+% Bench vs Data: firm
 figure(1)
 bar([firmmodel,fsdata'],1,'group');
 colormap summer ;
@@ -40,7 +40,7 @@ ylabel('Fraction of Firms');
 title('Firm Size Distribution: Benchmark','FontWeight','Normal');
 saveas(gcf,'./Results/Figure5_Left.eps','epsc');
 
-% Bench vs No-tax: employment
+% Bench vs Data: employment
 figure(2)
 bar([esmodel,esdata'],1,'group');
 colormap summer ;

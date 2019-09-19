@@ -1,6 +1,8 @@
 documentation/*.*
 !documentation/*.tex
 !documentation/*.pdf
+!documentation/*.bib
+!documentation/Figures/*.*
 Empirical/Data/*.*
 Empirical/Results/*.*
 Empirical/Data/Raw_Data/*.*
