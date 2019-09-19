@@ -1,9 +1,11 @@
 documentation/*.*
+documentation/latex_templates/*.*
 !documentation/*.tex
 !documentation/*.pdf
 !documentation/*.bib
 !documentation/Figures/*.*
 Empirical/Data/*.*
+Empirical/Data/AEJ_Replication/*.*
 Empirical/Results/*.*
 Empirical/Data/Raw_Data/*.*
 !Empirical/Results/*.log
