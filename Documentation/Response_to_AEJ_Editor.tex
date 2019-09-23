@@ -1,0 +1,153 @@
+\documentclass[twoside,12pt,leqno]{article}
+%\documentclass[twoside,12pt,leqno]{report}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs,multirow,upgreek}
+\usepackage[capposition=bottom]{floatrow} % For Figure Notes
+\usepackage{graphicx,pstricks,epstopdf}
+\usepackage{url}      % This package helps to typeset urls
+
+%\usepackage{apacite}
+%\usepackage{natbib}   % This is a great aid with bibliographies
+%\setcitestyle{authoryear,round,semicolon,aysep={},yysep={,},notesep={:}}
+
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{Appendix}
+
+\usepackage[authoryear,comma]{natbib}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0em}
+
+%\usepackage[sc,tiny,center]{titlesec}
+\usepackage{titlesec}
+\titleformat*{\section}{\sc \center}
+\titleformat*{\subsection}{\it \center}
+\renewcommand\thesection{\textnormal{{\Roman{section}}}}
+\renewcommand{\refname}{Reference}
+\usepackage[font={sc,small}]{caption}
+
+\usepackage[%dvipdfmx,%
+            bookmarks=true,%
+            pdfstartview=FitH,%
+            breaklinks=true,%
+            colorlinks=true,%
+            %allcolors=black,%
+            citecolor=blue,
+            linkcolor=red,
+            pagebackref=true]{hyperref}
+
+\renewcommand{\rmdefault}{ptm}
+%\usepackage[lite]{mtpro2}
+% use Palatinho-Roman as default font family
+%\renewcommand{\rmdefault}{ppl}
+\usepackage[scaled=0.88]{helvet}
+\makeatletter   % Roman Numbers
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator*{\argmax}{argmax}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\gvec}[1]{{\boldsymbol{#1}}}
+
+\usepackage[hmargin={1.2in,1.2in},vmargin={1.5in,1.5in}]{geometry}
+\usepackage{threeparttable,booktabs,multirow} % This allows notes in tables
+
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{CJK}
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{Appendix}
+\newtheorem{result}{Result}
+\setlength{\unitlength}{1mm}
+
+\topmargin -1cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm
+\renewcommand\baselinestretch{1.15}
+\parskip 0.25em
+\parindent 1em
+\linespread{1}
+
+% Set header and footer
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyhead{}
+%\fancyhead[LE,RO]{\thepage}
+%\cfoot{}
+%\renewcommand{\headrulewidth}{0pt}
+
+%\pdfoptionpdfminorversion 6
+
+\begin{document}
+
+\title{\large{THE LETTER TO THE EDITOR}}
+\date{}
+\maketitle
+
+\vspace{-1.75cm}
+
+\begin{flushleft}
+Dear Dr. Moll,
+\end{flushleft}
+
+This letter summarizes our responses to the comments that we received from you and the referees after our resubmission to the \textit{American Economic Journal: Macroeconomics}. We truly appreciate it that you have conditionally accepted our paper. Overall, it has been a wonderful experience working with the \textit{AEJ: Macro}. It was very enjoyable revising our paper following the guidance we received from you and the referees. 
+
+We have taken the expositional comments from both referees. We have also followed your advice on leaving the CES case in Appendix J. Our responses in detail are as follows.
+
+\begin{flushleft}
+\textbf{Response to Referee 1's Comments:}
+\end{flushleft}
+
+\begin{enumerate}
+    \item
+    We thank Referee 1 for mentioning the paper by \citet{Heetal:2019} to us. It is clear that the paper used a different dataset, which has a panel structure. However, since the authors did not provide enough details on the original source of the environmental dataset they used---possibly due to the lack of an official English translation for the name of the dataset---we had a really hard time identifying the exact dataset. Our educated guess is that they were using the firm-level data from \textit{Annual Statistic Report on Environment in China} (in Chinese \begin{CJK}{GBK}{kai}中国环境统计年报\end{CJK}), but we cannot be 100\% sure.
+
+    We talked with our colleagues who have direct access to the above dataset, and learned that there are at least two important differences between that dataset and the one we used. First, the firm-level emission data in the Annual Statistic Report were mostly self-reported by the firms, while the emission data in our dataset were collected by well-trained field staff who could also borrow manpower from local government agencies. As a result, the data quality of the Annual Statistic Report is likely to be lower. \citet{Heetal:2019} seemed to be concerned with the quality of their dataset as well, for which they wrote in their paper that ``Unlike the ASIF, however, we are less confident about the quality of ESR data.'' Second, while the treatment equipment data in our dataset plays a key role in our analysis, the Annual Statistic Report does not provide any information on the treatment equipment used by firms.
+
+    \item
+    We have taken Referee 1's advice, removed some footnotes and put some into the main text. We have also removed italics from more than a dozen of words.
+
+    Specifically, the following footnotes from our previous draft are removed: 2, 3, 4, 7, 19, 23, 28, and 41. The following footnotes are integrated into the main text: 10, 12, 22, 25, 36, 39, 44, and 49. We have also merged Footnotes 16 and 17. As a result, the total number of footnotes has been reduced from 52 to 35.
+
+    \item
+    In our accounting exercise in Section I.C., we do take the U.S. as a benchmark, since we have data on the U.S. firm size distribution. In our quantitative analysis, however, we are not able to do that, simply because we do not have access to the U.S. firm-level data. Instead, we remove all the correlated distortions from our benchmark model. We did include some discussion on the economic interpretation of the measured wedges that we call distortions in Part \textit{Correlated Distortions} of Section II.A, with Appendix D.1 providing further details. We choose to call these measured wedges as distortions because we prefer to stay close to the literature. In that section, we have cited two survey articles by \citet{RestucciaRogerson:2013, RestucciaRogerson:2017} that elaborate this interpretation issue that the referee concerns. That said, we believe that it is of interest to carry out an additional exercise where the U.S. is the benchmark, if the U.S. firm-level data are available, and we leave this interesting exercise to future work.
+\end{enumerate}
+
+\begin{flushleft}
+\textbf{Response to Referee 3's Comments:}
+\end{flushleft}
+
+\begin{enumerate}[1.]
+    \item
+    \textit{Introduction}
+    \begin{enumerate}[(1)]
+        \item
+        The sentence has been changed to the following: ``Not only do large firms generate fewer pollutants per output during production, but they are also more likely to use advanced end-of-pipe treatment technologies that require large installation costs.'' Please see the middle of the first paragraph on Page 2 of our new draft.
+        \item
+        The sentence has been changed as follows: ``Our results show that while the progressiveness of distortions does not imply large output losses, it plays a central role in amplifying aggregate pollution: replacing the progressive taxes with flat taxes would cause a 7\% increase in aggregate output, and a 30\% decrease in aggregate pollution.'' Please see the end of the last paragraph on Page 3 of our new draft.
+        \item
+        We have removed some footnotes and integrated some into the main text. Specifically, the following footnotes from our previous draft are removed: 2, 3, 4, 7, 19, 23, 28, and 41. The following footnotes are integrated into the main text: 10, 12, 22, 25, 36, 39, 44, and 49. We have also merged Footnotes 16 and 17. As a result, the total number of footnotes has been reduced from 52 to 35.
+    \end{enumerate}
+    
+    \item
+    \textit{Model}
+    \begin{enumerate}[(1)]
+        \item
+        We have explained what the superscripts $c$ and $d$ refer to when they first appear in the model section; please see the beginning of the second paragraph of part \textit{Household} in Section II.A (page 13) of our new draft. Specifically, the superscript $c$ refers to the non-polluting sector, and $d$ refers to the polluting sector.
+        \item
+        In our initial submission, our model had one sector and two types of treatment technologies, so we used the index $i=0,1$ to denote the type of treatment technology ($i=1$ for clean technology). In our version, there were two sectors in the model, so we used $i=0,1$ to denote the treatment technologies and $i=c,d$ to denote the sectors. It seems that the use of $i$ in both places has caused some confusion, hence we use the index $j=0,1$ in our new draft. We apologize for the confusion. The $j$ superscript is needed though, as there are a few technology-specific variables that we refer to.
+    \end{enumerate}
+
+    \item
+    \textit{Quantitative Exercises}
+
+    We sincerely appreciate it that Referee 3 finds the results in Appendix J interesting. Indeed, this exercise is inspired by the referee's comments. We considered this suggestion very carefully; however, we decided to leave these results in Appendix J as they are for the following reasons. First, the firm-level data suggest that there are severe correlated distortions in both the polluting and non-polluting sectors. Therefore, we think it is more natural to consider removing distortions from both sectors. Second, when we remove the correlated distortions from the polluting sector only, the results depend critically on the elasticity of substitution between the two sectors $\rho$. Unfortunately, we have not been able to come up with a good estimate of $\rho$ yet. On the other hand, if we remove distortions from both sectors, the value of $\rho$ has very limited impact on the results.
+\end{enumerate}
+
+\bibliographystyle{aea}
+\bibliography{./Dissertation1}
+
+\end{document}
