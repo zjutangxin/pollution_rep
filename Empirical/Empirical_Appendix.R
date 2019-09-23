@@ -346,7 +346,7 @@ sel <- which(POLLUTEALL$product > 0 & POLLUTEALL$product < qup
              & POLLUTEALL$product > qdown)
 POLLUTEALL <- POLLUTEALL[sel]
 
-# ================== Regression (!#) Page 9 Upper ==========================
+# ================== Regression (!#) Page 7 ================================
 CODR <- POLLUTEALL[cod_e > 0]
 lm_all <- lm(log(cod_e)~log(product)+industry_a+province+type_a,
              data=CODR)
@@ -369,7 +369,7 @@ codr_residual <- lm(res_intensity ~ res_product, data = CODR)
 abline(codr_residual,col="red",lwd=4)
 dev.off()
 
-# ================== Regression (!#) Page 9 Lower ==========================
+# ================== Regression (!#) Page 9 ================================
 CODR$clean <- 0
 sel <- which(CODR$dm1_code_a == 4 | CODR$dm1_code_a == 5)
 CODR$clean[sel] <- 1
