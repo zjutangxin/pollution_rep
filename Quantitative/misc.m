@@ -40,7 +40,7 @@ disp('The Role of Technology')
 disp(1-(1-prodredi)/(1-totredi))
 
 % Plot the tax function
-clear ;
+clear all ;
 load('./Results/benchmark_new.mat');
 figure(1)
 plot(log(zgrid(indzhatc:end)),tauzc(indzhatc:end),'LineWidth',2);
