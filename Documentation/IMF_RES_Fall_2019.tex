@@ -80,7 +80,7 @@
     \inst{\star} {Chinese Academy for Environmental Planning} \and
     \inst{\dagger} {International Monetary Fund} \and
     \inst{\ddagger} {Fudan University}}
-\date[IMF (RES) Fall 2019]{\footnotesize{\today} \\ \scriptsize{The views expressed here are those of the authors and do not necessarily reflect the views of the CAEP and the IMF.}}
+\date[IMF (RES) Fall 2019]{\footnotesize{\today} \\ \scriptsize{The views expressed here are those of the authors and do not necessarily reflect the views of the CAEP or the IMF.}}
 
 \begin{document}
 
@@ -99,12 +99,12 @@
         Is pollution an inevitable consequence of growth or exacerbated by policy distortions and/or market inefficiencies?
     \end{itemize}
     \item
-    We argue that misallocation across firms reduces output and amplifies industrial pollution by distorting the firm size distribution.
+    We argue that misallocation across firms reduces output and amplifies industrial pollution by distorting firm size distribution.
     \item
     \textit{\color{blue}Policy Implications}:
     \begin{itemize}
         \item
-        Reducing the distortions firms face increases output while reducing pollution.
+        Reducing the distortions firms face increases output while decrease pollution.
         \item
         Environmental regulations could amplify existing market distortions.
     \end{itemize}
@@ -131,7 +131,7 @@
         \item
         Distortions limit the expansion of productive firms in China.
         \item
-        Compared to an economy with fewer distortions (e.g., the U.S.), less productive firms with higher pollution intensity are active.
+        Compared to an economy with fewer distortions (e.g., the U.S.), less productive but more polluting firms survive.
         \item
         As a result, aggregate output is lower, but industrial pollution is higher.
     \end{itemize}
@@ -219,7 +219,7 @@
         \item
         Jiang et al. (2014), Kahn et al. (2015), Cai et al. (2016), Jia (2017).
         \item
-        We emphasize the role of distortions and size distribution.
+        We emphasize the role of economic factors.
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -245,7 +245,7 @@
     Quantitative Results:
     \begin{itemize}
         \item Removing Distortions
-        \item Tightening Regulations
+        \item Strengthening Regulations
     \end{itemize}
 \end{itemize}
 \end{frame}
@@ -269,13 +269,13 @@
     National General Survey of Pollution Sources (2007)
     \begin{itemize}
     \item
-    Firm sales, emission, and treatment equipment.
+    Firm output, emission and treatment equipment.
     \end{itemize}
     \item
     China National Economic Census (2004)
     \begin{itemize}
     \item
-    Firm sales, employment, labor compensation, and capital stock.
+    Firm output, employment labor compensation, and capital stock.
     \end{itemize}
     \item
     Statistics of U.S. Business (2004)
@@ -295,7 +295,7 @@
     We use Chemical Oxygen Demand (COD) as the main measure.
     \begin{itemize}
     \itemsep=0.10in
-    \item More than 70\% of firms in our sample have positive COD emissions.
+    \item More than 70\% firms in our sample have positive COD emission.
     \item COD emission is highly correlated with those of other pollutants.
     \item In the Paper industry, $\text{corr}(\text{NH}_4^+,\text{COD}) = 0.82$, and $\text{corr}(\text{BOD},\text{COD}) = 0.94$.
     \end{itemize}
@@ -307,7 +307,7 @@
     \item
     We focus on the key sources.
     \begin{itemize}
-        \item For the polluting industries, they account for 90\% of the emissions, and 80\% of the production.
+        \item For the polluting industries, they account for 90\% of the emission and 80\% of the production.
     \end{itemize}
 \end{itemize}
 \hyperlink{coddef}{\beamergotobutton{COD Definition}}
@@ -343,12 +343,12 @@
         & N = 29,019, R^2 = 0.41.
     \end{align*}
     \item
-    $\mathbf{X}_i$ controls for sectors, provinces, and ownership rights.
+    $\mathbf{X}_i$ controls for sectors, provinces and ownership rights.
     \begin{itemize}
         \item Pollution intensity does \rtext{not} vary systematically with \btext{ownership rights}.
     \end{itemize}
     \item
-    As sales rise by 1\%, emission intensity drops by $(1-0.63) = 0.37\%$.
+    As output rises by 1\%, emission intensity drops by $(1-0.63) = 0.37\%$.
 \end{itemize}
 \end{frame}
 
@@ -357,10 +357,10 @@
 \begin{itemize}
 \itemsep=0.15in
     \item
-    For the Paper industry:
+    Treatment efficiency: $1 - \text{COD Emitted}/\text{COD Generated}$.
     \begin{itemize}
     \item
-    Treatment efficiency ($1 - \text{COD Emitted}/\text{COD Generated}$):
+    For the Paper industry:
     \end{itemize}
 \end{itemize}
 
@@ -404,9 +404,9 @@
     \item
     Regression Specifications:
     \begin{align*}
-        \text{Physical:}   \quad \log (\text{COD}_i) &= \underset{(0.40)}{-3.50} + \underset{(0.01)}{0.58} \times \log (\text{Sales}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i, \\
-        \text{Chemical:}   \quad \log (\text{COD}_i) &= \underset{(0.49)}{-4.59} + \underset{(0.01)}{0.77} \times \log (\text{Sales}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i, \\
-        \text{Biological:} \quad \log (\text{COD}_i) &= \underset{(0.20)}{-4.37} + \underset{(0.01)}{0.67} \times \log (\text{Sales}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i.
+        \text{Physical:}   \quad \log (\text{COD}_i) &= \underset{(0.40)}{-3.50} + \underset{(0.01)}{0.58} \times \log (\text{Output}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i, \\
+        \text{Chemical:}   \quad \log (\text{COD}_i) &= \underset{(0.49)}{-4.59} + \underset{(0.01)}{0.77} \times \log (\text{Output}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i, \\
+        \text{Biological:} \quad \log (\text{COD}_i) &= \underset{(0.20)}{-4.37} + \underset{(0.01)}{0.67} \times \log (\text{Output}_i) + \mathbf{X}_i\gvec{\upgamma} + \epsilon_i.
     \end{align*}
 \end{itemize}
 %\hyperlink{treattech}{\beamergotobutton{Treatment Technology Choice}}
@@ -447,7 +447,7 @@
 \begin{itemize}
 \itemsep=0.15in
     \item
-    {\color{blue}Question:} How will the {\color{black}average pollution intensity} change if the {\color{black}size distribution} is mechanically changed to that in the U.S.?
+    {\color{blue}Question:} How will {\color{black}average pollution intensity} change if the {\color{black}size distribution} is mechanically changed to that in the U.S.?
     \begin{itemize}
     \itemsep=0.10in
         \item
@@ -455,7 +455,7 @@
         \item
         The relation between pollution intensity and firm size in China is used.
         \item
-        It captures the \textit{Technique} effect while holding the \textit{Scale} effect constant.
+        It captures the \textit{Technique Effect} while holding the \textit{Scale Effect} constant.
     \end{itemize}
     \item
     {\color{blue}Answer:} Average pollution intensity would drop by 33\%.
@@ -527,7 +527,7 @@
     \item
     A two-sector model with perfect substitution between products.
     \item
-    Each sector features a Lucas (1978) span-of-control model.
+    Each sector features a Lucas (1978) span-of-control economy.
     \item
     Firms differ in productivity and pollution intensity.
     \item
@@ -537,7 +537,7 @@
     \item There are penalties for not using clean technology.
     \end{itemize}
     \item
-    Correlated distortions that increase with firm size (Restuccia and Rogerson, 2008).
+    Correlated distortions that increase with firm's productivity (Restuccia and Rogerson, 2008).
     \begin{itemize}
     \item Domestic local protectionism, size-dependent tax treatments, etc.
     \end{itemize}
@@ -559,7 +559,7 @@
     Each member is endowed with $z$ units of \btext{sector-specific} managerial talent.
     \begin{itemize}
         \item The CDFs are $G^c(z)$ and $G^d(z)$ with a common support $Z \triangleq [0,\overline{z}]$;
-        \item $z$ is fixed once drawn.
+        \item $z$ is fixed once drawn;
         \item A fraction $\mu$ of members possess talent in the \btext{polluting} sector.
     \end{itemize}
     \item
@@ -625,12 +625,12 @@
 \begin{itemize}
 \itemsep=0.15in
     \item
-    We use the variations in average factor products to measure these wedges (Hsieh and Klenow, 2009).
-    \item
     Let {\color{blue}$\tau_{z_i}, \tau_{k_i}$} and {\color{blue}$\tau_{l_i}$} be the wedges firm $i$ faces on the product, capital and labor market, the problem of firm $i$ is
     \begin{equation*}
       \pi_i = \max_{k_i,l_i} \left\{ (1-\tau_{z_i}) z_i^{1-\gamma} (k_i^{\alpha} l_i^{1-\alpha})^{\gamma} - (1+\tau_{k_i})Rk_i - (1+\tau_{l_i})W l_i \right\}.
     \end{equation*}
+    \item
+    We use the variations in average factor products to measure these wedges (Hsieh and Klenow, 2009).    
     \item
     Assuming $\tau_{l_i} = 0$:
     \begin{align*}
@@ -1284,7 +1284,7 @@
     \begin{itemize}
     \itemsep=0.10in
         \item
-        $z_E$ increases with $\xi$ and decreases with $k_E$.
+        $z_E$ decreases with $\xi$ and increases with $k_E$.
         \item
         $z_E$ increases with $\tau_z$.
     \end{itemize}
