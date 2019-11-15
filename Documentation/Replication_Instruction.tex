@@ -175,13 +175,13 @@ The specific versions we use are: \textsc{Stata} 12, \texttt{R} 3.5.3 (code name
     \item
     Due to limited backward compatibility of \textsc{Stata} and that the \code{foreign} package of \code{R} supports only \code{.dta} files saved by \textsc{Stata} up to Version 12, readers with more recent version of \textsc{Stata} would need to either modify in the \code{.do} file everywhere \code{.dta} files are read and written, or use alternative \code{R} package (for instance \code{readstata13}) to convert the data in \bcode{cpsc\_convert.R} and \bcode{cec\_convert.R}.
     \item
-    The syntax for several routines was slightly changed in MATLAB R2014b. If vintage versions are used, the reader would get a complaint saying (here from R2014a)
+    The syntax for several routines was slightly changed in MATLAB R2014b. If vintage versions are used, the reader would get a complaint saying (here from R2014a for instance)
 \begin{verbatim}    
 Error using optimoptions (line 105)
 'OptimalityTolerance' is not an option for FSOLVE.
 A list of options can be found on the FSOLVE documentation page.
 \end{verbatim}
-    The code would run through by simply fixing the syntax to R2014a version; namely, the keywords to two optimization option need to be changed to \code{TolFun} and \code{MaxIter}. The code will run through seamlessly.
+    The code would run through by simply fixing the syntax to R2014a version; namely, the keywords to two optimization options need to be changed to \code{TolFun} and \code{MaxIter}. The code would then run through seamlessly.
 \end{itemize}
 
 We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
