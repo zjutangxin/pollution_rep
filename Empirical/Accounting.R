@@ -646,3 +646,13 @@ ppar <- c(ppar_paper,ppar_agri,ppar_text,ppar_chem,ppar_bever)
 pmed
 preg
 ppar
+
+# wgt is the first row of Table 1, main text
+wgt = c(0.334,0.151,0.140,0.104,0.0427)
+# ======================= Intext Page 12 ===================================
+# Decrease in average pollution intensity, top-5 polluting
+reduction5 <- 1-sum(wgt*ppar)/sum(wgt)
+reduction5
+# Decrease in average pollution intensity, whole manufacturing
+reductionall <- 1-((1-reduction5)*sum(wgt)+(1-sum(wgt)))
+reductionall

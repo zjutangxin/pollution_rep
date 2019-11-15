@@ -1,0 +1,154 @@
+\documentclass[twoside,12pt,leqno]{article}
+%\documentclass[twoside,12pt,leqno]{report}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs,multirow,upgreek}
+\usepackage[capposition=bottom]{floatrow} % For Figure Notes
+\usepackage{graphicx,pstricks,epstopdf}
+\usepackage{url}      % This package helps to typeset urls
+
+%\usepackage{apacite}
+%\usepackage{natbib}   % This is a great aid with bibliographies
+%\setcitestyle{authoryear,round,semicolon,aysep={},yysep={,},notesep={:}}
+
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{Appendix}
+
+\usepackage[authoryear,comma]{natbib}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0em}
+
+%\usepackage[sc,tiny,center]{titlesec}
+\usepackage{titlesec}
+\titleformat*{\section}{\sc \center}
+\titleformat*{\subsection}{\it \center}
+\renewcommand\thesection{\textnormal{{\Roman{section}}}}
+\renewcommand{\refname}{Reference}
+\usepackage[font={sc,small}]{caption}
+
+\usepackage[%dvipdfmx,%
+            bookmarks=true,%
+            pdfstartview=FitH,%
+            breaklinks=true,%
+            colorlinks=true,%
+            %allcolors=black,%
+            citecolor=blue,
+            linkcolor=red,
+            pagebackref=true]{hyperref}
+
+\renewcommand{\rmdefault}{ptm}
+%\usepackage[lite]{mtpro2}
+% use Palatinho-Roman as default font family
+%\renewcommand{\rmdefault}{ppl}
+\usepackage[scaled=0.88]{helvet}
+\makeatletter   % Roman Numbers
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator*{\argmax}{argmax}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\gvec}[1]{{\boldsymbol{#1}}}
+
+\usepackage[hmargin={1.2in,1.2in},vmargin={1.5in,1.5in}]{geometry}
+\usepackage{threeparttable,booktabs,multirow} % This allows notes in tables
+
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{CJK}
+\usepackage[title]{appendix}
+\renewcommand{\appendixname}{Appendix}
+\newtheorem{result}{Result}
+\setlength{\unitlength}{1mm}
+
+\topmargin -1cm        % read Lamport p.163
+\oddsidemargin -0.04cm   % read Lamport p.163
+\evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+\textwidth 16.59cm
+\textheight 21.94cm
+\renewcommand\baselinestretch{1.15}
+\parskip 0.25em
+\parindent 1em
+\linespread{1}
+
+\newcommand{\code}{\texttt}
+\newcommand{\bcode}[1]{\texttt{\blue{#1}}}
+\newcommand{\rcode}[1]{\texttt{\red{#1}}}
+\newcommand{\rtext}[1]{{\red{#1}}}
+\newcommand{\btext}[1]{{\blue{#1}}}
+
+% Set header and footer
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyhead{}
+%\fancyhead[LE,RO]{\thepage}
+%\cfoot{}
+%\renewcommand{\headrulewidth}{0pt}
+
+%\pdfoptionpdfminorversion 6
+
+\begin{document}
+
+\title{\large{THE LETTER TO THE DATA EDITOR}}
+\date{}
+\maketitle
+
+\vspace{-1.75cm}
+
+\begin{flushleft}
+Dear AEA Data Editor
+\end{flushleft}
+
+This letter summarizes our changes to the data repository (OPENICPSR-112005) according to your comments for our final submission to the \textit{American Economic Journal: Macroeconomics}. We sincerely appreciate the careful investigation of the replication team into our programs. We are happy to report that we have fixed all the issues the editor requested. Our responses are in the same order as the sections in editor's report.
+
+\begin{enumerate}
+    \item
+    Summary
+    \begin{itemize}
+        \item
+        We have added data citations for NGSPS, CNEC and SUSB to the main text.
+        \item
+        We have removed all the files destined for the Data Editor only.
+        \item
+        We were a bit puzzled by this comment as we have filled all the OpenICPSR metadata fields. We think this may simply be a typo.
+        \item
+        We have uploaded the Online Appendix to the data repository. The programs and instructions have already been uploaded in our first submission. We were not aware that the data editor cannot access the Appendix from the author center. We apologize for the miscommunication. Please do not hesitate to let us know if there is anything we did not upload.
+    \end{itemize}
+    \item
+    Data Description
+    \begin{itemize}
+        \item
+        NGSPS: Citation to both materials are added.
+        \item
+        CNEC: Citation is added to the main text. Additional information regarding the CNEC is provided in the README (Section I.A).
+        \item
+        SUSB: Citation is added to the main text.
+    \end{itemize}
+    \item
+    Replication Steps:
+    \begin{itemize}
+        \item
+        In the README, we did provide two tables (Tables 1 and 2) explaining which file depends on which dataset and generates which result. These two tables were mentioned in the opening paragraphs of Sections \rom{2} and \rom{3} of the README. To further highlight the two tables, we have added a paragraph at the end of Section \rom{1}.C to emphasize them.
+    \end{itemize}    
+    \item
+    Findings:
+    \begin{itemize}
+        \item
+        We have written two new MATLAB scripts \bcode{generate\_tables\_main.m} and \\
+        \bcode{generate\_tables\_appendix.m} to directly compute and print Tables 4, 5, 6 and J.1 to MATLAB terminal. No manual calculation is needed anymore. We have also revised the instructions in the README accordingly.
+        \item
+        There are only two in-text numbers that require manual calculation: the average reduction in intensity for polluting industries and for the whole manufacturing sector (Section \rom{2} point 5 of the README). They are now automated in \bcode{Accounting.R} as well. The code and instruction are both updated accordingly.
+    \end{itemize}
+    \item
+    MATLAB Terminal:
+    \begin{itemize}
+        \item
+        Online Appendix has been uploaded to the OPENICPSR repository as well. All the programs have already been uploaded in our previous submission.
+        \item
+        We suspect that the reason that the data editor did not see the computation accuracy related information (optimality tolerance, etc.) is due to a different version of MATLAB being used. In the code, we have specified the option \bcode{'final-detailed'} when calling \bcode{fsolve} to request MATLAB to print information regarding computation accuracy. Such information was correctly printed when we tested our code in both MATLAB R2014a, R2016a and R2017b. We were not able to replicate the issue. We believe, however, that minor revisions to the syntax should be sufficient for other versions.
+    \end{itemize}
+\end{enumerate}
+
+
+
+\end{document} 

@@ -11,10 +11,6 @@
 % Author:
 %     - Xin Tang @ International Monetary Fund
 % 
-% File Dependence:
-%     - fcn.m: evaluates all the allocations at a given wage and returns 
-%       the excess demand in the labor market.
-%  
 % Record of Revisions:
 %         Date:                 Description of Changes
 %     ============        =================================
