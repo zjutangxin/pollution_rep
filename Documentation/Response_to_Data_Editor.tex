@@ -106,22 +106,21 @@ This letter summarizes the changes that we made to the data repository (OPENICPS
     Summary
     \begin{itemize}
         \item
-        We have added data citations for NGSPS, CNEC and SUSB to the article.
+        We have added data citations for NGSPS, CNEC and SUSB to the article, both the main text and the Online Appendix.
         \item
         We have removed all the files that were destined for the Data Editor only.
         \item
         We were a bit puzzled by this comment as we have filled all the OpenICPSR metadata fields. We think this may simply be a typo.
         \item
-        The programs and instructions for appendix tables and figures had already been uploaded in our first submission. We apologize for any miscommunication. The complete code for inline numbers has been provided.
-        %We have uploaded the Online Appendix to the data repository. The programs and instructions had already been uploaded in our first submission. We were not aware that the replication team cannot access the Appendix from the author center. We apologize for the miscommunication. Please do not hesitate to let us know if there is anything we did not upload.
+        The programs and instructions for the Online Appendix had already been uploaded in our first submission. We apologize for any miscommunication. All the calculations are now automated as recommended by the replication team.
     \end{itemize}
     \item
     Data Description
     \begin{itemize}
         \item
-        NGSPS: Data citation has been added to the article. The source for ``The Regulations on the National General Survey of Pollution Sources" has been provided in the references.
+        NGSPS: Data citation has been added to the article. The source for ``The Regulations on the National General Survey of Pollution Sources'' has also been provided in the references.
         \item
-        CNEC: Data citation has been added to the article. Additional information regarding the CNEC, including a landing page at the NBS of China, has been provided in the README (Section I.A).
+        CNEC: Data citation has been added to the article. Additional information regarding the CNEC, including a landing page at the National Bureau of Statistics of China, has been provided in the README (Section I.A).
         \item
         SUSB: Data citation has been added to the article.
     \end{itemize}
@@ -130,7 +129,7 @@ This letter summarizes the changes that we made to the data repository (OPENICPS
     \begin{itemize}
         \item
         In the README, we did provide two tables (Tables 1 and 2) explaining which file depends on which dataset and generates which result. These two tables were mentioned in the opening paragraphs of Sections \rom{2} and \rom{3} of the README. To further highlight the two tables, we have added a paragraph at the end of Section \rom{1}.C to emphasize them.
-    \end{itemize}    
+    \end{itemize}
     \item
     Findings:
     \begin{itemize}
@@ -138,19 +137,18 @@ This letter summarizes the changes that we made to the data repository (OPENICPS
         We have written two new MATLAB scripts \bcode{generate\_tables\_main.m} and \\
         \bcode{generate\_tables\_appendix.m} to directly compute and print Tables 4, 5, 6 and J.1 to MATLAB terminal. No manual calculation is needed anymore. We have also revised the instructions in the README accordingly.
         \item
-        There are only two in-text numbers that require manual calculation: the average reduction in intensity for polluting industries and for the whole manufacturing sector (Section \rom{2} point 5 of the README). They are now automated in \bcode{Accounting.R} as well. The code and instruction are both updated accordingly.
+        There are only two in-text numbers that require manual calculation: the average reduction in intensity for polluting industries and for the whole manufacturing sector (Section \rom{2} point 5 of the README). They are now automated in \bcode{Accounting.R} as well. The code and instructions are both updated accordingly.
     \end{itemize}
     \item
     MATLAB Terminal:
     \begin{itemize}
         \item
-        The programs and instructions for appendix tables and figures had already been uploaded in our first submission.
-        %Online Appendix has been uploaded to the OPENICPSR repository as well. All the programs have already been uploaded in our previous submission.
+        The programs and instructions for the Online Appendix had already been uploaded in our first submission.
         \item
-        We suspect that the reason that the data editor did not see the computation accuracy related information (optimality tolerance, etc.) is due to a different version of MATLAB being used. In the code, we have specified the option \bcode{'final-detailed'} when calling \bcode{fsolve} to request MATLAB to print information regarding computation accuracy. Such information was correctly printed when we tested our code in both MATLAB R2014a, R2016a and R2017b. We believe that minor revisions to the syntax should be sufficient for other versions.%We were not able to replicate the issue. We believe, however, that minor revisions to the syntax should be sufficient for other versions.
+        We suspect that the reason that the data editor did not see the computation accuracy related information (optimality tolerance, etc.) is due to a different version of MATLAB being used. In the code, we have specified the option \bcode{'final-detailed'} when calling \bcode{fsolve} to request MATLAB to print information regarding computation accuracy. Such information was correctly printed when we tested our code in MATLAB R2014a, R2016a and R2017b. We believe that minor revisions to the syntax should be sufficient for other versions.
     \end{itemize}
 \end{enumerate}
 
 
 
-\end{document} 
+\end{document}
