@@ -66,6 +66,7 @@
             %allcolors=black,%
             citecolor=blue,
             linkcolor=red,
+            urlcolor=black,
             pagebackref=true]{hyperref}
 
 % Functional Package
@@ -176,7 +177,7 @@ The specific versions we use are: \textsc{Stata} 12, \texttt{R} 3.5.3 (code name
     Due to limited backward compatibility of \textsc{Stata} and that the \code{foreign} package of \code{R} supports only \code{.dta} files saved by \textsc{Stata} up to Version 12, readers with more recent version of \textsc{Stata} would need to either modify in the \code{.do} file everywhere \code{.dta} files are read and written, or use alternative \code{R} package (for instance \code{readstata13}) to convert the data in \bcode{cpsc\_convert.R} and \bcode{cec\_convert.R}.
     \item
     The syntax for several routines was slightly changed in MATLAB R2014b. If vintage versions are used, the reader would get a complaint saying (here from R2014a for instance)
-\begin{verbatim}    
+\begin{verbatim}
 Error using optimoptions (line 105)
 'OptimalityTolerance' is not an option for FSOLVE.
 A list of options can be found on the FSOLVE documentation page.
@@ -184,21 +185,22 @@ A list of options can be found on the FSOLVE documentation page.
     The code would run through by simply fixing the syntax to R2014a version; namely, the keywords to two optimization options need to be changed to \code{TolFun} and \code{MaxIter}. The code would then run through seamlessly.
 \end{itemize}
 
-We use three datasets in our analysis: The National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the Statistics of U.S. Businesses (SUSB).
+We use three datasets in our analysis: The 2007 National General Survey of Pollution Sources (NGSPS, \begin{CJK}{GBK}{kai}第一次全国污染源普查\end{CJK}), The 2004 National Economic Census (CNEC, \begin{CJK}{GBK}{kai}第一次全国经济普查\end{CJK}) and the 2004 Statistics of U.S. Businesses (SUSB).
 \begin{itemize}
     \item
-    The NGSPS is a confidential dataset housed at the Ministry of Ecology and Environment (MEE henceforth). The dataset is subject to regulation by \textit{The Law of the People's Republic of China on Guarding State Secrets} (\begin{CJK}{GBK}{kai}中华人民共和国保守国家秘密法\end{CJK}) because it contains sensitive information. Please refer to \textit{Regulation on Archiving the National General Survey of Pollution Sources Data} (\textit{State Environmental Protection Administration [2007] No.187}, {\begin{CJK}{GBK}{kai}污染源普查档案管理办法[环发[2007]187号]\end{CJK}}). The data can only be accessed within the MEE as well as institutions under its direct supervision (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部及其直属单位\end{CJK}). Researchers affiliated with these institutions should submit application for access following the internal procedure of the MEE. This is how we access the data.
+    The NGSPS is a confidential dataset housed at the Ministry of Ecology and Environment (MEE henceforth). The dataset is subject to regulation by \textit{The Law of the People's Republic of China on Guarding State Secrets} (\begin{CJK}{GBK}{kai}中华人民共和国保守国家秘密法\end{CJK}) because it contains sensitive information. Please refer to \textit{Regulation on Archiving the National General Survey of Pollution Sources Data} (\textit{State Environmental Protection Administration [2007] No.187}, {\begin{CJK}{GBK}{kai}污染源普查档案管理办法[环发[2007]187号]]\end{CJK}}). The data can only be accessed within the MEE as well as institutions under its direct supervision (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部及其直属单位\end{CJK}). Researchers affiliated with these institutions should submit application for access following the internal procedure of the MEE. This is how we access the data.
 
-    Individual researchers not affiliated with the MEE and institutions under its direct supervision need to submit the application through the official portal for requesting Information Access (\begin{CJK}{GBK}{kai} 政府信息公开\end{CJK}) by the MEE at the following url: \url{http://www.mee.gov.cn/weihu/201706/t20170625_416641.shtml}. The url is retrieved on September 15th, 2019 and may vary in the future. All applications are subject to official approval by the General Office of Ministry of Ecology and Environment (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部办公厅\end{CJK}).
+    Individual researchers not affiliated with the MEE and institutions under its direct supervision need to submit the application through the official portal for requesting Information Access (\begin{CJK}{GBK}{kai}政府信息公开\end{CJK}) by the MEE at the following url: \url{http://www.mee.gov.cn/weihu/201706/t20170625_416641.shtml}. The url was retrieved on November 15th, 2019 and may vary in the future. All applications are subject to official approval by the General Office of Ministry of Ecology and Environment (\begin{CJK}{GBK}{kai}中华人民共和国生态环境部办公厅\end{CJK}).
 
-    For an official introduction to the NGSPS and declassified information at the aggregated level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}), which is publicly available. We provide a summary in English in Online Appendix A of our paper.
+    For an official introduction to the NGSPS and declassified information at the aggregated level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}), which is publicly available. We provide a summary in English in Online Appendix A of our paper. For more information on the NGSPS, please visit the following websites: \url{http://env.people.com.cn/GB/8220/113963/index.html}, or \url{http://www.mee.gov.cn/home/ztbd/rdzl/wrypc/}.\footnote{The latter website was initially dedicated to the first NGSPS starting in 2007. Since the launch of the second NGSPS in 2017, the content of the website has been changed accordingly. However, the two surveys share similar structures.} The urls were retrieved on November 15th, 2019 and may vary in the future.
     \item
-    The CNEC is also a confidential dataset belonging to National Bureau of Statistics of China. Many universities and institutions have legal copy of the dataset though. Our copy was obtained from Fudan University. \\ \rtext{MORE INFORMATION IS NEEDED HERE!!!!!!!!}
+    The CNEC was conducted by the National Bureau of Statistics (NBS) of China in 2004, and was designed to cover the entire population of Chinese firms in that year. The firm-level data from the CNEC are not available to the general public and therefore not uploaded as part of our data files. For data access, please contact the NBS of China at \url{wgsjsys@stats.gov.cn}. For more information on the CNEC, please visit the dedicated page maintained by NBS at the following url: \url{http://www.stats.gov.cn/ztjc/zdtjgz/zgjjpc}. The url was retrieved on November 15th, 2019 and may vary in the future.
+   % The CNEC is also a confidential dataset belonging to National Bureau of Statistics of China. Many universities and institutions have legal copy of the dataset though. Our copy was obtained from Fudan University. \\ \rtext{MORE INFORMATION IS NEEDED HERE!!!!!!!!}
     \item
-    The SUSB is publicly available from the Census Bureau's dedicated website. The url, retrieved on September 15th, 2019, and subject to possible change in the future, is \url{https://www.census.gov/programs-surveys/susb.html}.
+    The SUSB is publicly available from the U.S. Census Bureau's dedicated website. The url, retrieved on November 15th, 2019, and subject to possible change in the future, is \url{https://www.census.gov/programs-surveys/susb.html}.
 \end{itemize}
 
-In the replication files, we cannot provide micro-level data of the NGSPS and CNEC, due to non-disclosure agreements with the MEE and Fudan University. Therefore, we only post the source code that generates the results. However, to facilitate replication by the readers who have access to the datasets, we post the log files when running the analysis on our computer. More details on the log files are provided at the end of this note.
+We cannot provide confidential micro-level data of the NGSPS and CNEC as part of the replication files. Instead, we post the source code that generates the results. However, to facilitate replication by the readers who have access to the datasets, we post the log files when running the analysis on our computer. More details on the log files are provided at the end of this note.
 
 \subsection{File Structures}
 

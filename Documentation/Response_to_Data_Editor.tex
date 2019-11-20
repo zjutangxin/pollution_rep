@@ -96,33 +96,34 @@
 \vspace{-1.75cm}
 
 \begin{flushleft}
-Dear AEA Data Editor
+Dear AEA Data Editor,
 \end{flushleft}
 
-This letter summarizes our changes to the data repository (OPENICPSR-112005) according to your comments for our final submission to the \textit{American Economic Journal: Macroeconomics}. We sincerely appreciate the careful investigation of the replication team into our programs. We are happy to report that we have fixed all the issues the editor requested. Our responses are in the same order as the sections in editor's report.
+This letter summarizes the changes that we made to the data repository (OPENICPSR-112005), as our responses to your comments on our submission to the \textit{American Economic Journal: Macroeconomics}. We sincerely appreciate the careful investigation of the replication team into our programs. We believe that we have fixed all the issues as per your request. Our responses are in the same order as the sections in your report.
 
 \begin{enumerate}
     \item
     Summary
     \begin{itemize}
         \item
-        We have added data citations for NGSPS, CNEC and SUSB to the main text.
+        We have added data citations for NGSPS, CNEC and SUSB to the article.
         \item
-        We have removed all the files destined for the Data Editor only.
+        We have removed all the files that were destined for the Data Editor only.
         \item
         We were a bit puzzled by this comment as we have filled all the OpenICPSR metadata fields. We think this may simply be a typo.
         \item
-        We have uploaded the Online Appendix to the data repository. The programs and instructions have already been uploaded in our first submission. We were not aware that the data editor cannot access the Appendix from the author center. We apologize for the miscommunication. Please do not hesitate to let us know if there is anything we did not upload.
+        The programs and instructions for appendix tables and figures had already been uploaded in our first submission. We apologize for any miscommunication. The complete code for inline numbers has been provided.
+        %We have uploaded the Online Appendix to the data repository. The programs and instructions had already been uploaded in our first submission. We were not aware that the replication team cannot access the Appendix from the author center. We apologize for the miscommunication. Please do not hesitate to let us know if there is anything we did not upload.
     \end{itemize}
     \item
     Data Description
     \begin{itemize}
         \item
-        NGSPS: Citation to both materials are added.
+        NGSPS: Data citation has been added to the article. The source for ``The Regulations on the National General Survey of Pollution Sources" has been provided in the references.
         \item
-        CNEC: Citation is added to the main text. Additional information regarding the CNEC is provided in the README (Section I.A).
+        CNEC: Data citation has been added to the article. Additional information regarding the CNEC, including a landing page at the NBS of China, has been provided in the README (Section I.A).
         \item
-        SUSB: Citation is added to the main text.
+        SUSB: Data citation has been added to the article.
     \end{itemize}
     \item
     Replication Steps:
@@ -143,9 +144,10 @@ This letter summarizes our changes to the data repository (OPENICPSR-112005) acc
     MATLAB Terminal:
     \begin{itemize}
         \item
-        Online Appendix has been uploaded to the OPENICPSR repository as well. All the programs have already been uploaded in our previous submission.
+        The programs and instructions for appendix tables and figures had already been uploaded in our first submission.
+        %Online Appendix has been uploaded to the OPENICPSR repository as well. All the programs have already been uploaded in our previous submission.
         \item
-        We suspect that the reason that the data editor did not see the computation accuracy related information (optimality tolerance, etc.) is due to a different version of MATLAB being used. In the code, we have specified the option \bcode{'final-detailed'} when calling \bcode{fsolve} to request MATLAB to print information regarding computation accuracy. Such information was correctly printed when we tested our code in both MATLAB R2014a, R2016a and R2017b. We were not able to replicate the issue. We believe, however, that minor revisions to the syntax should be sufficient for other versions.
+        We suspect that the reason that the data editor did not see the computation accuracy related information (optimality tolerance, etc.) is due to a different version of MATLAB being used. In the code, we have specified the option \bcode{'final-detailed'} when calling \bcode{fsolve} to request MATLAB to print information regarding computation accuracy. Such information was correctly printed when we tested our code in both MATLAB R2014a, R2016a and R2017b. We believe that minor revisions to the syntax should be sufficient for other versions.%We were not able to replicate the issue. We believe, however, that minor revisions to the syntax should be sufficient for other versions.
     \end{itemize}
 \end{enumerate}
 

@@ -148,23 +148,23 @@
 \newpage
 \section{National General Survey of Pollution Sources}
 
-The most important data source that we draw upon in Section \rom{1}.B of the main text is the 2007 \textit{National General Survey of Pollution Sources} (henceforth NGSPS). In this section, we provide a detailed description of the dataset, which is based on the following documents:
+The most important data source that we draw upon in Section \rom{1}.B of the main text is the 2007 \textit{National General Survey of Pollution Sources} (henceforth NGSPS) [\citet{NGSPS:2007}]. In this section, we provide a detailed description of the dataset, which is based on the following documents:
 
 %The most important data source that we draw upon in Section \rom{1}.B of the main text is the 2007 \textit{National General Survey of Pollution Sources} (henceforth, NGSPS). Since to the best of our knowledge, the data were not used before in economic studies, we provide a detailed description of the dataset in this section. The content in this section is combined from:
 \begin{itemize}
     \item
-    \textit{Census Program of the National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查方案)\end{CJK}};
+    \textit{Census Program of the National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查方案)\end{CJK}}, issued by \citet{CensusProgram};
     \item
-    \textit{Regulation on National General Survey of Pollution Sources [Decree of the State Council of the People's Republic of China (No.508)]} {\begin{CJK}{GBK}{kai}(全国污染源普查条例[中华人民共和国国务院令第508号])\end{CJK}}.
+    \textit{The Regulations on National General Survey of Pollution Sources [Decree of the State Council of the People's Republic of China (No.508)]} {\begin{CJK}{GBK}{kai}(全国污染源普查条例[中华人民共和国国务院令第508号])\end{CJK}}, issued by \citet{Decree508};
     \item
-    \textit{Technical Specifications Requirements of the First National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查技术规定)\end{CJK}}.
+    \textit{Technical Specifications Requirements of the First National General Survey of Pollution Sources} {\begin{CJK}{GBK}{kai}(第一次全国污染源普查技术规定)\end{CJK}}, issued by \citet{TechSpec}.
 \end{itemize}
 
-For an official introduction to the NGSPS and declassified information at the aggregate level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}), which is publicly available.
+For an official introduction to the NGSPS and declassified information at the aggregate level, interested readers could refer to the book \textit{Data Collection of the National General Survey of Pollution Sources} (\begin{CJK}{GBK}{kai}《污染源普查数据集》, 中国环境科学出版社, 2011\end{CJK}) prepared by \citet{DataCollect}, which is publicly available. Besides the NGSPS, we also use two other datasets in preparing this appendix: \textit{China National Economic Census} [\citet{CNEC:2004}] and \textit{Statistics of U.S. Businesses} [\citet{SUSB:2004}].
 
 \subsection{General Introduction}
 
-The NGSPS was a joint effort of multiple national ministries in China. The survey was organized directly by the State Council with data collection and quality control done by specially trained field staff. According to the Regulation on National General Survey of Pollution Sources [Decree of the State Council of the People's Republic of China (No. 508)], faking data would lead to financial penalties or even lawsuits. The purpose of the NGSPS is to understand the total number of pollution sources and their distribution in different industries and regions; to understand the generation, discharge and treatment of major pollutants; to establish records for key pollution sources; to build a pollution source information database and an environmental statistics platform; and to provide basis for formulating policies and plans for economic and social development and environmental protection. The term ``pollution source'' here refers to premises, facilities and equipment which discharge pollutants to environment in the process of production, living or other activities or have adverse impact on environment, as well as other sources that result in pollution.
+The NGSPS was a joint effort of multiple national ministries in China. The survey was organized directly by the State Council with data collection and quality control done by specially trained field staff. According to the \citet{Decree508}, faking data would lead to financial penalties or even lawsuits. The purpose of the NGSPS is to understand the total number of pollution sources and their distribution in different industries and regions; to understand the generation, discharge and treatment of major pollutants; to establish records for key pollution sources; to build a pollution source information database and an environmental statistics platform; and to provide basis for formulating policies and plans for economic and social development and environmental protection. The term ``pollution source'' here refers to premises, facilities and equipment which discharge pollutants to environment in the process of production, living or other activities or have adverse impact on environment, as well as other sources that result in pollution.
 
 The survey covers all of the pollution units from agricultural, industrial, domestic sources, and facilities for centralized treatment of pollution within the borders of the People's Republic of China. In this study, we focus on the {industrial pollution sources}, which consist of businesses from 39 manufacturing industries according to the \textit{Industrial Classification for National Economic Activities} (GB/T4547-2002).
 
@@ -541,7 +541,7 @@ Therefore in our model we assume that only the adoption of biological equipment 
 %\subsection{Treatment Technologies}
 
 \textit{Additional Technical Features of the Treatment Technologies.---}We are interested in the following features of these technologies: {processing efficiency, designed processing capacity} and {installation costs}. We proxy the {processing efficiency} using one minus the ratio of {emitted COD} to {generated COD}. The {designed processing capacity} (in tons) and {actual installation costs} are recorded directly in the data. We then calculate the {unit capacity costs} by dividing the installation costs with the processing capacity. We use the unit capacity costs as an indicator of the returns to scale of clean treatment equipment. In Figure \ref{fig:techdiff}, in clockwise order we plot the density functions of processing capacity, installation costs, total value of industrial output and unit capacity cost by technology type. For all panels, log-scale is used in the horizontal axes.
-\begin{figure}[htbp]
+\begin{figure}[t]%[htbp]
     \begin{center}
     \includegraphics[width=0.4\textwidth]{./Figures/abate_cap.pdf}%
     \includegraphics[width=0.4\textwidth]{./Figures/abate_inv.pdf} \\
