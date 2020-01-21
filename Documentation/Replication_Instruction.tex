@@ -163,7 +163,7 @@
 \begin{document}
 \maketitle
 
-This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with some housekeeping stuff in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the results in the main text. Section \rom{3} shows how the results in the appendices can be replicated. The data and code can be downloaded from the AEA Data and Code Repository (OPENICPSR-112005).
+This note explains step-by-step how to replicate all the results in \textit{The Size Distribution of Firms and Industrial Water Pollution: A Quantitative Analysis of China}. We begin with some housekeeping information in Section \rom{1}. Section \rom{2} explains in detail how to replicate all the results in the main text. Section \rom{3} shows how the results in the appendices can be replicated. The data and code can be downloaded from the AEA Data and Code Repository (OPENICPSR-112005).
 
 \section{Housekeeping Information}
 
@@ -204,7 +204,7 @@ We cannot provide confidential micro-level data of the NGSPS and CNEC as part of
 
 \subsection{File Structures}
 
-The readers will get a number of files for replicating the results. To ease digestion, we briefly introduce the structure of the folders and files. As typographical convention, we use \bcode{blue computer modern typewriter} to indicate \bcode{folders} and \bcode{files}. The parent folder is referred to as \bcode{./}.
+The readers will get a number of files for replicating the results. To facilitate digestion, we briefly introduce the structure of the folders and files. As typographical convention, we use \bcode{blue computer modern typewriter} to indicate \bcode{folders} and \bcode{files}. The parent folder is referred to as \bcode{./}.
 \begin{itemize}
     \item
     \bcode{./Empirical/}:
@@ -225,6 +225,8 @@ The readers will get a number of files for replicating the results. To ease dige
         \bcode{./Empirical\_AEJ.R}: produces most empirical results in the main text.
         \item
         \bcode{./Empirical\_Appendix.R} produces most empirical results in the appendices.
+        \item
+        \bcode{./Empirical\_Public\_Data.R} produces the empirical results reproducible using the published data (SUSB): the U.S. firm size distributions in Figures 2 and E.1 (blue bars).
         \item
         \bcode{./Accounting.R}: executes the accounting exercise.
         \item
@@ -267,6 +269,8 @@ With these two steps completed, the reader needs to convert the data from \texts
 
 The SUSB data are directly downloaded from the Census website as \bcode{susb04.csv}. We use the dataset in its original form.
 
+\subsection{Reproducibility Using the Published Data}
+
 In what follows, we will only use the files converted by \code{R}. A list of the essential files is provided below. All the files should be placed under \bcode{./Empirical/Data/}. For ease of reference, we use the two-letter acronyms in parenthesis when referring to the data files later.
 \begin{itemize}
     \item
@@ -280,7 +284,7 @@ In what follows, we will only use the files converted by \code{R}. A list of the
     \item
     \bcode{susb04.csv (US)}: SUSB 2004.
 \end{itemize}
-Because we cannot post the NGSPS and CNEC publicly, the readers will not be able to run some of the files. Tables \ref{tab:navi_main} and \ref{tab:navi_appendix} list respectively which part of each file depends on which datasets and generates which result; the datasets are referenced using the above two-letter acronyms.
+Because we cannot post the NGSPS and CNEC publicly, the readers will not be able to run some of the files. Tables \ref{tab:navi_main} and \ref{tab:navi_appendix} list respectively which part of each file depends on which datasets and generates which result; the datasets are referenced using the above two-letter acronyms. With the published data, for the empirical part, the readers would be able to replicate the U.S. firm size distributions in Figure 2 and E.1 (the blue bars); program \bcode{Empirical\-Public\_Data.R} does the job. The program is constructed by taking the relevant code snippet from \bcode{Empirical\_AEJ.R} (Section 3) and \bcode{Empirical\_Appendix.R} (Section 5), as can be seen by direct comparison between the files. All the quantitative results can be replicated using the programs provided.
 
 \section{Replicate Results in the Main Text}
 
